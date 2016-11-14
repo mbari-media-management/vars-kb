@@ -1,0 +1,67 @@
+vars-jpa is an implementation of vars-core interfaces
+
+About DAO: 
+	As currently implemented. The persist/remove/merge/findByPrimaryKey methods
+are exactly the same for all the DAO's so any DAO will work with any Entity object. However,
+each DAO implements some methods that are specific for a particular entity. Usually, these
+methods are query methods. 
+
+
+Working with the Concepts:
+
+To insert into the database:
+	NOTE: inserts cascade. Inserting a selectedConcept will insert all it's children.
+  Example:
+	// Assume you've already created a selectedConcept here
+	Concept selectedConcept;
+	// ---- Step 1: You need to make sure you're working with a persisted parent selectedConcept!!
+	Concept parentConcept = dao.findByName('something') 
+	// ---- Step 2: Add Concept to parent
+	parentConcept.addChildConcept(selectedConcept);
+	// ---- Step 3: insert
+	dao.persist(selectedConcept) // OR dao.update(parentConcept)
+		
+To delete from the database:
+	NOTE: Deletes cascade to the childConcepts but NOT to the parent.
+  Example:
+	// ---- Step 1: Detach from the parent
+	selectedConcept.getParentConcept().removeChildConcept(selectedConcept);
+	// ---- Step 2: Execute delete
+	dao.makeTransient(selectedConcept);
+	
+	
+Creating your database:
+
+JPA can auto-generate your database tables. However, you may need to initialize your UniqueId table with the following:
+
+INSERT INTO UNIQUEID (tablename, nextid) VALUES ('CameraPlatformDeployment', 100);
+INSERT INTO UNIQUEID (tablename, nextid) VALUES ('VideoArchiveSet', 100);
+INSERT INTO UNIQUEID (tablename, nextid) VALUES ('VideoArchive', 100);
+INSERT INTO UNIQUEID (tablename, nextid) VALUES ('VideoFrame', 100);
+INSERT INTO UNIQUEID (tablename, nextid) VALUES ('CameraData', 100);
+INSERT INTO UNIQUEID (tablename, nextid) VALUES ('PhysicalData', 100);
+INSERT INTO UNIQUEID (tablename, nextid) VALUES ('Observation', 100);
+INSERT INTO UNIQUEID (tablename, nextid) VALUES ('Association', 100);
+INSERT INTO UNIQUEID (tablename, nextid) VALUES ('Concept', 100);
+INSERT INTO UNIQUEID (tablename, nextid) VALUES ('ConceptName', 100)
+INSERT INTO UNIQUEID (tablename, nextid) VALUES ('ConceptDelegate', 100)
+INSERT INTO UNIQUEID (tablename, nextid) VALUES ('LinkTemplate', 100)
+INSERT INTO UNIQUEID (tablename, nextid) VALUES ('History', 100)
+INSERT INTO UNIQUEID (tablename, nextid) VALUES ('SectionInfo', 100)
+INSERT INTO UNIQUEID (tablename, nextid) VALUES ('Media', 100)
+INSERT INTO UNIQUEID (tablename, nextid) VALUES ('LinkRealization', 100)
+INSERT INTO UNIQUEID (TABLENAME, NEXTID) VALUES ('UserName
+', 100)
+
+
+Steps to migrating existing VARS databases:
+  1. Create a copy of your original database tables
+  2. Copy KB from original to new
+  3. Set ParentConceptId_FK = null where it is currently 0 (zero)
+  4. Run VARS-REDUX schema upgrade script on the new database
+  5. Increment all values in UniqueID table by 1
+  6. Set LAST_UPDATE_TIME values to some date (instead of null)
+  7. remove all rowguid columns and there associated index
+  8. Modify annotation view by dropping reference to Association_Child_Parent table
+
+	

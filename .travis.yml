@@ -1,0 +1,21 @@
+language: java
+sudo: false
+jdk:
+#  - openjdk6
+#  - oraclejdk7
+  - oraclejdk8
+#  - openjdk7
+
+script:
+  - mvn install -P dev -DskipTests=true -Dmaven.javadoc.skip=true
+
+after_success:
+  - mvn clean
+
+branches:
+  only:
+    - videofile-jdk8
+
+notifications:
+  email:
+    - bschlining@gmail.com

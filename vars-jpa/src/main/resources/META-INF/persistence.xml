@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence version="1.0"
+             xmlns="http://java.sun.com/xml/ns/persistence"
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xsi:schemaLocation="http://java.sun.com/xml/ns/persistence http://java.sun.com/xml/ns/persistence/persistence_1_0.xsd">
+    <persistence-unit name="vars-jpa-knowledgebase" transaction-type="RESOURCE_LOCAL">
+        <description>VARS Data Model</description>
+        <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
+        <shared-cache-mode>NONE</shared-cache-mode>
+        <class>vars.knowledgebase.jpa.ArtifactImpl</class>
+        <class>vars.knowledgebase.jpa.ConceptImpl</class>
+        <class>vars.knowledgebase.jpa.ConceptMetadataImpl</class>
+        <class>vars.knowledgebase.jpa.ConceptNameImpl</class>
+        <class>vars.knowledgebase.jpa.HistoryImpl</class>
+        <class>vars.knowledgebase.jpa.LinkRealizationImpl</class>
+        <class>vars.knowledgebase.jpa.LinkTemplateImpl</class>
+        <class>vars.knowledgebase.jpa.MediaImpl</class>
+        <class>vars.knowledgebase.jpa.UsageImpl</class>
+        <properties>
+            <property name="eclipse.weaving" value="static" />
+            <property name="eclipselink.cache.shared.default" value="false"/>
+            <property name="eclipselink.connection-pool.default.initial" value="2" />
+            <property name="eclipselink.connection-pool.default.max" value="16" />
+            <property name="eclipselink.logging.level" value="INFO"/>
+        </properties>
+    </persistence-unit>
+
+     <persistence-unit name="vars-jpa-annotation" transaction-type="RESOURCE_LOCAL">
+        <description>VARS Data Model</description>
+        <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
+        <class>vars.annotation.jpa.VideoArchiveSetImpl</class>
+        <class>vars.annotation.jpa.CameraDeploymentImpl</class>
+        <class>vars.annotation.jpa.VideoArchiveImpl</class>
+        <class>vars.annotation.jpa.VideoFrameImpl</class>
+        <class>vars.annotation.jpa.PhysicalDataImpl</class>
+        <class>vars.annotation.jpa.CameraDataImpl</class>
+        <class>vars.annotation.jpa.ObservationImpl</class>
+        <class>vars.annotation.jpa.AssociationImpl</class>
+        <properties>
+            <property name="javax.persistence.jdbc.url" value="${ANNOTATION_JDBC_URL}"/>
+            <property name="javax.persistence.jdbc.user" value="${ANNOTATION_JDBC_USERNAME}"/>
+            <property name="javax.persistence.jdbc.driver" value="${ANNOTATION_JDBC_DRIVER}"/>
+            <property name="javax.persistence.jdbc.password" value="${ANNOTATION_JDBC_PASSWORD}"/>
+            <property name="eclipselink.cache.type.default" value="Weak" />
+            <!-- property name="eclipselink.cache.type.default" value="NONE" / -->
+            <!-- property name="eclipselink.cache.shared.default" value="false"/ -->
+            <shared-cache-mode>ENABLE_SELECTIVE</shared-cache-mode>
+            <property name="eclipselink.logging.level" value="INFO"/>
+            <property name="eclipselink.weaving" value="static" />
+            <!-- <property name="eclipselink.jdbc.bind-parameters" value="false"/> -->
+        </properties>
+    </persistence-unit>
+    
+    <persistence-unit name="vars-jpa-misc" transaction-type="RESOURCE_LOCAL">
+        <description>VARS Data Model</description>
+        <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
+        <class>vars.jpa.UserAccountImpl</class>
+        <class>vars.jpa.PreferenceNode</class>
+        <properties>
+            <property name="javax.persistence.jdbc.url" value="${MISC_JDBC_URL}"/>
+            <property name="javax.persistence.jdbc.user" value="${MISC_JDBC_USERNAME}"/>
+            <property name="javax.persistence.jdbc.driver" value="${MISC_JDBC_DRIVER}"/>
+            <property name="javax.persistence.jdbc.password" value="${MISC_JDBC_PASSWORD}"/>
+            <property name="eclipselink.cache.type.default" value="Weak" />
+            <property name="eclipselink.cache.shared.default" value="false"/>
+            <property name="eclipselink.logging.level" value="INFO"/>
+            <property name="eclipselink.weaving" value="static" />
+            <!-- <property name="eclipselink.jdbc.bind-parameters" value="false"/> -->
+        </properties>
+    </persistence-unit>
+
+    <persistence-unit name="vars-jpa-test" transaction-type="RESOURCE_LOCAL">
+        <description>VARS Data Model</description>
+        <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
+        <class>vars.annotation.jpa.VideoArchiveSetImpl</class>
+        <class>vars.annotation.jpa.CameraDeploymentImpl</class>
+        <class>vars.annotation.jpa.VideoArchiveImpl</class>
+        <class>vars.annotation.jpa.VideoFrameImpl</class>
+        <class>vars.annotation.jpa.PhysicalDataImpl</class>
+        <class>vars.annotation.jpa.CameraDataImpl</class>
+        <class>vars.annotation.jpa.ObservationImpl</class>
+        <class>vars.annotation.jpa.AssociationImpl</class>
+        <class>vars.knowledgebase.jpa.ArtifactImpl</class>
+        <class>vars.knowledgebase.jpa.ConceptImpl</class>
+        <class>vars.knowledgebase.jpa.ConceptMetadataImpl</class>
+        <class>vars.knowledgebase.jpa.ConceptNameImpl</class>
+        <class>vars.knowledgebase.jpa.HistoryImpl</class>
+        <class>vars.knowledgebase.jpa.LinkRealizationImpl</class>
+        <class>vars.knowledgebase.jpa.LinkTemplateImpl</class>
+        <class>vars.knowledgebase.jpa.MediaImpl</class>
+        <class>vars.knowledgebase.jpa.UsageImpl</class>
+        <class>vars.jpa.UserAccountImpl</class>
+        <class>vars.jpa.PreferenceNode</class>
+        <properties>
+            <property name="javax.persistence.jdbc.url" value="jdbc:derby:memory:VARS;create=true"/>
+            <property name="javax.persistence.jdbc.user" value="sa"/>
+            <property name="javax.persistence.jdbc.driver" value="org.apache.derby.jdbc.ClientDriver"/>
+            <property name="javax.persistence.jdbc.password" value=""/>
+
+            <!-- Logging -->
+            <property name="eclipselink.logging.level" value="FINE"/>
+            <property name="eclipselink.logging.timestamp" value="false" />
+            <property name="eclipselink.logging.session" value="false" />
+            <property name="eclipselink.logging.thread" value="false" />
+
+            <!-- Disable Caching -->
+            <property name="eclipselink.cache.type.default" value="NONE" />
+            <property name="eclipselink.cache.shared.default" value="false"/>
+
+            <!-- Database Table generation -->
+            <property name="eclipselink.ddl-generation" value="create-tables"/>
+            <property name="eclipselink.ddl-generation.output-mode" value="database"/>
+
+            <!-- Use static weaving -->
+            <property name="eclipselink.weaving" value="static" />
+        </properties>
+    </persistence-unit>
+
+    <!-- <persistence-unit name="vars-jpa-test" transaction-type="RESOURCE_LOCAL">
+        <description>VARS Data Model</description>
+        <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
+        <class>vars.annotation.jpa.VideoArchiveSetImpl</class>
+        <class>vars.annotation.jpa.CameraDeploymentImpl</class>
+        <class>vars.annotation.jpa.VideoArchiveImpl</class>
+        <class>vars.annotation.jpa.VideoFrameImpl</class>
+        <class>vars.annotation.jpa.PhysicalDataImpl</class>
+        <class>vars.annotation.jpa.CameraDataImpl</class>
+        <class>vars.annotation.jpa.ObservationImpl</class>
+        <class>vars.annotation.jpa.AssociationImpl</class>
+        <class>vars.knowledgebase.jpa.ConceptImpl</class>
+        <class>vars.knowledgebase.jpa.ConceptMetadataImpl</class>
+        <class>vars.knowledgebase.jpa.ConceptNameImpl</class>
+        <class>vars.knowledgebase.jpa.HistoryImpl</class>
+        <class>vars.knowledgebase.jpa.LinkRealizationImpl</class>
+        <class>vars.knowledgebase.jpa.LinkTemplateImpl</class>
+        <class>vars.knowledgebase.jpa.MediaImpl</class>
+        <class>vars.knowledgebase.jpa.UsageImpl</class>
+        <class>vars.jpa.UserAccountImpl</class>
+        <class>vars.jpa.PreferenceNode</class>
+        <properties>
+            <property name="javax.persistence.preparedstatement.url" value="preparedstatement:hsqldb:mem:my-project-test"/>
+            <property name="javax.persistence.preparedstatement.user" value="sa"/>
+            <property name="javax.persistence.preparedstatement.driver" value="org.hsqldb.jdbcDriver"/>
+            <property name="javax.persistence.preparedstatement.password" value=""/>
+            <property name="eclipselink.logging.level" value="FINE"/>
+            <property name="eclipselink.target-database" value="org.eclipse.persistence.platform.database.HSQLPlatform" /> 
+
+			<property name="eclipselink.logging.level" value="FINE" />
+			<property name="eclipselink.logging.timestamp" value="false" />
+			<property name="eclipselink.logging.session" value="false" />
+			<property name="eclipselink.logging.thread" value="false" />
+
+            <property name="eclipselink.ddl-generation" value="create-tables"/>
+            <property name="eclipselink.ddl-generation.output-mode" value="database"/>
+        </properties>
+    </persistence-unit> -->
+
+</persistence>

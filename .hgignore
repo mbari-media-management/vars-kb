@@ -1,0 +1,18 @@
+syntax: regexp
+.idea/.
+.metadata/ 
+.settings/
+target/ 
+^test 
+^.*patch$
+build/
+.svn/
+
+syntax: glob
+.DS_Store
+.project
+.classpath
+*.iml
+*.ipr
+*.iws
+
