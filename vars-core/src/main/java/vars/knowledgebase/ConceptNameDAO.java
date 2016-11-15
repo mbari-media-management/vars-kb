@@ -1,6 +1,8 @@
 package vars.knowledgebase;
 
 import java.util.Collection;
+import java.util.List;
+
 import vars.DAO;
 
 
@@ -23,5 +25,9 @@ public interface ConceptNameDAO extends DAO {
     Collection<ConceptName> findByNameContaining(String substring);
 
     Collection<ConceptName> findByNameStartingWith(String s);
+
+    List<String> findAllNamesAsStrings();
+
+    boolean doesConceptNameExist(final String name);
 
 }

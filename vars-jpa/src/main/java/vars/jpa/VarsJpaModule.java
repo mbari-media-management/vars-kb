@@ -31,25 +31,15 @@ import javax.persistence.Persistence;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import vars.ExternalDataPersistenceService;
-import vars.EXPDPersistenceService;
 import vars.MiscDAOFactory;
 import vars.MiscFactory;
 import vars.PersistenceCacheProvider;
-import vars.annotation.AnnotationDAOFactory;
-import vars.annotation.AnnotationFactory;
-import vars.annotation.AnnotationPersistenceService;
-import vars.annotation.AnnotationPersistenceServiceImpl;
-import vars.annotation.jpa.AnnotationDAOFactoryImpl;
-import vars.annotation.jpa.AnnotationFactoryImpl;
 import vars.knowledgebase.KnowledgebasePersistenceService;
 import vars.knowledgebase.KnowledgebaseDAOFactory;
 import vars.knowledgebase.KnowledgebasePersistenceServiceImpl;
 import vars.knowledgebase.KnowledgebaseFactory;
 import vars.knowledgebase.jpa.KnowledgebaseDAOFactoryImpl;
 import vars.knowledgebase.jpa.KnowledgebaseFactoryImpl;
-import vars.query.QueryPersistenceService;
-import vars.query.QueryPersistenceServiceImpl;
 
 /**
  * Created by IntelliJ IDEA.
@@ -87,7 +77,6 @@ public class VarsJpaModule implements Module {
         binder.bind(DateFormat.class).toInstance(dateFormatISO);
         
         // Bind the EntityManagerFactories
-        binder.bind(EntityManagerFactory.class).annotatedWith(Names.named("annotationPersistenceUnit")).toInstance(Persistence.createEntityManagerFactory(annotationPersistenceUnit));
         binder.bind(EntityManagerFactory.class).annotatedWith(Names.named("knowledgebasePersistenceUnit")).toInstance(Persistence.createEntityManagerFactory(knowledgebasePersistenceUnit));
         binder.bind(EntityManagerFactory.class).annotatedWith(Names.named("miscPersistenceUnit")).toInstance(Persistence.createEntityManagerFactory(miscPersistenceUnit));
 

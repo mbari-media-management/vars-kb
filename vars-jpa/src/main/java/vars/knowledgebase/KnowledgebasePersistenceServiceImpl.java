@@ -5,7 +5,11 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.List;
 import java.util.Locale;
+import java.util.Map;
 import java.util.ResourceBundle;
 import java.util.Collection;
 import java.util.ArrayList;
@@ -36,6 +40,8 @@ public class KnowledgebasePersistenceServiceImpl extends QueryableImpl implement
         jdbcDriver = bundle.getString("jdbc.driver");
     }
 
+    private final Map<Concept, List<String>> descendantNameCache = Collections.synchronizedMap(new HashMap<Concept, List<String>>());
+
     /**
      * Constructs ...
      */
@@ -53,14 +59,12 @@ public class KnowledgebasePersistenceServiceImpl extends QueryableImpl implement
 
         String sql = "SELECT count(*) FROM ConceptName WHERE ConceptName = ?";
 
-        final QueryFunction<Boolean> queryFunction = new QueryFunction<Boolean>() {
-            public Boolean apply(ResultSet resultSet) throws SQLException {
-                Integer n = 0;
-                while (resultSet.next()) {
-                    n = resultSet.getInt(1);
-                }
-                return new Boolean(n > 0);
+        final QueryFunction<Boolean> queryFunction = resultSet -> {
+            Integer n = 0;
+            while (resultSet.next()) {
+                n = resultSet.getInt(1);
             }
+            return n > 0;
         };
 
         try {

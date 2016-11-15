@@ -26,6 +26,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedNativeQueries;
+import javax.persistence.NamedNativeQuery;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
@@ -39,29 +41,18 @@ import vars.knowledgebase.Concept;
 import vars.knowledgebase.ConceptName;
 
 /**
- * <pre>
- * CREATE TABLE CONCEPTNAME (
- *   CONCEPTNAME        VARCHAR(50) NOT NULL,
- *   CONCEPTID_FK       BIGINT,
- *   AUTHOR             VARCHAR(255),
- *   NAMETYPE           VARCHAR(10),
- *   ID                 BIGINT NOT NULL,
- *   CONSTRAINT PK_CONCEPTNAME PRIMARY KEY(ID)
- * )
- * GO
- * CREATE INDEX IDX_CONCEPTNAME_CONCEPTID
- *   ON CONCEPTNAME(CONCEPTID_FK)
- * GO
- * CREATE INDEX IDX_CONCEPTNAME2
- *   ON CONCEPTNAME(CONCEPTNAME)
- * GO
- * </pre>
+ *
  */
 @Entity(name = "ConceptName")
 @Table(name = "ConceptName", uniqueConstraints = { @UniqueConstraint(columnNames = { "ConceptName" }) })
 @EntityListeners({ TransactionLogger.class, KeyNullifier.class })
+@NamedNativeQueries({
+        @NamedNativeQuery(name = "ConceptName.findAllNamesAsStrings",
+                query = "SELECT ConceptName FROM ConceptName ORDER BY ConceptName"),
+        @NamedNativeQuery(name = "ConceptName.countByName",
+        query = "SELECT count(*) FROM ConceptName WHERE ConceptName = ?")
+})
 @NamedQueries( {
-
     @NamedQuery(name = "ConceptName.findById", query = "SELECT v FROM ConceptName v WHERE v.id = :id") ,
     @NamedQuery(name = "ConceptName.findByName", query = "SELECT c FROM ConceptName c WHERE c.name = :name") ,
     @NamedQuery(name = "ConceptName.findByAuthor", query = "SELECT c FROM ConceptName c WHERE c.author = :author") ,
@@ -69,7 +60,6 @@ import vars.knowledgebase.ConceptName;
                 query = "SELECT c FROM ConceptName c WHERE c.nameType = :nameType") ,
     @NamedQuery(name = "ConceptName.findAll", query = "SELECT c FROM ConceptName c") ,
     @NamedQuery(name = "ConceptName.findByNameLike", query = "SELECT c FROM ConceptName c WHERE lower(c.name) LIKE :name ORDER BY c.name")
-
 })
 public class ConceptNameImpl implements Serializable, ConceptName, JPAEntity {
 
