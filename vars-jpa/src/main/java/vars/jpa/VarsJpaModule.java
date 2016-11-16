@@ -34,10 +34,12 @@ import org.slf4j.LoggerFactory;
 import vars.MiscDAOFactory;
 import vars.MiscFactory;
 import vars.PersistenceCacheProvider;
+import vars.knowledgebase.ConceptCache;
 import vars.knowledgebase.KnowledgebasePersistenceService;
 import vars.knowledgebase.KnowledgebaseDAOFactory;
 import vars.knowledgebase.KnowledgebasePersistenceServiceImpl;
 import vars.knowledgebase.KnowledgebaseFactory;
+import vars.knowledgebase.jpa.ConceptCacheImpl;
 import vars.knowledgebase.jpa.KnowledgebaseDAOFactoryImpl;
 import vars.knowledgebase.jpa.KnowledgebaseFactoryImpl;
 
@@ -90,7 +92,7 @@ public class VarsJpaModule implements Module {
         binder.bind(PersistenceCacheProvider.class).to(JPACacheProvider.class);
         binder.bind(VarsUserPreferencesFactory.class).to(VarsUserPreferencesFactoryImpl.class).in(Scopes.SINGLETON);
         binder.bind(PreferencesFactory.class).toProvider(PreferenceFactoryProvider.class);
-
+        binder.bind(ConceptCache.class).to(ConceptCacheImpl.class);
     }
 
     /**

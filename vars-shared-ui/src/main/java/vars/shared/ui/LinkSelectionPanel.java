@@ -43,8 +43,8 @@ import vars.ILink;
 import vars.LinkBean;
 import vars.LinkComparator;
 import vars.LinkUtilities;
-import vars.annotation.AnnotationPersistenceService;
 import vars.knowledgebase.Concept;
+import vars.knowledgebase.ConceptCache;
 
 /**
  *
@@ -55,7 +55,7 @@ import vars.knowledgebase.Concept;
 public class LinkSelectionPanel extends JPanel {
 
     private final ILink DEFAULT_LINK = new LinkBean(ILink.VALUE_NIL, ILink.VALUE_NIL, ILink.VALUE_NIL);
-    private final AnnotationPersistenceService annotationPersistenceService;
+    private final ConceptCache conceptCache;
     private JLabel lblLinkName;
     private JLabel lblLinkValue;
     private JLabel lblSearchFor;
@@ -69,11 +69,11 @@ public class LinkSelectionPanel extends JPanel {
     /**
      * Create the dialog.
      *
-     * @param annotationPersistenceService
+     * @param conceptCache
      */
     @Inject
-    public LinkSelectionPanel(AnnotationPersistenceService annotationPersistenceService) {
-        this.annotationPersistenceService = annotationPersistenceService;
+    public LinkSelectionPanel(ConceptCache conceptCache) {
+        this.conceptCache = conceptCache;
         initialize();
     }
 
@@ -213,7 +213,7 @@ public class LinkSelectionPanel extends JPanel {
 
     public HierachicalConceptNameComboBox getToConceptComboBox() {
         if (toConceptComboBox == null) {
-            toConceptComboBox = new HierachicalConceptNameComboBox(annotationPersistenceService);
+            toConceptComboBox = new HierachicalConceptNameComboBox(conceptCache);
             toConceptComboBox.setToolTipText("To Concept");
             toConceptComboBox.addFocusListener(new FocusAdapter() {
 
@@ -326,7 +326,7 @@ public class LinkSelectionPanel extends JPanel {
                 final Concept c = (Concept) Worker.post(new Task() {
                     @Override
                     public Object run() throws Exception {
-                        return annotationPersistenceService.findConceptByName(link.getToConcept());
+                        return conceptCache.findConceptByName(link.getToConcept());
                     }
 
                 });

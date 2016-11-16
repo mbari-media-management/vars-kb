@@ -18,14 +18,21 @@ package vars.knowledgebase.jpa;
 import com.google.common.base.Predicate;
 import com.google.common.collect.Collections2;
 import com.google.inject.Inject;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 import javax.persistence.EntityManager;
+import javax.persistence.EntityTransaction;
+
+import vars.VARSException;
 import vars.jpa.DAO;
 import vars.knowledgebase.Concept;
 import vars.knowledgebase.ConceptDAO;
+import vars.knowledgebase.ConceptName;
 import vars.knowledgebase.LinkTemplate;
 import vars.knowledgebase.LinkTemplateDAO;
 
@@ -114,6 +121,42 @@ public class LinkTemplateDAOImpl extends DAO implements LinkTemplateDAO {
             }
 
         });
+    }
+
+    @Override
+    public void updateToConcepts(String newToConcept, Collection<String> oldToConcepts) {
+
+
+        /*
+         * Update the Observation table
+         */
+        String sql1 = "UPDATE Observation SET ConceptName = ? WHERE ConceptName = ?";
+        String sql2 = "UPDATE Association SET ToConcept = ? WHERE ToConcept = ?";
+
+        try {
+            EntityManager em = getEntityManager();
+            final EntityTransaction transaction = em.getTransaction();
+            transaction.begin();
+            Connection connection = em.unwrap(Connection.class);
+            PreparedStatement preparedStatement1 = connection.prepareStatement(sql1);
+            PreparedStatement preparedStatement2 = connection.prepareStatement(sql2);
+            for (String oldName: oldToConcepts) {
+                preparedStatement1.setString(1, newToConcept);
+                preparedStatement1.setString(2, oldName);
+                preparedStatement1.addBatch();
+                preparedStatement2.setString(1, newToConcept);
+                preparedStatement2.setString(2, oldName);
+                preparedStatement2.addBatch();
+            }
+            preparedStatement1.executeBatch();
+            preparedStatement2.executeBatch();
+            preparedStatement1.close();
+            preparedStatement2.close();
+            transaction.commit();
+        }
+        catch (Exception e) {
+            throw new VARSException("Failed to update concept-names used by annotations", e);
+        }
     }
 
     /**

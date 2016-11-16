@@ -29,8 +29,8 @@ import org.mbari.swing.SpinningDialWaitIndicator;
 import org.mbari.swing.WaitIndicator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import vars.annotation.AnnotationPersistenceService;
 import vars.knowledgebase.Concept;
+import vars.knowledgebase.ConceptCache;
 
 /**
  * <p>Displays the Concept and all it's children in the drop-down list. Names are stored internally as Strings</p>
@@ -41,19 +41,19 @@ import vars.knowledgebase.Concept;
 public class HierachicalConceptNameComboBox extends ConceptNameComboBox {
 
     private final Logger log = LoggerFactory.getLogger(getClass());
-    private final AnnotationPersistenceService annotationPersistenceService;
+    private final ConceptCache conceptCache;
     private Concept concept;
 
     /**
      * Constructs ...
      *
      *
-     * @param annotationPersistenceService
+     * @param conceptCache
      */
     @Inject
-    public HierachicalConceptNameComboBox(AnnotationPersistenceService annotationPersistenceService) {
+    public HierachicalConceptNameComboBox(ConceptCache conceptCache) {
         super();
-        this.annotationPersistenceService = annotationPersistenceService;
+        this.conceptCache = conceptCache;
         initialize();
     }
 
@@ -61,13 +61,13 @@ public class HierachicalConceptNameComboBox extends ConceptNameComboBox {
      *
      *
      * @param concept
-     * @param annotationPersistenceService
+     * @param conceptCache
      */
-    public HierachicalConceptNameComboBox(Concept concept, AnnotationPersistenceService annotationPersistenceService) {
+    public HierachicalConceptNameComboBox(Concept concept, ConceptCache conceptCache) {
 
         // WARNING!! getDescendentNames can be very slow the first time it is called.
         super();
-        this.annotationPersistenceService = annotationPersistenceService;
+        this.conceptCache = conceptCache;
         initialize();
         setConcept(concept);
     }
@@ -133,8 +133,7 @@ public class HierachicalConceptNameComboBox extends ConceptNameComboBox {
 
                     @Override
                     protected Collection<String> doInBackground() throws Exception {
-                        log.info("WOOT!");
-                        return annotationPersistenceService.findDescendantNamesFor(concept);
+                        return conceptCache.findDescendantNamesFor(concept);
                     }
 
                     @Override

@@ -302,7 +302,7 @@ public class LinkRealizationEditorPanel extends EditorPanel {
     private HierachicalConceptNameComboBox getToConceptComboBox() {
         if (toConceptComboBox == null) {
             // TODO where to get concept names from?
-            toConceptComboBox = new HierachicalConceptNameComboBox(getToolBelt().getAnnotationPersistenceService());
+            toConceptComboBox = new HierachicalConceptNameComboBox(getToolBelt().getConceptCache());
         }
 
         return toConceptComboBox;

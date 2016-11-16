@@ -314,7 +314,7 @@ public class LinkEditorDialog extends JDialog implements ILockableEditor {
     public HierachicalConceptNameComboBox getToConceptComboBox() {
         if (toConceptComboBox == null) {
             // TODO where to get all concept names from? Just from KB? or include annotations
-            toConceptComboBox = new HierachicalConceptNameComboBox(toolBelt.getAnnotationPersistenceService());
+            toConceptComboBox = new HierachicalConceptNameComboBox(toolBelt.getConceptCache());
         }
 
         return toConceptComboBox;

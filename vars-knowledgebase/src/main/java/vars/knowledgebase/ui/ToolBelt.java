@@ -19,16 +19,13 @@ import com.google.inject.Inject;
 import vars.MiscDAOFactory;
 import vars.MiscFactory;
 import vars.PersistenceCacheProvider;
-import vars.annotation.AnnotationDAOFactory;
-import vars.annotation.AnnotationFactory;
-import vars.annotation.AnnotationPersistenceService;
+import vars.knowledgebase.ConceptCache;
 import vars.knowledgebase.HistoryFactory;
 import vars.knowledgebase.KnowledgebaseDAOFactory;
 import vars.knowledgebase.KnowledgebaseFactory;
-import vars.knowledgebase.KnowledgebasePersistenceService;
 import vars.knowledgebase.ui.actions.ApproveHistoryTask;
 import vars.knowledgebase.ui.actions.RejectHistoryTask;
-import vars.query.QueryPersistenceService;
+import vars.knowledgebase.ui.annotation.AnnotationService;
 
 /**
  * Container that holds on to a ton of shared objects that need to be widely
@@ -39,6 +36,7 @@ public class ToolBelt extends vars.ToolBelt {
     private final ApproveHistoryTask approveHistoryTask;
     private final HistoryFactory historyFactory;
     private final RejectHistoryTask rejectHistoryTask;
+    private final AnnotationService annotationService;
 
     /**
      * Constructs ...
@@ -48,19 +46,21 @@ public class ToolBelt extends vars.ToolBelt {
      * @param miscDAOFactory
      * @param miscFactory
      * @param persistenceCacheProvider
-     * @param knowledgebasePersistenceService
+     * @param conceptCache
      */
     @Inject
     public ToolBelt(
                     KnowledgebaseDAOFactory knowledgebaseDAOFactory, KnowledgebaseFactory knowledgebaseFactory,
                     MiscDAOFactory miscDAOFactory, MiscFactory miscFactory,
                     PersistenceCacheProvider persistenceCacheProvider,
-                    KnowledgebasePersistenceService knowledgebasePersistenceService) {
+                    ConceptCache conceptCache,
+            AnnotationService annotationService) {
         super(knowledgebaseDAOFactory, knowledgebaseFactory, miscDAOFactory,
-              miscFactory, persistenceCacheProvider, knowledgebasePersistenceService);
+              miscFactory, persistenceCacheProvider, conceptCache);
         historyFactory = new HistoryFactory(knowledgebaseFactory);
         approveHistoryTask = new ApproveHistoryTask(this);
         rejectHistoryTask = new RejectHistoryTask(this);
+        this.annotationService = annotationService;
     }
 
 
@@ -83,5 +83,9 @@ public class ToolBelt extends vars.ToolBelt {
      */
     public RejectHistoryTask getRejectHistoryTask() {
         return rejectHistoryTask;
+    }
+
+    public AnnotationService getAnnotationService() {
+        return annotationService;
     }
 }

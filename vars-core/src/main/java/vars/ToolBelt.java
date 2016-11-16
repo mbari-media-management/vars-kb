@@ -16,9 +16,9 @@ package vars;
 
 
 import com.google.inject.Inject;
+import vars.knowledgebase.ConceptCache;
 import vars.knowledgebase.KnowledgebaseDAOFactory;
 import vars.knowledgebase.KnowledgebaseFactory;
-import vars.knowledgebase.KnowledgebasePersistenceService;
 
 /**
  *
@@ -30,12 +30,12 @@ public class ToolBelt {
     private final MiscDAOFactory miscDAOFactory;
     private final MiscFactory miscFactory;
     private final PersistenceCache persistenceCache;
-    private final KnowledgebasePersistenceService knowledgebasePersistenceService;
+    private final ConceptCache conceptCache;
 
     /**
      * Constructs ...
      *
-     * @param knowledgebasePersistenceService
+     * @param conceptCache
      * @param knowledgebaseDAOFactory
      * @param knowledgebaseFactory
      * @param miscDAOFactory
@@ -48,8 +48,8 @@ public class ToolBelt {
             KnowledgebaseFactory knowledgebaseFactory,
             MiscDAOFactory miscDAOFactory, MiscFactory miscFactory,
             PersistenceCacheProvider persistenceCacheProvider, 
-            KnowledgebasePersistenceService knowledgebasePersistenceService) {
-        this.knowledgebasePersistenceService = knowledgebasePersistenceService;
+            ConceptCache conceptCache) {
+        this.conceptCache = conceptCache;
         this.knowledgebaseDAOFactory = knowledgebaseDAOFactory;
         this.knowledgebaseFactory = knowledgebaseFactory;
         this.miscDAOFactory = miscDAOFactory;
@@ -96,8 +96,8 @@ public class ToolBelt {
     /**
      * @return
      */
-    public KnowledgebasePersistenceService getKnowledgebasePersistenceService() {
-        return knowledgebasePersistenceService;
+    public ConceptCache getConceptCache() {
+        return conceptCache;
     }
 
 

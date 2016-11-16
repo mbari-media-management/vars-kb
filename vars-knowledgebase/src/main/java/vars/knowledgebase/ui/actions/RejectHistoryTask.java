@@ -26,8 +26,10 @@ import java.util.Collection;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.stream.Collectors;
 import javax.swing.*;
 
 import org.bushe.swing.event.EventBus;
@@ -38,9 +40,11 @@ import vars.LinkBean;
 import vars.LinkUtilities;
 import vars.UserAccount;
 import vars.knowledgebase.Concept;
+import vars.knowledgebase.ConceptCache;
 import vars.knowledgebase.ConceptDAO;
 import vars.knowledgebase.ConceptMetadata;
 import vars.knowledgebase.ConceptName;
+import vars.knowledgebase.ConceptNameTypes;
 import vars.knowledgebase.History;
 import vars.knowledgebase.LinkRealization;
 import vars.knowledgebase.LinkTemplate;
@@ -48,6 +52,7 @@ import vars.knowledgebase.Media;
 import vars.knowledgebase.MediaDAO;
 import vars.knowledgebase.ui.StateLookup;
 import vars.knowledgebase.ui.ToolBelt;
+import vars.knowledgebase.ui.annotation.AnnotationService;
 
 /**
  * <p>Handles the steps need to reject a History. NOTE: For some operations it's important to
@@ -257,19 +262,25 @@ public class RejectHistoryTask extends AbstractHistoryTask {
                      * Make sure that no annotations are using the concept-name that is
                      * being deleted.
                      */
-                    Thread thread = new Thread(new Runnable() {
-
-                        public void run() {
-                            try {
-                                toolBelt.getKnowledgebasePersistenceService().updateConceptNameUsedByLinkTemplates(
-                                    thisConcept);
-                                toolBelt.getAnnotationPersistenceService().updateConceptNameUsedByAnnotations(thisConcept);
+                    Thread thread = new Thread(() -> {
+                        try {
+                            final String newName = thisConcept.getPrimaryConceptName().getName();
+                            final Collection<String> oldNames = thisConcept.getConceptNames()
+                                    .stream()
+                                    .filter(c -> !c.getNameType().equalsIgnoreCase(ConceptNameTypes.PRIMARY.toString()))
+                                    .map(ConceptName::getName)
+                                    .collect(Collectors.toList());
+                            if (!oldNames.isEmpty()) {
+                                toolBelt.getAnnotationService().updateConceptUsedByAnnotations(newName, oldNames);
+                                toolBelt.getKnowledgebaseDAOFactory()
+                                        .newLinkTemplateDAO()
+                                        .updateToConcepts(newName, oldNames);
                             }
-                            catch (Exception e) {
-                                EventBus.publish(StateLookup.TOPIC_NONFATAL_ERROR, e);
-                            }
-
                         }
+                        catch (Exception e) {
+                            EventBus.publish(StateLookup.TOPIC_NONFATAL_ERROR, e);
+                        }
+
                     }, "Update thread for annotations named " + thisConcept.getPrimaryConceptName().getName());
 
                     thread.setDaemon(false);
@@ -366,11 +377,13 @@ public class RejectHistoryTask extends AbstractHistoryTask {
              * Get all concept-names that will be deleted. Use those to find all the Observations that
              * will be affected.
              */
-            ObservationDAO observationDAO = toolBelt.getAnnotationDAOFactory().newObservationDAO();
-            observationDAO.startTransaction();
-            Collection<Observation> observations = observationDAO.findAllByConcept(rejectedConcept, true, conceptDAO);
+            AnnotationService annotationService = toolBelt.getAnnotationService();
+            ConceptCache conceptCache = toolBelt.getConceptCache();
+            List<String> namesToChange = conceptCache.findDescendantNamesFor(rejectedConcept);
+            int n = annotationService.countByConcepts(namesToChange);
+
             final String newName = parentConcept.getPrimaryConceptName().getName();
-            final String msg = observations.size() + " Observations were found using '" + rejectedName +
+            final String msg = n + " Observations were found using '" + rejectedName +
                                "' or one of it's \nchildren. Do you want to update the names to '" + newName +
                                "' or \nignore them and leave them as is?";
 
@@ -386,9 +399,7 @@ public class RejectHistoryTask extends AbstractHistoryTask {
             case JOptionPane.YES_OPTION:
 
                 // Updated
-                for (Observation observation : observations) {
-                    observation.setConceptName(newName);
-                }
+                annotationService.updateConceptUsedByAnnotations(newName, namesToChange);
 
                 break;
 
@@ -402,8 +413,6 @@ public class RejectHistoryTask extends AbstractHistoryTask {
                 // Cancel
                 return;
             }
-            observationDAO.endTransaction();
-            observationDAO.close();
 
             // Delete the concept and it's children
             conceptDAO.endTransaction();
@@ -649,19 +658,25 @@ public class RejectHistoryTask extends AbstractHistoryTask {
                          * Make sure that no annotations are using the concept-name that is
                          * being deleted.
                          */
-                        Thread thread = new Thread(new Runnable() {
-
-                            public void run() {
-                                try {
-                                    toolBelt.getKnowledgebasePersistenceService().updateConceptNameUsedByLinkTemplates(
-                                        concept);
-                                    toolBelt.getAnnotationPersistenceService().updateConceptNameUsedByAnnotations(concept);
+                        Thread thread = new Thread(() -> {
+                            try {
+                                final String newName = concept.getPrimaryConceptName().getName();
+                                final Collection<String> oldNames = concept.getConceptNames()
+                                        .stream()
+                                        .filter(c -> !c.getNameType().equalsIgnoreCase(ConceptNameTypes.PRIMARY.toString()))
+                                        .map(ConceptName::getName)
+                                        .collect(Collectors.toList());
+                                if (!oldNames.isEmpty()) {
+                                    toolBelt.getAnnotationService().updateConceptUsedByAnnotations(newName, oldNames);
+                                    toolBelt.getKnowledgebaseDAOFactory()
+                                            .newLinkTemplateDAO()
+                                            .updateToConcepts(newName, oldNames);
                                 }
-                                catch (Exception e) {
-                                    EventBus.publish(StateLookup.TOPIC_NONFATAL_ERROR, e);
-                                }
-
                             }
+                            catch (Exception e) {
+                                EventBus.publish(StateLookup.TOPIC_NONFATAL_ERROR, e);
+                            }
+
                         }, "Update thread for annotations named " + history.getOldValue());
 
                         thread.setDaemon(false);

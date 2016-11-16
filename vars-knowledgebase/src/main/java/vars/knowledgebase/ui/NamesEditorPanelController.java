@@ -15,31 +15,25 @@
 package vars.knowledgebase.ui;
 
 import java.awt.Frame;
-import java.beans.PropertyChangeEvent;
-import java.beans.PropertyChangeListener;
+import java.util.Collection;
+import java.util.stream.Collectors;
 import javax.swing.JOptionPane;
 import org.bushe.swing.event.EventBus;
 import org.mbari.awt.event.ActionAdapter;
 import org.mbari.swing.WaitIndicator;
-import org.mbari.util.Dispatcher;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import vars.DAO;
 import vars.UserAccount;
-import vars.annotation.AnnotationPersistenceService;
 import vars.knowledgebase.Concept;
+import vars.knowledgebase.ConceptCache;
 import vars.knowledgebase.ConceptDAO;
 import vars.knowledgebase.ConceptMetadata;
 import vars.knowledgebase.ConceptName;
-import vars.knowledgebase.ConceptNameDAO;
 import vars.knowledgebase.ConceptNameTypes;
 import vars.knowledgebase.History;
-import vars.knowledgebase.HistoryDAO;
 import vars.knowledgebase.HistoryFactory;
-import vars.knowledgebase.KnowledgebasePersistenceService;
-import vars.knowledgebase.KnowledgebaseDAOFactory;
 import vars.knowledgebase.KnowledgebaseFactory;
-import vars.knowledgebase.ui.actions.ApproveHistoryTask;
 import vars.knowledgebase.ui.dialogs.AddConceptNameDialog2;
 
 /**
@@ -118,8 +112,7 @@ class NamesEditorPanelController {
         boolean okToProceed = true;
 
         ConceptDAO conceptDAO = toolBelt.getKnowledgebaseDAOFactory().newConceptDAO();
-        KnowledgebasePersistenceService kbPersistenceService = toolBelt.getKnowledgebasePersistenceService();
-        AnnotationPersistenceService annoPersistenceService = toolBelt.getAnnotationPersistenceService();
+        ConceptCache conceptCache = toolBelt.getConceptCache();
         KnowledgebaseFactory knowledgebaseFactory = toolBelt.getKnowledgebaseFactory();
 
 
@@ -221,8 +214,19 @@ class NamesEditorPanelController {
                   log.debug("Changing all Observations that use '" + oldName + "' to use '" + newName + "'");
               }
               // TODO this should call annosaurus
-                kbPersistenceService.updateConceptNameUsedByLinkTemplates(concept);
-                annoPersistenceService.updateConceptNameUsedByAnnotations(concept);
+
+                final String conceptName = concept.getPrimaryConceptName().getName();
+                final Collection<String> oldNames = concept.getConceptNames()
+                        .stream()
+                        .filter(c -> !c.getNameType().equalsIgnoreCase(ConceptNameTypes.PRIMARY.toString()))
+                        .map(ConceptName::getName)
+                        .collect(Collectors.toList());
+                if (!oldNames.isEmpty()) {
+                    toolBelt.getAnnotationService().updateConceptUsedByAnnotations(conceptName, oldNames);
+                    toolBelt.getKnowledgebaseDAOFactory()
+                            .newLinkTemplateDAO()
+                            .updateToConcepts(conceptName, oldNames);
+                }
             }
             catch (Exception e) {
                 String msg = "Failed to change primary names of annotations from '" + oldName + "' to '" +

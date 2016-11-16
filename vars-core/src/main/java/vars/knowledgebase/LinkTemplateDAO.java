@@ -28,4 +28,6 @@ public interface LinkTemplateDAO extends DAO, ConceptNameValidator<LinkTemplate>
 
     Collection<LinkTemplate> findAllApplicableToConcept(Concept concept);
 
+    void updateToConcepts(String newToConcept, Collection<String> oldToConcepts);
+
 }

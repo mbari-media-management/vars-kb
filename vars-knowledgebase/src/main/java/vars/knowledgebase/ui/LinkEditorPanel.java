@@ -251,12 +251,12 @@ public class LinkEditorPanel extends javax.swing.JPanel implements ILockableEdit
         linkNameField = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
         // TODO decide where to get the concept names from!! Do I need to get them from annotaitons too?
-        toConceptComboBox = new AllConceptNamesComboBox(toolBelt.getQueryPersistenceService());
+        toConceptComboBox = new AllConceptNamesComboBox(toolBelt.getConceptCache());
         jLabel3 = new javax.swing.JLabel();
         linkValueField = new javax.swing.JTextField();
         jSeparator1 = new javax.swing.JSeparator();
         jLabel5 = new javax.swing.JLabel();
-        fromConceptComboBox = new AllConceptNamesComboBox(toolBelt.getQueryPersistenceService());
+        fromConceptComboBox = new AllConceptNamesComboBox(toolBelt.getConceptCache());
 
         jLabel4.setText("Search:");
 

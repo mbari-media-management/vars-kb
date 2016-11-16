@@ -25,8 +25,9 @@ import java.awt.event.FocusEvent;
 import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import vars.knowledgebase.ConceptNameDAO;
-import vars.query.QueryPersistenceService;
+import vars.knowledgebase.ConceptCache;
+
+import javax.inject.Inject;
 
 /**
  * <h2><u>Description </u></h2>
@@ -55,16 +56,17 @@ import vars.query.QueryPersistenceService;
 public class AllConceptNamesComboBox extends ConceptNameComboBox {
 
     private final Logger log = LoggerFactory.getLogger(getClass());
-    private final ConceptNameDAO dao;
+    private final ConceptCache conceptCache;
 
     /**
      *
      *
-     * @param dao
+     * @param conceptCache
      */
-    public AllConceptNamesComboBox(ConceptNameDAO dao) {
+    @Inject
+    public AllConceptNamesComboBox(ConceptCache conceptCache) {
         super();
-        this.dao = dao;
+        this.conceptCache = conceptCache;
         updateConceptNames();
 
         /*
@@ -82,8 +84,6 @@ public class AllConceptNamesComboBox extends ConceptNameComboBox {
 
         });
 
-
-
     }
 
     /**
@@ -94,9 +94,8 @@ public class AllConceptNamesComboBox extends ConceptNameComboBox {
 
         // Get ALL concept names (not just primary names). This is a FAST
         // lookup.
-        List<String> conceptNameList = dao.findAllNamesAsStrings();
-        String[] conceptNames = conceptNameList.toArray(new String[conceptNameList.size()]);
-        return conceptNames;
+        List<String> conceptNameList = conceptCache.findAllNames();
+        return conceptNameList.toArray(new String[conceptNameList.size()]);
     }
 
     public void updateConceptNames() {

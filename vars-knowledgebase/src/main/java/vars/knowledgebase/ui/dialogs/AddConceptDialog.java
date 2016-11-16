@@ -126,7 +126,7 @@ public class AddConceptDialog extends javax.swing.JDialog {
         nameField = new javax.swing.JTextField();
         parentLabel = new javax.swing.JLabel();
         // TODO should this get names from annosaurus?
-        conceptComboBox = new AllConceptNamesComboBox(toolBelt.getQueryPersistenceService());
+        conceptComboBox = new AllConceptNamesComboBox(toolBelt.getConceptCache());
         cancelButton = new FancyButton();
         okButton = new FancyButton();
         jScrollPane1 = new javax.swing.JScrollPane();
