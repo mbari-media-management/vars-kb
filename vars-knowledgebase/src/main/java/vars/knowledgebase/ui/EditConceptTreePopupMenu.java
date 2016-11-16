@@ -199,7 +199,7 @@ public class EditConceptTreePopupMenu extends ConceptTreePopupMenu implements IL
                     "Do you want to mark '" + concept.getPrimaryConceptName().getName() + "' for deletion?",
                     "VARS - Confirm", JOptionPane.YES_NO_OPTION, JOptionPane.PLAIN_MESSAGE);
 
-                final UserAccount userAccount = (UserAccount) Lookup.getUserAccountDispatcher().getValueObject();
+                final UserAccount userAccount = StateLookup.getUserAccount();
 
                 if (value == JOptionPane.YES_OPTION) {
                     WaitIndicator waitIndicator = new WaitIndicator(frame);

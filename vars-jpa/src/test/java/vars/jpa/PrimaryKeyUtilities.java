@@ -27,19 +27,6 @@ import vars.knowledgebase.jpa.ConceptImpl;
 import vars.knowledgebase.jpa.ConceptMetadataImpl;
 import vars.knowledgebase.jpa.LinkTemplateImpl;
 
-import vars.annotation.VideoArchiveSet;
-import vars.annotation.VideoArchive;
-import vars.annotation.VideoFrame;
-import vars.annotation.Observation;
-import vars.annotation.jpa.AssociationImpl;
-import vars.annotation.jpa.CameraDataImpl;
-import vars.annotation.jpa.CameraDeploymentImpl;
-
-import vars.annotation.jpa.ObservationImpl;
-import vars.annotation.jpa.PhysicalDataImpl;
-import vars.annotation.jpa.VideoArchiveImpl;
-import vars.annotation.jpa.VideoArchiveSetImpl;
-import vars.annotation.jpa.VideoFrameImpl;
 import vars.knowledgebase.jpa.ConceptNameImpl;
 import vars.knowledgebase.jpa.HistoryImpl;
 import vars.knowledgebase.jpa.LinkRealizationImpl;
@@ -140,36 +127,6 @@ public class PrimaryKeyUtilities {
         return map;
     }
 
-    public static Map<Class, Collection> primaryKeyMap(VideoArchiveSet videoArchiveSet) {
-        Map<Class, Collection> map = new HashMap<Class, Collection>() {
-
-            {
-                put(VideoArchiveSetImpl.class, new ArrayList());
-                put(CameraDeploymentImpl.class, new ArrayList());
-                put(VideoArchiveImpl.class, new ArrayList());
-                put(VideoFrameImpl.class, new ArrayList());
-                put(PhysicalDataImpl.class, new ArrayList());
-                put(CameraDataImpl.class, new ArrayList());
-                put(ObservationImpl.class, new ArrayList());
-                put(AssociationImpl.class, new ArrayList());
-            }
-        };
-
-        map.get(VideoArchiveSetImpl.class).add(((JPAEntity) videoArchiveSet).getId());
-        map.get(CameraDeploymentImpl.class).addAll(primaryKeys(videoArchiveSet.getCameraDeployments()));
-
-        Collection<VideoArchive> videoArchives = videoArchiveSet.getVideoArchives();
-
-        map.get(VideoArchiveImpl.class).addAll(primaryKeys(videoArchives));
-
-        for (VideoArchive va : videoArchives) {
-            for (VideoFrame videoFrame : va.getVideoFrames()) {
-                primaryKeyMap((VideoFrame) videoFrame, map);
-            }
-        }
-
-        return map;
-    }
 
     @SuppressWarnings("unchecked")
     private static void primaryKeyMap(Concept concept, Map<Class, Collection> map) {
@@ -191,24 +148,6 @@ public class PrimaryKeyUtilities {
             primaryKeyMap((Concept) child, map);
         }
 
-    }
-
-    private static void primaryKeyMap(VideoFrame videoFrame, Map<Class, Collection> map) {
-        map.get(VideoFrameImpl.class).add(((JPAEntity) videoFrame).getId());
-        map.get(PhysicalDataImpl.class).add(((JPAEntity) videoFrame.getPhysicalData()).getId());
-        map.get(PhysicalDataImpl.class).add(((JPAEntity) videoFrame.getPhysicalData()).getId());
-
-        Collection obs = videoFrame.getObservations();
-
-        map.get(ObservationImpl.class).add(primaryKeys(obs));
-
-        Collection ass = map.get(AssociationImpl.class);
-
-        for (Object o : obs) {
-            Observation observation = (Observation) o;
-
-            ass.addAll(primaryKeys(observation.getAssociations()));
-        }
     }
 
     /**

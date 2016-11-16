@@ -19,7 +19,7 @@ public class MockAnnotationService implements AnnotationService {
     }
 
     @Override
-    public int countByConceptName(String name) {
+    public int countByConcepts(Collection<String> concepts) {
         return 0;
     }
 }

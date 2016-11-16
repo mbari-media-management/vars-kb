@@ -35,9 +35,7 @@ import vars.MiscDAOFactory;
 import vars.MiscFactory;
 import vars.PersistenceCacheProvider;
 import vars.knowledgebase.ConceptCache;
-import vars.knowledgebase.KnowledgebasePersistenceService;
 import vars.knowledgebase.KnowledgebaseDAOFactory;
-import vars.knowledgebase.KnowledgebasePersistenceServiceImpl;
 import vars.knowledgebase.KnowledgebaseFactory;
 import vars.knowledgebase.jpa.ConceptCacheImpl;
 import vars.knowledgebase.jpa.KnowledgebaseDAOFactoryImpl;
@@ -52,20 +50,14 @@ import vars.knowledgebase.jpa.KnowledgebaseFactoryImpl;
  */
 public class VarsJpaModule implements Module {
 
-    private final String knowledgebasePersistenceUnit;
-    private final String miscPersistenceUnit;
-    private final Logger log = LoggerFactory.getLogger(getClass());
+    private final EntityManagerFactory entityManagerFactory;
 
     /**
      * Constructs ...
      *
-     * @param knowledgebasePersistenceUnit
-     * @param miscPersistenceUnit
      */
-    public VarsJpaModule(String knowledgebasePersistenceUnit,
-                         String miscPersistenceUnit) {
-        this.knowledgebasePersistenceUnit = knowledgebasePersistenceUnit;
-        this.miscPersistenceUnit = miscPersistenceUnit;
+    public VarsJpaModule(EntityManagerFactory entityManagerFactory) {
+        this.entityManagerFactory = entityManagerFactory;
     }
 
     public void configure(Binder binder) {
@@ -79,14 +71,18 @@ public class VarsJpaModule implements Module {
         binder.bind(DateFormat.class).toInstance(dateFormatISO);
         
         // Bind the EntityManagerFactories
-        binder.bind(EntityManagerFactory.class).annotatedWith(Names.named("knowledgebasePersistenceUnit")).toInstance(Persistence.createEntityManagerFactory(knowledgebasePersistenceUnit));
-        binder.bind(EntityManagerFactory.class).annotatedWith(Names.named("miscPersistenceUnit")).toInstance(Persistence.createEntityManagerFactory(miscPersistenceUnit));
+        binder.bind(EntityManagerFactory.class)
+                .annotatedWith(Names.named("knowledgebasePersistenceUnit"))
+                .toInstance(entityManagerFactory);
+
+        binder.bind(EntityManagerFactory.class)
+                .annotatedWith(Names.named("miscPersistenceUnit"))
+                .toInstance(entityManagerFactory);
 
         // Bind annotation object and DAO factories
 
         binder.bind(KnowledgebaseDAOFactory.class).to(KnowledgebaseDAOFactoryImpl.class).in(Scopes.SINGLETON);
         binder.bind(KnowledgebaseFactory.class).to(KnowledgebaseFactoryImpl.class);
-        binder.bind(KnowledgebasePersistenceService.class).to(KnowledgebasePersistenceServiceImpl.class);
         binder.bind(MiscDAOFactory.class).to(MiscDAOFactoryImpl.class).in(Scopes.SINGLETON);
         binder.bind(MiscFactory.class).to(MiscFactoryImpl.class);
         binder.bind(PersistenceCacheProvider.class).to(JPACacheProvider.class);

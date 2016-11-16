@@ -41,7 +41,7 @@ public class StateLookup extends GlobalStateLookup {
     public static final String TOPIC_REFRESH_KNOWLEGEBASE = "vars.knowledgebase.ui.Lookup-RefreshKnowledgebase";
 
     /** HACK: Hard-wired JPA names. Change after switch to typesafe config */
-    public static final Injector GUICE_INJECTOR = Guice.createInjector(new InjectorModule("vars-jpa-annotation", "vars-jpa-knowledgebase", "vars-jpa-misc"));
+    public static final Injector GUICE_INJECTOR = Guice.createInjector(new InjectorModule());
 
     private static final ObjectProperty<KnowledgebaseFrame> applicationFrame = new SimpleObjectProperty<>();
     private static final ObjectProperty<Concept> selectedConcept = new SimpleObjectProperty<>();

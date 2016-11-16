@@ -3,7 +3,6 @@ package vars.jpa;
 import com.google.inject.Injector;
 import com.google.inject.Guice;
 import vars.knowledgebase.KnowledgebaseDAOFactory;
-import vars.annotation.AnnotationDAOFactory;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
@@ -29,14 +28,6 @@ public class DaoFactoryTest {
         assertNotNull(kf.newMediaDAO());
         assertNotNull(kf.newUsageDAO());
 
-        AnnotationDAOFactory af = injector.getInstance(AnnotationDAOFactory.class);
-        assertNotNull(af.newAssociationDAO());
-        assertNotNull(af.newCameraDataDAO());
-        assertNotNull(af.newCameraDeploymentDAO());
-        assertNotNull(af.newObservationDAO());
-        assertNotNull(af.newPhysicalDataDAO());
-        assertNotNull(af.newVideoArchiveDAO());
-        assertNotNull(af.newVideoArchiveSetDAO());
     }
 
 }

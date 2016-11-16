@@ -25,19 +25,17 @@ import vars.knowledgebase.KnowledgebaseObject;
 public class JPACacheProvider implements PersistenceCacheProvider {
 
     private final EntityManagerFactory kbEmf;
-    private final EntityManagerFactory annoEmf;
     private final EntityManagerFactory miscEmf;
     private final Logger log = LoggerFactory.getLogger(getClass());
 
 
 
     @Inject
-    public JPACacheProvider(@Named("annotationPersistenceUnit") EntityManagerFactory annoEmf,
+    public JPACacheProvider(
             @Named("knowledgebasePersistenceUnit") EntityManagerFactory kbEmf,
             @Named("miscPersistenceUnit") EntityManagerFactory miscEmf) {
 
         this.kbEmf = kbEmf;
-        this.annoEmf = annoEmf;
         this.miscEmf = miscEmf;
     }
 
@@ -47,9 +45,6 @@ public class JPACacheProvider implements PersistenceCacheProvider {
     public void clear() {
         
         Cache cache = kbEmf.getCache();
-        cache.evictAll();
-
-        cache = annoEmf.getCache();
         cache.evictAll();
 
         cache = miscEmf.getCache();

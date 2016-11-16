@@ -5,12 +5,6 @@
 
 package vars.jpa;
 
-import vars.annotation.Association;
-import vars.annotation.CameraDeployment;
-import vars.annotation.Observation;
-import vars.annotation.VideoArchive;
-import vars.annotation.VideoArchiveSet;
-import vars.annotation.VideoFrame;
 import vars.knowledgebase.Concept;
 import vars.knowledgebase.ConceptMetadata;
 import vars.knowledgebase.ConceptName;
@@ -24,37 +18,6 @@ import vars.knowledgebase.Media;
  * @author brian
  */
 public class EntityUtilities {
-
-    public String buildTextTree(VideoArchiveSet videoArchiveSet) {
-        StringBuilder sb = new StringBuilder(videoArchiveSet.toString());
-
-        for (CameraDeployment cameraDeployment : videoArchiveSet.getCameraDeployments()) {
-            sb.append("|-- ").append(cameraDeployment).append("\n");
-        }
-        
-        for (VideoArchive videoArchive : videoArchiveSet.getVideoArchives()) {
-            sb.append("|-- ").append(videoArchive).append("\n");
-            
-            for (VideoFrame videoFrame : videoArchive.getVideoFrames()) {
-                sb.append("|    |-- ").append(videoFrame).append("\n");
-                sb.append("|        |-- ").append(videoFrame.getCameraData()).append("\n");
-                sb.append("|        |-- ").append(videoFrame.getPhysicalData()).append("\n");
-                
-                for (Observation observation : videoFrame.getObservations()) {
-                    sb.append("|        |-- ").append(observation).append("\n");
-
-                    for (Association association : observation.getAssociations()) {
-                        sb.append("|            |-- ").append(association).append("\n");
-                    }
-                }
-            }
-        }
-
-
-        return sb.toString();
-
-    }
-
 
     public String buildTextTree(Concept concept) {
         return buildTextTree(concept, 0);

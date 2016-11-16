@@ -25,6 +25,7 @@ import vars.UserAccount;
 import vars.UserAccountDAO;
 import vars.UserAccountRoles;
 import vars.jpa.VarsJpaModule;
+import vars.knowledgebase.jpa.DevelopmentDAOFactory;
 import vars.shared.ui.UserAccountPreferencesPanel;
 
 /**
@@ -74,8 +75,7 @@ public class CreateUserAccountDialog extends UserAccountDialog {
      */
     public static void main(String[] args) {
 
-        Injector injector = Guice.createInjector(new VarsJpaModule("vars-jpa-annotation", "vars-jpa-knowledgebase",
-            "vars-jpa-misc"));
+        Injector injector = Guice.createInjector(new VarsJpaModule(DevelopmentDAOFactory.newEntityManagerFactory()));
         ToolBelt toolBelt = injector.getInstance(ToolBelt.class);
         UserAccount admin = CreateUserAccountDialog.showDialog(null, true, "VARS - Create Administrator Account",
                 toolBelt.getMiscDAOFactory(), toolBelt.getMiscFactory());

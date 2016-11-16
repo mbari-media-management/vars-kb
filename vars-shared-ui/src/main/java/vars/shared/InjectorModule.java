@@ -19,8 +19,14 @@ import com.google.inject.Binder;
 import com.google.inject.Module;
 import java.util.Locale;
 import java.util.ResourceBundle;
+
+import com.typesafe.config.ConfigFactory;
 import vars.VARSException;
 import vars.jpa.VarsJpaModule;
+import vars.knowledgebase.jpa.DevelopmentDAOFactory;
+import vars.knowledgebase.jpa.ProductionDAOFactory;
+
+import javax.persistence.EntityManagerFactory;
 
 /**
  *
@@ -28,15 +34,11 @@ import vars.jpa.VarsJpaModule;
  */
 public class InjectorModule implements Module {
 
-    private final String knowledgebasePersistenceUnit;
-    private final String miscPersistenceUnit;
 
+    private final String environment;
 
-    public InjectorModule(
-            String knowledgebasePersistenceUnit,
-            String miscPersistenceUnit) {
-        this.knowledgebasePersistenceUnit = knowledgebasePersistenceUnit;
-        this.miscPersistenceUnit = miscPersistenceUnit;
+    public InjectorModule() {
+        environment = ConfigFactory.load().getString("database.environment");
     }
 
     /**
@@ -44,9 +46,12 @@ public class InjectorModule implements Module {
      * @param binder
      */
     public void configure(Binder binder) {
+        EntityManagerFactory entityManagerFactory =  environment.equalsIgnoreCase("production") ?
+                ProductionDAOFactory.newEntityManagerFactory() :
+                DevelopmentDAOFactory.newEntityManagerFactory();
+
         try {
-            binder.install(new VarsJpaModule(knowledgebasePersistenceUnit,
-                    miscPersistenceUnit));
+            binder.install(new VarsJpaModule(entityManagerFactory));
         }
         catch (Exception ex) {
             throw new VARSException("Failed to intialize dependency injection", ex);

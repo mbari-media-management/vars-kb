@@ -8,6 +8,7 @@ import java.util.List;
 import vars.ILink;
 import vars.jpa.VarsJpaModule;
 import vars.knowledgebase.ConceptCache;
+import vars.knowledgebase.jpa.DevelopmentDAOFactory;
 import vars.shared.ui.dialogs.StandardDialog;
 
 import com.google.inject.Guice;
@@ -16,7 +17,7 @@ import com.google.inject.Injector;
 public class LinkSelectionPanelDemo {
 	
 	public static void main(String[] args) {
-		Injector injector = Guice.createInjector(new VarsJpaModule("vars-jpa-knowledgebase", "vars-jpa-misc"));
+		Injector injector = Guice.createInjector(new VarsJpaModule(DevelopmentDAOFactory.newEntityManagerFactory()));
 		ConceptCache conceptCache = injector.getInstance(ConceptCache.class);
 		List<ILink> links = conceptCache.findLinkTemplatesFor(conceptCache.findRootConcept());
 		LinkSelectionPanel panel = new LinkSelectionPanel(conceptCache);

@@ -1,10 +1,11 @@
 package vars.jpa;
 
+import vars.knowledgebase.jpa.DevelopmentDAOFactory;
+
 public class VarsJpaDevelopmentModule extends VarsJpaModule {
     
-    private static final String puName = "vars-hibernate-development";
 
     public VarsJpaDevelopmentModule() {
-        super(puName, puName, puName);
+        super(DevelopmentDAOFactory.newEntityManagerFactory());
     }
 }
