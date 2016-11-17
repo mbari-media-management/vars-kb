@@ -13,18 +13,17 @@
 
 
 
-package vars.shared;
+package vars.jpa;
 
 import com.google.inject.Binder;
 import com.google.inject.Module;
-import java.util.Locale;
-import java.util.ResourceBundle;
 
+import com.typesafe.config.Config;
 import com.typesafe.config.ConfigFactory;
 import vars.VARSException;
 import vars.jpa.VarsJpaModule;
-import vars.knowledgebase.jpa.DevelopmentDAOFactory;
-import vars.knowledgebase.jpa.ProductionDAOFactory;
+import vars.jpa.DevelopmentDAOFactory;
+import vars.jpa.ProductionDAOFactory;
 
 import javax.persistence.EntityManagerFactory;
 
@@ -38,7 +37,8 @@ public class InjectorModule implements Module {
     private final String environment;
 
     public InjectorModule() {
-        environment = ConfigFactory.load().getString("database.environment");
+        Config config = ConfigFactory.load();
+        environment = config.getString("database.environment");
     }
 
     /**

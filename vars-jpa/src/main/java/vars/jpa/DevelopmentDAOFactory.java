@@ -1,4 +1,4 @@
-package vars.knowledgebase.jpa;
+package vars.jpa;
 
 import com.google.common.collect.ImmutableMap;
 import com.typesafe.config.Config;

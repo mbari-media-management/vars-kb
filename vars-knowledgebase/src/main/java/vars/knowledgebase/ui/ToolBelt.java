@@ -49,12 +49,11 @@ public class ToolBelt extends vars.ToolBelt {
      * @param conceptCache
      */
     @Inject
-    public ToolBelt(
-                    KnowledgebaseDAOFactory knowledgebaseDAOFactory, KnowledgebaseFactory knowledgebaseFactory,
+    public ToolBelt(KnowledgebaseDAOFactory knowledgebaseDAOFactory, KnowledgebaseFactory knowledgebaseFactory,
                     MiscDAOFactory miscDAOFactory, MiscFactory miscFactory,
                     PersistenceCacheProvider persistenceCacheProvider,
                     ConceptCache conceptCache,
-            AnnotationService annotationService) {
+                    AnnotationService annotationService) {
         super(knowledgebaseDAOFactory, knowledgebaseFactory, miscDAOFactory,
               miscFactory, persistenceCacheProvider, conceptCache);
         historyFactory = new HistoryFactory(knowledgebaseFactory);

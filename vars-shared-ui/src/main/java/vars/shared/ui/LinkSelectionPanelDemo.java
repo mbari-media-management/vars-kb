@@ -1,14 +1,13 @@
 package vars.shared.ui;
 
 import java.awt.BorderLayout;
-import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.List;
 
 import vars.ILink;
 import vars.jpa.VarsJpaModule;
 import vars.knowledgebase.ConceptCache;
-import vars.knowledgebase.jpa.DevelopmentDAOFactory;
+import vars.jpa.DevelopmentDAOFactory;
 import vars.shared.ui.dialogs.StandardDialog;
 
 import com.google.inject.Guice;

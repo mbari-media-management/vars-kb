@@ -25,7 +25,7 @@ import vars.UserAccount;
 import vars.UserAccountDAO;
 import vars.UserAccountRoles;
 import vars.jpa.VarsJpaModule;
-import vars.knowledgebase.jpa.DevelopmentDAOFactory;
+import vars.jpa.DevelopmentDAOFactory;
 import vars.shared.ui.UserAccountPreferencesPanel;
 
 /**

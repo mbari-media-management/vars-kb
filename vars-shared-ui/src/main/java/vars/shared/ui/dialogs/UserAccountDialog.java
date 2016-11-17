@@ -28,7 +28,7 @@ import org.slf4j.LoggerFactory;
 import vars.ToolBelt;
 import vars.UserAccount;
 import vars.jpa.VarsJpaModule;
-import vars.knowledgebase.jpa.DevelopmentDAOFactory;
+import vars.jpa.DevelopmentDAOFactory;
 import vars.shared.ui.UserAccountPreferencesPanel;
 
 /**
