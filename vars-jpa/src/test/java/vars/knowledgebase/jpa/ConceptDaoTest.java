@@ -1,10 +1,10 @@
 package vars.knowledgebase.jpa;
 
+import vars.jpa.VarsJpaDevelopmentModule;
 import vars.knowledgebase.KnowledgebaseDAOFactory;
 import vars.knowledgebase.ConceptDAO;
 import vars.knowledgebase.Concept;
 import vars.knowledgebase.ConceptName;
-import vars.jpa.VarsJpaDevelopmentModule;
 
 import java.util.Collection;
 

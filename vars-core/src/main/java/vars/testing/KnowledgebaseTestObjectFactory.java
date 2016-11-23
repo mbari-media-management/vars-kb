@@ -96,12 +96,6 @@ public class KnowledgebaseTestObjectFactory {
         return m;
     }
 
-    public Usage makeUsage() {
-        Usage u = factory.newUsage();
-        u.setEmbargoExpirationDate(new Date());
-        u.setSpecification("Specification can be a looooooong message." + randomNumber(0, 99999999));
-        return u;
-    }
 
     public LinkTemplate makeLinkTemplate() {
         LinkTemplate lt = factory.newLinkTemplate();
@@ -133,7 +127,7 @@ public class KnowledgebaseTestObjectFactory {
     public Concept makeFancyConcept(String name, int x) {
         Concept c = makeConcept(name);
         ConceptMetadata cm = c.getConceptMetadata();
-        cm.setUsage(makeUsage());
+        //cm.setUsage(makeUsage());
         for (int i = 0; i < x; i++) {
             cm.addHistory(makeHistory());
             cm.addLinkRealization(makeLinkRealization());

@@ -52,13 +52,7 @@ public class KnowledgebaseDAOFactoryImpl implements KnowledgebaseDAOFactory, Ent
         return entityManagerFactory;
     }
 
-    public ArtifactDAO newArtifactDAO() {
-        return new ArtifactDAOImpl((entityManagerFactory.createEntityManager()));
-    }
 
-    public ArtifactDAO newArtifactDAO(EntityManager entityManager) {
-        return new ArtifactDAOImpl(entityManager);
-    }
 
     /**
      * @return
@@ -188,19 +182,4 @@ public class KnowledgebaseDAOFactoryImpl implements KnowledgebaseDAOFactory, Ent
         return new MediaDAOImpl(entityManager);
     }
 
-    /**
-     * @return
-     */
-    public UsageDAO newUsageDAO() {
-        return new UsageDAOImpl(entityManagerFactory.createEntityManager());
-    }
-
-    /**
-     *
-     * @param entityManager
-     * @return
-     */
-    public UsageDAO newUsageDAO(EntityManager entityManager) {
-        return new UsageDAOImpl(entityManager);
-    }
 }

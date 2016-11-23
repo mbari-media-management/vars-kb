@@ -5,9 +5,9 @@ import java.awt.event.ActionListener;
 import java.util.List;
 
 import vars.ILink;
+import vars.jpa.DevelopmentDAOFactory;
 import vars.jpa.VarsJpaModule;
 import vars.knowledgebase.ConceptCache;
-import vars.jpa.DevelopmentDAOFactory;
 import vars.shared.ui.dialogs.StandardDialog;
 
 import com.google.inject.Guice;

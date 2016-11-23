@@ -4,9 +4,6 @@ import vars.knowledgebase.*;
 
 public class KnowledgebaseFactoryImpl implements KnowledgebaseFactory {
 
-    public Artifact newArtifact() {
-        return new ArtifactImpl();
-    }
 
     public Concept newConcept() {
         return new ConceptImpl();
@@ -32,8 +29,5 @@ public class KnowledgebaseFactoryImpl implements KnowledgebaseFactory {
         return new MediaImpl();
     }
 
-    public Usage newUsage() {
-        return new UsageImpl();
-    }
 
 }

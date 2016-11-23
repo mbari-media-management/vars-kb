@@ -29,10 +29,6 @@ import vars.DAO;
  */
 public interface KnowledgebaseDAOFactory {
 
-    ArtifactDAO newArtifactDAO();
-
-    ArtifactDAO newArtifactDAO(EntityManager entityManager);
-
     ConceptDAO newConceptDAO();
 
     ConceptDAO newConceptDAO(EntityManager entitManager);
@@ -65,9 +61,5 @@ public interface KnowledgebaseDAOFactory {
 
     MediaDAO newMediaDAO(EntityManager entitManager);
 
-    UsageDAO newUsageDAO();
-
-    UsageDAO newUsageDAO(EntityManager entitManager);
-    
     EntityManagerFactory getEntityManagerFactory();
 }

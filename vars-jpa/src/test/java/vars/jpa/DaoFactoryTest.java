@@ -26,8 +26,6 @@ public class DaoFactoryTest {
         assertNotNull(kf.newLinkRealizationDAO());
         assertNotNull(kf.newLinkTemplateDAO());
         assertNotNull(kf.newMediaDAO());
-        assertNotNull(kf.newUsageDAO());
-
     }
 
 }

@@ -21,9 +21,6 @@ import com.google.inject.Module;
 import com.typesafe.config.Config;
 import com.typesafe.config.ConfigFactory;
 import vars.VARSException;
-import vars.jpa.VarsJpaModule;
-import vars.jpa.DevelopmentDAOFactory;
-import vars.jpa.ProductionDAOFactory;
 
 import javax.persistence.EntityManagerFactory;
 
@@ -46,15 +43,17 @@ public class InjectorModule implements Module {
      * @param binder
      */
     public void configure(Binder binder) {
-        EntityManagerFactory entityManagerFactory =  environment.equalsIgnoreCase("production") ?
-                ProductionDAOFactory.newEntityManagerFactory() :
-                DevelopmentDAOFactory.newEntityManagerFactory();
+        String nodeName = environment.equalsIgnoreCase("production") ?
+                "org.mbari.vars.knowledgebase.database.production" :
+                "org.mbari.vars.knowledgebase.database.development";
+
+        EntityManagerFactory entityManagerFactory =  EntityManagerFactories.newEntityManagerFactory(nodeName);
 
         try {
             binder.install(new VarsJpaModule(entityManagerFactory));
         }
         catch (Exception ex) {
-            throw new VARSException("Failed to intialize dependency injection", ex);
+            throw new VARSException("Failed to initialize dependency injection", ex);
         }
 
     }

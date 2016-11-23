@@ -1,9 +1,19 @@
 package vars.jpa;
 
+import vars.knowledgebase.jpa.DerbyTestDAOFactory;
+
+import javax.persistence.EntityManagerFactory;
+
+/**
+ * @author Brian Schlining
+ * @since 2016-11-22T10:34:00
+ */
 public class VarsJpaDevelopmentModule extends VarsJpaModule {
-    
+
+    static String nodeName = "org.mbari.vars.knowledgebase.database.development";
 
     public VarsJpaDevelopmentModule() {
-        super(DevelopmentDAOFactory.newEntityManagerFactory());
+        super(EntityManagerFactories.newEntityManagerFactory(nodeName));
     }
+
 }

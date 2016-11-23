@@ -95,11 +95,11 @@ public interface ConceptMetadata extends KnowledgebaseObject {
      */
     void addMedia(Media media);
 
-    void addArtifact(Artifact artifact);
+    //void addArtifact(Artifact artifact);
 
-    void removeArtifact(Artifact artifact);
+    //void removeArtifact(Artifact artifact);
 
-    Collection<Artifact> getArtifacts();
+    //Collection<Artifact> getArtifacts();
 
 
     /**
@@ -134,7 +134,7 @@ public interface ConceptMetadata extends KnowledgebaseObject {
     /**
      * @return
      */
-    Usage getUsage();
+    //Usage getUsage();
 
     /**
      * Removes a <B>History </B> from this <B>Concept </B>.
@@ -187,5 +187,5 @@ public interface ConceptMetadata extends KnowledgebaseObject {
      * @param usage               A <code>Usage</code> to be assigned to this <code>Concept</code>  node.
      * @see  Usage
      */
-    void setUsage(Usage usage);
+    //void setUsage(Usage usage);
 }

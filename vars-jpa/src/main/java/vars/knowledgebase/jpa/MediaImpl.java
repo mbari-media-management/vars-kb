@@ -24,6 +24,7 @@ import javax.persistence.EntityListeners;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Index;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
@@ -31,6 +32,8 @@ import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.persistence.TableGenerator;
 import javax.persistence.Version;
+
+import vars.gson.Exclude;
 import vars.jpa.JPAEntity;
 import vars.jpa.KeyNullifier;
 import vars.jpa.TransactionLogger;
@@ -45,7 +48,9 @@ import vars.knowledgebase.Media;
  * To change this template use File | Settings | File Templates.
  */
 @Entity(name = "Media")
-@Table(name = "Media")
+@Table(name = "Media",
+        indexes = {@Index(name = "idx_Media_FK1", columnList = "ConceptDelegateID_FK"),
+                @Index(name = "idx_Media_LUT", columnList = "LAST_UPDATED_TIME")})
 @EntityListeners({ TransactionLogger.class, KeyNullifier.class })
 @NamedQueries( {
     @NamedQuery(name = "Media.findById", query = "SELECT v FROM Media v WHERE v.id = :id") ,
@@ -61,6 +66,7 @@ public class MediaImpl implements Serializable, Media, JPAEntity {
     @Column(name = "Caption", length = 1000)
     String caption;
 
+    @Exclude
     @ManyToOne(optional = false, targetEntity = ConceptMetadataImpl.class, cascade = {CascadeType.MERGE, CascadeType.REFRESH})
     @JoinColumn(name = "ConceptDelegateID_FK")
     ConceptMetadata conceptMetadata;
@@ -68,6 +74,7 @@ public class MediaImpl implements Serializable, Media, JPAEntity {
     @Column(name = "Credit", length = 255)
     String credit;
 
+    @Exclude
     @Id
     @Column(
         name = "id",
@@ -92,9 +99,11 @@ public class MediaImpl implements Serializable, Media, JPAEntity {
     String type;
 
     /** Optimistic lock to prevent concurrent overwrites */
+    @Exclude
     @Version
     @Column(name = "LAST_UPDATED_TIME")
     private Timestamp updatedTime;
+
     @Column(name = "Url", length = 1024)
     String url;
 

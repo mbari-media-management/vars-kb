@@ -16,6 +16,7 @@ import javax.persistence.EntityListeners;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Index;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
@@ -25,6 +26,7 @@ import javax.persistence.TableGenerator;
 import javax.persistence.Transient;
 import javax.persistence.Version;
 import vars.LinkUtilities;
+import vars.gson.Exclude;
 import vars.jpa.JPAEntity;
 import vars.jpa.KeyNullifier;
 import vars.jpa.TransactionLogger;
@@ -51,7 +53,9 @@ import vars.knowledgebase.LinkRealization;
  * </pre>
  */
 @Entity(name = "LinkRealization")
-@Table(name = "LinkRealization")
+@Table(name = "LinkRealization",
+        indexes = {@Index(name = "idx_LinkRealization_FK1", columnList = "ConceptDelegateID_FK"),
+                @Index(name = "idx_LinkRealization_LUT", columnList = "LAST_UPDATED_TIME")})
 @EntityListeners({TransactionLogger.class, KeyNullifier.class})
 @NamedQueries({
     @NamedQuery(name = "LinkRealization.findById",
@@ -69,6 +73,7 @@ public class LinkRealizationImpl implements Serializable, LinkRealization, JPAEn
     private static final List<String> PROPS = ImmutableList.of(LinkRealization.PROP_LINKNAME,
             LinkRealization.PROP_TOCONCEPT, LinkRealization.PROP_LINKVALUE) ;
 
+    @Exclude
     @Id
     @Column(name = "id", nullable = false, updatable=false)
     @GeneratedValue(strategy = GenerationType.TABLE, generator = "LinkRealization_Gen")
@@ -78,6 +83,7 @@ public class LinkRealizationImpl implements Serializable, LinkRealization, JPAEn
     Long id;
 
     /** Optimistic lock to prevent concurrent overwrites */
+    @Exclude
     @Version
     @Column(name = "LAST_UPDATED_TIME")
     private Timestamp updatedTime;
@@ -91,6 +97,7 @@ public class LinkRealizationImpl implements Serializable, LinkRealization, JPAEn
     @Column(name = "LinkValue", length = 2048)
     String linkValue;
 
+    @Exclude
     @ManyToOne(optional = false, targetEntity = ConceptMetadataImpl.class, cascade = {CascadeType.MERGE, CascadeType.REFRESH})
     @JoinColumn(name = "ConceptDelegateID_FK")
     ConceptMetadata conceptMetadata;

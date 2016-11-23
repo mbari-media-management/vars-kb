@@ -24,6 +24,7 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Index;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedNativeQueries;
@@ -34,6 +35,9 @@ import javax.persistence.Table;
 import javax.persistence.TableGenerator;
 import javax.persistence.UniqueConstraint;
 import javax.persistence.Version;
+
+import com.google.gson.annotations.SerializedName;
+import vars.gson.Exclude;
 import vars.jpa.JPAEntity;
 import vars.jpa.KeyNullifier;
 import vars.jpa.TransactionLogger;
@@ -44,7 +48,11 @@ import vars.knowledgebase.ConceptName;
  *
  */
 @Entity(name = "ConceptName")
-@Table(name = "ConceptName", uniqueConstraints = { @UniqueConstraint(columnNames = { "ConceptName" }) })
+@Table(name = "ConceptName",
+        uniqueConstraints = { @UniqueConstraint(columnNames = { "ConceptName" }) },
+        indexes = {@Index(name = "idx_ConceptName_name", columnList = "ConceptName"),
+                   @Index(name = "idx_ConceptName_FK1", columnList = "ConceptID_FK"),
+                   @Index(name = "idx_ConceptName_LUT", columnList = "LAST_UPDATED_TIME")})
 @EntityListeners({ TransactionLogger.class, KeyNullifier.class })
 @NamedNativeQueries({
         @NamedNativeQuery(name = "ConceptName.findAllNamesAsStrings",
@@ -67,6 +75,7 @@ public class ConceptNameImpl implements Serializable, ConceptName, JPAEntity {
     @Column(name = "Author", length = 255)
     String author;
 
+    @Exclude
     @ManyToOne(
         optional = false,
         targetEntity = ConceptImpl.class,
@@ -76,6 +85,7 @@ public class ConceptNameImpl implements Serializable, ConceptName, JPAEntity {
     @JoinColumn(name = "ConceptID_FK")
     Concept concept;
 
+    @Exclude
     @Id
     @Column(
         name = "id",
@@ -93,6 +103,7 @@ public class ConceptNameImpl implements Serializable, ConceptName, JPAEntity {
     )
     Long id;
 
+    @SerializedName("name")
     @Column(
         name = "ConceptName",
         nullable = false,
@@ -100,7 +111,7 @@ public class ConceptNameImpl implements Serializable, ConceptName, JPAEntity {
         unique = true
     )
     String name;
-    
+
     @Column(
         name = "NameType",
         nullable = false,
@@ -109,6 +120,7 @@ public class ConceptNameImpl implements Serializable, ConceptName, JPAEntity {
     String nameType;
 
     /** Optimistic lock to prevent concurrent overwrites */
+    @Exclude
     @Version
     @Column(name = "LAST_UPDATED_TIME")
     private Timestamp updatedTime;

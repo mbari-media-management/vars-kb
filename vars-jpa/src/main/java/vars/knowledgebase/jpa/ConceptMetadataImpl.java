@@ -29,6 +29,7 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Index;
 import javax.persistence.JoinColumn;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
@@ -38,6 +39,8 @@ import javax.persistence.OrderBy;
 import javax.persistence.Table;
 import javax.persistence.TableGenerator;
 import javax.persistence.Version;
+
+import vars.gson.Exclude;
 import vars.jpa.JPAEntity;
 import vars.jpa.KeyNullifier;
 import vars.jpa.TransactionLogger;
@@ -61,16 +64,20 @@ import vars.knowledgebase.*;
  * </pre>
  */
 @Entity(name = "ConceptMetadata")
-@Table(name = "ConceptDelegate")
+@Table(name = "ConceptDelegate",
+        indexes = {@Index(name = "idx_ConceptDelegate_FK1", columnList = "ConceptID_FK"),
+                   @Index(name = "idx_ConceptDelegate_LUT", columnList = "LAST_UPDATED_TIME")})
 @EntityListeners({ TransactionLogger.class, KeyNullifier.class })
 @NamedQueries({ @NamedQuery(name = "ConceptMetadata.findById",
                             query = "SELECT v FROM ConceptMetadata v WHERE v.id = :id") })
 public class ConceptMetadataImpl implements Serializable, ConceptMetadata, JPAEntity {
 
+    @Exclude
     @OneToOne(optional = false, targetEntity = ConceptImpl.class, cascade = {CascadeType.MERGE, CascadeType.REFRESH}, fetch = FetchType.LAZY)
     @JoinColumn(name = "ConceptID_FK", nullable = false)
     private Concept concept;
 
+    @Exclude
     @OneToMany(
         targetEntity = HistoryImpl.class,
         mappedBy = "conceptMetadata",
@@ -78,8 +85,9 @@ public class ConceptMetadataImpl implements Serializable, ConceptMetadata, JPAEn
         cascade = {CascadeType.ALL}
     )
     @OrderBy(value = "creationDate")
-    private List<History> histories;
+    private List<HistoryImpl> histories;
 
+    @Exclude
     @Id
     @Column(
         name = "id",
@@ -103,7 +111,7 @@ public class ConceptMetadataImpl implements Serializable, ConceptMetadata, JPAEn
         fetch = FetchType.EAGER,
         cascade = CascadeType.ALL
     )
-    private List<LinkRealization> linkRealizations;
+    private List<LinkRealizationImpl> linkRealizations;
 
     @OneToMany(
         targetEntity = LinkTemplateImpl.class,
@@ -111,7 +119,7 @@ public class ConceptMetadataImpl implements Serializable, ConceptMetadata, JPAEn
         fetch = FetchType.EAGER,
         cascade = CascadeType.ALL
     )
-    private List<LinkTemplate> linkTemplates;
+    private List<LinkTemplateImpl> linkTemplates;
 
 
     @OneToMany(
@@ -120,35 +128,14 @@ public class ConceptMetadataImpl implements Serializable, ConceptMetadata, JPAEn
         fetch = FetchType.EAGER,
         cascade = CascadeType.ALL
     )
-    private List<Media> medias;
-
-    @OneToMany(
-        targetEntity = ArtifactImpl.class,
-        mappedBy = "conceptMetadata",
-        fetch = FetchType.EAGER,
-        cascade = CascadeType.ALL
-    )
-    private List<Artifact> artifacts;
+    private List<MediaImpl> medias;
 
     /** Optimistic lock to prevent concurrent overwrites */
+    @Exclude
     @SuppressWarnings("unused")
 	@Version
     @Column(name = "LAST_UPDATED_TIME")
     private Timestamp updatedTime;
-    
-    @OneToOne(
-        mappedBy = "conceptMetadata",
-        fetch = FetchType.EAGER,
-        cascade = CascadeType.ALL,
-        targetEntity = UsageImpl.class
-    )
-    private Usage usage;
-
-    public void addArtifact(Artifact artifact) {
-        if (getArtifacts().add(artifact)) {
-            ((ArtifactImpl) artifact).setConceptMetadata(this);
-        }
-    }
 
     public void addHistory(History history) {
         if (getHistories().add(history)) {
@@ -179,20 +166,14 @@ public class ConceptMetadataImpl implements Serializable, ConceptMetadata, JPAEn
         return concept;
     }
 
-    public Collection<Artifact> getArtifacts() {
-        if (artifacts == null) {
-            artifacts = new ArrayList<Artifact>();
-        }
-        return artifacts;
-    }
 
     public Collection<History> getHistories() {
         if (histories == null) {
-            histories = new ArrayList<History>();
+            histories = new ArrayList<>();
         }
  
 
-        return histories;
+        return (List<History>) (List<?>) histories;
     }
 
     public Long getId() {
@@ -201,27 +182,27 @@ public class ConceptMetadataImpl implements Serializable, ConceptMetadata, JPAEn
 
     public Collection<LinkRealization> getLinkRealizations() {
         if (linkRealizations == null) {
-            linkRealizations = new ArrayList<LinkRealization>();
+            linkRealizations = new ArrayList<>();
         }
 
-        return linkRealizations;
+        return (List<LinkRealization>) (List<?>) linkRealizations;
     }
 
     public Collection<LinkTemplate> getLinkTemplates() {
         if (linkTemplates == null) {
-            linkTemplates = new ArrayList<LinkTemplate>();
+            linkTemplates = new ArrayList<>();
         }
 
-        return linkTemplates;
+        return (List<LinkTemplate>) (List<?>) linkTemplates;
     }
 
     public Collection<Media> getMedias() {
         if (medias == null) {
-            medias = new ArrayList<Media>();
+            medias = new ArrayList<>();
         }
 
 
-        return medias;
+        return (List<Media>) (List<?>) medias;
     }
 
     public Media getPrimaryImage() {
@@ -249,10 +230,6 @@ public class ConceptMetadataImpl implements Serializable, ConceptMetadata, JPAEn
 
         return primaryMedia;
     }
-
-    public Usage getUsage() {
-        return usage;
-    }
     
     public Object getPrimaryKey() {
     	return getId();
@@ -277,11 +254,6 @@ public class ConceptMetadataImpl implements Serializable, ConceptMetadata, JPAEn
         return isPending;
     }
 
-    public void removeArtifact(Artifact artifact) {
-        if (getArtifacts().remove(artifact)) {
-            ((ArtifactImpl) artifact).setConceptMetadata(null);
-        }
-    }
 
     public void removeHistory(History history) {
         if (getHistories().remove(history)) {
@@ -315,19 +287,6 @@ public class ConceptMetadataImpl implements Serializable, ConceptMetadata, JPAEn
         this.id = id;
     }
 
-    public void setUsage(Usage usage) {
-        if (this.usage != null) {
-            UsageImpl thisUsage = (UsageImpl) this.usage;
-            thisUsage.setConceptMetadata(null);
-        }
-
-        this.usage = usage;
-
-        if (usage != null) {
-            ((UsageImpl) usage).setConceptMetadata(this);
-        }
-    }
-
     @Override
     public boolean equals(Object obj) {
         if (obj == null) {
@@ -355,9 +314,6 @@ public class ConceptMetadataImpl implements Serializable, ConceptMetadata, JPAEn
 		return "ConceptMetadataImpl ([id=" + id + "] updatedTime=" + updatedTime
 				+ ")";
 	}
-    
-    
 
-    
 
 }

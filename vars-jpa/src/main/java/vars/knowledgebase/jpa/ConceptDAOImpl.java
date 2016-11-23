@@ -20,6 +20,7 @@ import java.util.Map;
 import java.util.Queue;
 
 import javax.persistence.EntityManager;
+import javax.persistence.Query;
 
 /**
  * Created by IntelliJ IDEA.
@@ -53,6 +54,16 @@ public class ConceptDAOImpl extends DAO implements ConceptDAO {
         return root;
     }
 
+    public Concept eagerFindByName(String name) {
+        Query query = getEntityManager().createNamedQuery("Concept.findByName");
+        query.setParameter("name", name);
+        query.setHint("eclipselink.join-fetch", "c.conceptMetadata");
+        return (Concept) query.getResultList()
+                .stream()
+                .findFirst()
+                .orElseGet(null);
+    }
+
     /**
      * This find method should be called inside of a transaction
      * @param name
@@ -78,6 +89,8 @@ public class ConceptDAOImpl extends DAO implements ConceptDAO {
         final String name = '%' + nameGlob;
         return findByNamedQuery("Concept.findAllByNameGlob", new HashMap<String, Object>() {{ put("name", name.toLowerCase()); }});
     }
+
+
 
     /**
      * This should be called within a JPA tranaction

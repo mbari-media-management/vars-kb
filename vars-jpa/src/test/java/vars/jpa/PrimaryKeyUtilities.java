@@ -31,7 +31,6 @@ import vars.knowledgebase.jpa.ConceptNameImpl;
 import vars.knowledgebase.jpa.HistoryImpl;
 import vars.knowledgebase.jpa.LinkRealizationImpl;
 import vars.knowledgebase.jpa.MediaImpl;
-import vars.knowledgebase.jpa.UsageImpl;
 
 /**
  * Created by IntelliJ IDEA.
@@ -118,7 +117,6 @@ public class PrimaryKeyUtilities {
                 put(LinkRealizationImpl.class, new ArrayList());
                 put(LinkTemplateImpl.class, new ArrayList());
                 put(MediaImpl.class, new ArrayList());
-                put(UsageImpl.class, new ArrayList());
             }
         };
 
@@ -141,7 +139,6 @@ public class PrimaryKeyUtilities {
         map.get(LinkRealizationImpl.class).addAll(primaryKeys(metadata.getLinkRealizations()));
         map.get(LinkTemplateImpl.class).addAll(primaryKeys(metadata.getLinkTemplates()));
         map.get(MediaImpl.class).addAll(primaryKeys(metadata.getMedias()));
-        map.get(UsageImpl.class).add(((JPAEntity) metadata.getUsage()).getId());
 
         // Process the child conceptNames
         for (Object child : concept.getChildConcepts()) {

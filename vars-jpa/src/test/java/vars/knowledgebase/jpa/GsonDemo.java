@@ -1,0 +1,76 @@
+package vars.knowledgebase.jpa;
+
+import com.google.gson.FieldNamingPolicy;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.inject.Guice;
+import com.google.inject.Injector;
+import vars.gson.AnnotatedFieldExclusionStrategy;
+import vars.gson.ConceptSerializer;
+import vars.gson.UnderscoreFieldExclusionStrategy;
+import vars.jpa.DevelopmentDAOFactory;
+import vars.jpa.VarsJpaModule;
+import vars.knowledgebase.ConceptDAO;
+import vars.knowledgebase.KnowledgebaseDAOFactory;
+import vars.knowledgebase.KnowledgebaseFactory;
+
+import java.util.Collection;
+
+/**
+ * @author Brian Schlining
+ * @since 2016-11-22T10:25:00
+ */
+public class GsonDemo {
+
+    public static void main(String[] args) {
+        GsonBuilder gsonBuilder = new GsonBuilder()
+                .setExclusionStrategies(new UnderscoreFieldExclusionStrategy(),
+                        new AnnotatedFieldExclusionStrategy())
+                .registerTypeAdapter(ConceptImpl.class, new ConceptSerializer())
+                .setPrettyPrinting()
+                .setFieldNamingPolicy(FieldNamingPolicy.IDENTITY)
+                .setDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'");
+//        new GraphAdapterBuilder()
+//                .addType(ConceptImpl.class)
+//                .addType(ConceptMetadataImpl.class)
+//                .registerOn(gsonBuilder);
+        Gson gson = gsonBuilder.create();
+
+
+        Injector injector = Guice.createInjector(new VarsJpaModule(DevelopmentDAOFactory.newEntityManagerFactory()));
+        KnowledgebaseDAOFactory daoFactory = injector.getInstance(KnowledgebaseDAOFactory.class);
+        KnowledgebaseFactory kbFactory = injector.getInstance(KnowledgebaseFactory.class);
+
+        ConceptDAO dao = daoFactory.newConceptDAO();
+        //ConceptImpl root = (ConceptImpl) dao.findRoot();
+        ConceptImpl root = (ConceptImpl) dao.findByName("object");
+
+//        KnowledgebaseTestObjectFactory testObjectFactory = new KnowledgebaseTestObjectFactory(kbFactory);
+//        Concept root = testObjectFactory.makeObjectGraph("foo", 1);
+//
+//        root = new ConceptImpl();
+//        ((ConceptImpl) root).setId(100L);
+//        ConceptName cn = new ConceptNameImpl();
+//        cn.setName("Foo");
+//        cn.setNameType("Primary");
+//
+//        root.addConceptName(cn);
+//        root.getConceptMetadata();
+
+//        Media media = new MediaImpl();
+//        media.setUrl("http://www.mbari.org/foo.png");
+//        //root.getConceptMetadata().addMedia(media);
+//
+//        LinkTemplate lt = new LinkTemplateImpl();
+//        lt.setLinkName("foo");
+//        lt.setToConcept("bar");
+//        lt.setLinkValue("100");
+//        root.getConceptMetadata().addLinkTemplate(lt);
+
+        String dump = gson.toJson(root);
+        System.out.println(dump);
+
+        ConceptImpl newRoot = gson.fromJson(dump, ConceptImpl.class);
+        System.out.println(newRoot);
+    }
+}

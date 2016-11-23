@@ -24,6 +24,7 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Index;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
@@ -32,6 +33,7 @@ import javax.persistence.Table;
 import javax.persistence.TableGenerator;
 import javax.persistence.Version;
 import vars.LinkUtilities;
+import vars.gson.Exclude;
 import vars.jpa.JPAEntity;
 import vars.jpa.KeyNullifier;
 import vars.jpa.TransactionLogger;
@@ -46,7 +48,9 @@ import vars.knowledgebase.LinkTemplate;
  * @author         Brian Schlining [brian@mbari.org]
  */
 @Entity(name = "LinkTemplate")
-@Table(name = "LinkTemplate")
+@Table(name = "LinkTemplate",
+        indexes = {@Index(name = "idx_LinkTemplate_FK1", columnList = "ConceptDelegateID_FK"),
+                @Index(name = "idx_LinkTemplate_LUT", columnList = "LAST_UPDATED_TIME")})
 @EntityListeners({ TransactionLogger.class, KeyNullifier.class })
 @NamedQueries( {
 
@@ -64,10 +68,12 @@ import vars.knowledgebase.LinkTemplate;
 public class LinkTemplateImpl implements Serializable, LinkTemplate, JPAEntity {
 
 
+    @Exclude
     @ManyToOne(optional = false, targetEntity = ConceptMetadataImpl.class, fetch = FetchType.EAGER, cascade = {CascadeType.MERGE, CascadeType.REFRESH})
     @JoinColumn(name = "ConceptDelegateID_FK")
     ConceptMetadata conceptMetadata;
 
+    @Exclude
     @Id
     @Column(
         name = "id",
@@ -95,6 +101,7 @@ public class LinkTemplateImpl implements Serializable, LinkTemplate, JPAEntity {
     String toConcept;
 
     /** Optimistic lock to prevent concurrent overwrites */
+    @Exclude
     @SuppressWarnings("unused")
     @Version
     @Column(name = "LAST_UPDATED_TIME")

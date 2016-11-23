@@ -87,8 +87,6 @@
         <module>vars-jpa</module>
         <module>vars-shared-ui</module>
         <module>vars-knowledgebase</module>
-        <module>vars-kb-server</module>
-
     </modules>
     <scm>
         <connection>scm:hg:https://vars-redux.googlecode.com/hg/</connection>
