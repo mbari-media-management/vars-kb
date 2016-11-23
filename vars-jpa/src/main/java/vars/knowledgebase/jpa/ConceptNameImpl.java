@@ -49,7 +49,6 @@ import vars.knowledgebase.ConceptName;
  */
 @Entity(name = "ConceptName")
 @Table(name = "ConceptName",
-        uniqueConstraints = { @UniqueConstraint(columnNames = { "ConceptName" }) },
         indexes = {@Index(name = "idx_ConceptName_name", columnList = "ConceptName"),
                    @Index(name = "idx_ConceptName_FK1", columnList = "ConceptID_FK"),
                    @Index(name = "idx_ConceptName_LUT", columnList = "LAST_UPDATED_TIME")})
