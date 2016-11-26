@@ -20,7 +20,6 @@ public class EntityManagerFactories {
             .put("eclipselink.connection-pool.default.initial", "2")
             .put("eclipselink.connection-pool.default.max", "16")
             .put("eclipselink.connection-pool.default.min", "2")
-            .put("eclipselink.logging.level", "INFO")
             .put("eclipselink.logging.session", "false")
             .put("eclipselink.logging.thread", "false")
             .put("eclipselink.logging.timestamp", "false")
@@ -28,7 +27,10 @@ public class EntityManagerFactories {
             .build();
 
     public static EntityManagerFactory newEntityManagerFactory(String configNode) {
+        return newEntityManagerFactory(configNode, false);
+    }
 
+    public static EntityManagerFactory newEntityManagerFactory(String configNode, boolean debug) {
         String driver = config.getString(configNode + ".driver");
         String url = config.getString(configNode + ".url");
         String user = config.getString(configNode + ".user");
@@ -42,6 +44,9 @@ public class EntityManagerFactories {
         props.put("javax.persistence.jdbc.driver", driver);
         props.put("eclipselink.target-database", productName);
         props.put("javax.persistence.database-product-name", productName);
+
+        String logLevel = debug ? "FINE" : "INFO";
+        props.put("eclipselink.logging.level", logLevel);
 
         return Persistence.createEntityManagerFactory("vars-jpa-knowledgebase", props);
     }
