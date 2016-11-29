@@ -207,6 +207,7 @@ public class ConceptImpl implements Serializable, Concept, JPAEntity {
             ((ConceptMetadataImpl) conceptMetadata).setConcept(this);
         }
 
+
         return conceptMetadata;
     }
 
@@ -216,7 +217,7 @@ public class ConceptImpl implements Serializable, Concept, JPAEntity {
      * 
      * @param conceptMetadata
      */
-    protected void setConceptMetadata(ConceptMetadata conceptMetadata) {
+    public void setConceptMetadata(ConceptMetadata conceptMetadata) {
         ((ConceptMetadataImpl) getConceptMetadata()).setConcept(null);
         this.conceptMetadata = (ConceptMetadataImpl) conceptMetadata;
         ((ConceptMetadataImpl) conceptMetadata).setConcept(this);

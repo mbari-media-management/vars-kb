@@ -1,12 +1,16 @@
 package vars.gson;
 
-import com.google.gson.Gson;
 import com.google.inject.Guice;
 import com.google.inject.Injector;
 import vars.jpa.InjectorModule;
 import vars.knowledgebase.Concept;
 import vars.knowledgebase.ConceptDAO;
+import vars.knowledgebase.ConceptMetadata;
+import vars.knowledgebase.ConceptName;
 import vars.knowledgebase.KnowledgebaseDAOFactory;
+import vars.knowledgebase.LinkRealization;
+import vars.knowledgebase.LinkTemplate;
+import vars.knowledgebase.Media;
 import vars.knowledgebase.jpa.ConceptImpl;
 
 import java.io.BufferedInputStream;
@@ -14,8 +18,12 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Enumeration;
+import java.util.List;
 import java.util.Scanner;
+import java.util.Set;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipFile;
 
@@ -35,29 +43,33 @@ public class InitializeKnowledgebaseApp {
         // -- Parse Args
         File source = new File(args[0]);
 
-        // -- Check that KB is empty (Don't want to accidently overwrite a production DB!!)
         Injector injector = Guice.createInjector(new InjectorModule());
         KnowledgebaseDAOFactory daoFactory = injector.getInstance(KnowledgebaseDAOFactory.class);
+        run(source, daoFactory);
+
+    }
+
+    public static void run(File file, KnowledgebaseDAOFactory daoFactory) throws IOException {
+        // -- Check that KB is empty (Don't want to accidently overwrite a production DB!!)
         ConceptDAO dao = daoFactory.newConceptDAO();
         Concept root = dao.findRoot();
         if (root != null) {
             System.out.println("ABORTED! The knowledgebase isn't empty. \n" +
-                "\tYou need to first delete the knowledebase content.");
+                    "\tYou need to first delete the knowledebase content.");
             System.exit(-1);
         }
 
         // -- Load JSON from file
-        Concept concept = read(source);
+        Concept concept = read(file);
 
         // -- Insert into database
         dao.startTransaction();
         dao.persist(concept);
         dao.endTransaction();
         dao.close();
-
     }
 
-    private static Concept read(File file) throws IOException {
+    public static Concept read(File file) throws IOException {
         Concept concept = null;
         if (file.getName().endsWith(".zip")) {
             ZipFile zipFile = new ZipFile(file);
@@ -82,6 +94,10 @@ public class InitializeKnowledgebaseApp {
             concept = read(stream);
             stream.close();
         }
+
+        if (concept != null) {
+            fixRelationships(concept);
+        }
         return concept;
     }
 
@@ -90,4 +106,46 @@ public class InitializeKnowledgebaseApp {
         String content = scanner.hasNext() ? scanner.next() : "";
         return Constants.GSON.fromJson(content, ConceptImpl.class);
     }
+
+    /**
+     * GSON does not correctly set 2-way relationships so we have to fix those here.
+     * @param concept
+     */
+    private static void fixRelationships(Concept concept) {
+
+        ((ConceptImpl) concept).setConceptMetadata(concept.getConceptMetadata());
+
+        ConceptMetadata metadata = concept.getConceptMetadata();
+        final Collection<Media> medias = new ArrayList<>(metadata.getMedias());
+        for (Media m : medias) {
+            metadata.removeMedia(m);
+            metadata.addMedia(m);
+        }
+
+        final Collection<LinkTemplate> linkTemplates = new ArrayList<>(metadata.getLinkTemplates());
+        for (LinkTemplate lt: linkTemplates) {
+            metadata.removeLinkTemplate(lt);
+            metadata.addLinkTemplate(lt);
+        }
+
+        final Collection<LinkRealization> linkRealizations = new ArrayList<>(metadata.getLinkRealizations());
+        for (LinkRealization lr : linkRealizations) {
+            metadata.removeLinkRealization(lr);
+            metadata.addLinkRealization(lr);
+        }
+
+        final List<Concept> childConcepts = new ArrayList<>(concept.getChildConcepts());
+        for (Concept child: childConcepts) {
+            concept.removeChildConcept(child);
+            concept.addChildConcept(child);
+            fixRelationships(child);
+        }
+
+        final List<ConceptName> conceptNames = new ArrayList<>(concept.getConceptNames());
+        for (ConceptName name : conceptNames) {
+            concept.removeConceptName(name);
+            concept.addConceptName(name);
+        }
+    }
+
 }

@@ -27,10 +27,6 @@ public class EntityManagerFactories {
             .build();
 
     public static EntityManagerFactory newEntityManagerFactory(String configNode) {
-        return newEntityManagerFactory(configNode, false);
-    }
-
-    public static EntityManagerFactory newEntityManagerFactory(String configNode, boolean debug) {
         String driver = config.getString(configNode + ".driver");
         String url = config.getString(configNode + ".url");
         String user = config.getString(configNode + ".user");
@@ -45,7 +41,8 @@ public class EntityManagerFactories {
         props.put("eclipselink.target-database", productName);
         props.put("javax.persistence.database-product-name", productName);
 
-        String logLevel = debug ? "FINE" : "INFO";
+
+        String logLevel = config.getString("database.loglevel");
         props.put("eclipselink.logging.level", logLevel);
 
         return Persistence.createEntityManagerFactory("vars-jpa-knowledgebase", props);

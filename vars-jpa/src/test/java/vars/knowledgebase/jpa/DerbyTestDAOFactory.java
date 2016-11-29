@@ -21,7 +21,7 @@ public class DerbyTestDAOFactory {
             .put("eclipselink.connection-pool.default.initial", "2")
             .put("eclipselink.connection-pool.default.max", "16")
             .put("eclipselink.connection-pool.default.min", "2")
-            .put("eclipselink.logging.level", "FINE")
+            .put("eclipselink.logging.level", "INFO")
             .put("eclipselink.logging.session", "false")
             .put("eclipselink.logging.thread", "false")
             .put("eclipselink.logging.timestamp", "false")
