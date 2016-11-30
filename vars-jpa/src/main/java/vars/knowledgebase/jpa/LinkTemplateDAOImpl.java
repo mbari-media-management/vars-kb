@@ -21,13 +21,12 @@ import com.google.inject.Inject;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
 
+import vars.ILink;
+import vars.LinkComparator;
 import vars.VARSException;
 import vars.jpa.DAO;
 import vars.knowledgebase.Concept;
@@ -44,6 +43,8 @@ import vars.knowledgebase.LinkTemplateDAO;
  * To change this template use File | Settings | File Templates.
  */
 public class LinkTemplateDAOImpl extends DAO implements LinkTemplateDAO {
+
+    private static final Comparator<ILink> linkComparator = new LinkComparator();
 
     private final ConceptDAO conceptDAO;
 
@@ -66,12 +67,13 @@ public class LinkTemplateDAOImpl extends DAO implements LinkTemplateDAO {
      */
     public Collection<LinkTemplate> findAllApplicableToConcept(Concept concept) {
 
-        Collection<LinkTemplate> linkTemplates = new ArrayList<LinkTemplate>();
+        List<LinkTemplate> linkTemplates = new ArrayList<LinkTemplate>();
         while (concept != null) {
             linkTemplates.addAll(concept.getConceptMetadata().getLinkTemplates());
             concept = concept.getParentConcept();
         }
 
+        linkTemplates.sort(linkComparator);
         return linkTemplates;
     }
 
