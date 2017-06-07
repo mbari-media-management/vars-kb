@@ -27,13 +27,14 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.persistence.Transient;
+import javax.persistence.UniqueConstraint;
 
 /**
  *
  * @author brian
  */
 @Entity(name = "PreferenceNode")
-@Table(name = "Prefs")
+@Table(name = "Prefs", uniqueConstraints = {@UniqueConstraint(columnNames = {"NodeName", "PrefKey"})})
 @IdClass(PreferenceNodeCompositeKey.class)
 @EntityListeners({ TransactionLogger.class })
 @NamedQueries({ @NamedQuery(name = "PreferenceNode.findAllLikeNodeName",
