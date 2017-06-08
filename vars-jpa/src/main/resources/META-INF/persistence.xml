@@ -7,7 +7,6 @@
         <description>VARS Data Model</description>
         <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
         <shared-cache-mode>NONE</shared-cache-mode>
-        <class>vars.knowledgebase.jpa.ArtifactImpl</class>
         <class>vars.knowledgebase.jpa.ConceptImpl</class>
         <class>vars.knowledgebase.jpa.ConceptMetadataImpl</class>
         <class>vars.knowledgebase.jpa.ConceptNameImpl</class>
@@ -15,7 +14,6 @@
         <class>vars.knowledgebase.jpa.LinkRealizationImpl</class>
         <class>vars.knowledgebase.jpa.LinkTemplateImpl</class>
         <class>vars.knowledgebase.jpa.MediaImpl</class>
-        <class>vars.knowledgebase.jpa.UsageImpl</class>
         <class>vars.jpa.UserAccountImpl</class>
         <class>vars.jpa.PreferenceNode</class>
         <properties>

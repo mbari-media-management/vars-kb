@@ -11,7 +11,7 @@ In order to build VARS you will need to have the following installed:
 The VARS source code is stored in a Git repository. Instructions for obtaining the VARS source code can be found at [https://github.com/hohonuuli/vars](https://github.com/hohonuuli/vars). 
 For those familiar with hg, the checkout command is:
     
-    git clone https://github.com/hohonuuli/vars.git
+    git clone https://github.com/mbari-media-management/vars-kb.git
     
 ## YOUR FIRST BUILD
 
@@ -36,16 +36,16 @@ Normally Maven expects you to have an internet connection when running builds. H
     mvn dependency:go-offline
     
     #Build VARS later offline 
-    mvn install -P dev -o
+    mvn install -o
     
 ## BUILDING VARS
 	
 To Build VARS, run the following command on the command line:
 
-	mvn clean install -P dev
+	mvn clean install -Dmaven.test.skip=true
 
-A standalone application will be built to vars/vars-standalone/target/vars-standalone-[VERSION]-scripting.zip.
+## CONFIGURATION
 
-The 'environment' variable specifies what database you are targeting, for most folks that will be _dev_.
+The built appication uses Typesafe Config libriaries for setting the database parameters.
 
 

@@ -41,7 +41,6 @@ public class EntityManagerFactories {
         props.put("eclipselink.target-database", productName);
         props.put("javax.persistence.database-product-name", productName);
 
-
         String logLevel = config.getString("database.loglevel");
         props.put("eclipselink.logging.level", logLevel);
 
