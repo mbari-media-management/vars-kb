@@ -45,6 +45,8 @@ import javax.persistence.UniqueConstraint;
                             query = "SELECT p FROM PreferenceNode p WHERE p.nodeName = :nodeName") })
 public class PreferenceNode implements Serializable {
 
+    // This composite key will generate a unique constraint on these 2 columns.
+    // except in SQL Server, where the unique constrain
     @Id
     @AttributeOverrides({ @AttributeOverride(name = "nodeName", column = @Column(name = "NodeName")) ,
                           @AttributeOverride(name = "prefKey", column = @Column(name = "PrefKey")) })

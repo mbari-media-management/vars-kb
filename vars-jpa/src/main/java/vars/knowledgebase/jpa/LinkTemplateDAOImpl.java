@@ -59,6 +59,8 @@ public class LinkTemplateDAOImpl extends DAO implements LinkTemplateDAO {
         this.conceptDAO = new ConceptDAOImpl(entityManager);
     }
 
+
+
     /**
      * Call this inside a transaction
      *
@@ -116,13 +118,13 @@ public class LinkTemplateDAOImpl extends DAO implements LinkTemplateDAO {
     public Collection<LinkTemplate> findAllByLinkName(final String linkName, Concept concept) {
 
         Collection<LinkTemplate> linkTemplates = findAllApplicableToConcept(concept);
-        return Collections2.filter(linkTemplates, new Predicate<LinkTemplate>() {
+        return Collections2.filter(linkTemplates, linkTemplate ->
+                linkTemplate.getLinkName().equals(linkName));
+    }
 
-            public boolean apply(LinkTemplate linkTemplate) {
-                return linkTemplate.getLinkName().equals(linkName);
-            }
-
-        });
+    @Override
+    public Collection<LinkTemplate> findAll() {
+        return (Collection<LinkTemplate>) findByNamedQuery("LinkTemplate.findAll");
     }
 
     @Override
