@@ -21,16 +21,13 @@ public class H2TestDAOFactory {
             .put("eclipselink.connection-pool.default.initial", "2")
             .put("eclipselink.connection-pool.default.max", "16")
             .put("eclipselink.connection-pool.default.min", "2")
-            .put("eclipselink.logging.level", "FINE")
+            .put("eclipselink.logging.level", "INFO") // FINE
             .put("eclipselink.logging.session", "false")
             .put("eclipselink.logging.thread", "false")
             .put("eclipselink.logging.timestamp", "false")
             .put("eclipselink.target-database", TargetDatabase.Derby)
             .put("javax.persistence.database-product-name", TargetDatabase.Derby)
             .put("javax.persistence.schema-generation.database.action", "create")
-            .put("javax.persistence.schema-generation.scripts.action", "drop-and-create")
-            .put("javax.persistence.schema-generation.scripts.create-target", "target/test-database-create.ddl")
-            .put("javax.persistence.schema-generation.scripts.drop-target", "target/test-database-drop.ddl")
             .build();
 
     public static EntityManagerFactory newEntityManagerFactory() {

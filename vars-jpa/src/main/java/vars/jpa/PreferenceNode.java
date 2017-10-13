@@ -27,13 +27,14 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.persistence.Transient;
+import javax.persistence.UniqueConstraint;
 
 /**
  *
  * @author brian
  */
 @Entity(name = "PreferenceNode")
-@Table(name = "Prefs")
+@Table(name = "Prefs", uniqueConstraints = {@UniqueConstraint(columnNames = {"NodeName", "PrefKey"})})
 @IdClass(PreferenceNodeCompositeKey.class)
 @EntityListeners({ TransactionLogger.class })
 @NamedQueries({ @NamedQuery(name = "PreferenceNode.findAllLikeNodeName",
@@ -44,6 +45,8 @@ import javax.persistence.Transient;
                             query = "SELECT p FROM PreferenceNode p WHERE p.nodeName = :nodeName") })
 public class PreferenceNode implements Serializable {
 
+    // This composite key will generate a unique constraint on these 2 columns.
+    // except in SQL Server, where the unique constrain
     @Id
     @AttributeOverrides({ @AttributeOverride(name = "nodeName", column = @Column(name = "NodeName")) ,
                           @AttributeOverride(name = "prefKey", column = @Column(name = "PrefKey")) })

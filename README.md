@@ -16,8 +16,8 @@ Documentation for VARS is at [https://hohonuuli.github.io/vars/](https://hohonuu
 
 For the impatient:
 
-1. Checkout _vars-kb_
-  `git clone https://github.com/hohonuuli/vars-kb.git`
+1. Checkout _vars-kb_  
+  `git clone https://github.com/mbari-media-management/vars-kb.git`
 2. Build
-  `mvn install -P dev`
+  `mvn install`
   

@@ -55,6 +55,8 @@ import vars.knowledgebase.LinkTemplate;
 @NamedQueries( {
 
     @NamedQuery(name = "LinkTemplate.findById", query = "SELECT v FROM LinkTemplate v WHERE v.id = :id") ,
+    @NamedQuery(name = "LinkTemplate.findAll",
+                query = "SELECT l FROM LinkTemplate l") ,
     @NamedQuery(name = "LinkTemplate.findByLinkName",
                 query = "SELECT l FROM LinkTemplate l WHERE l.linkName = :linkName") ,
     @NamedQuery(name = "LinkTemplate.findByToConcept",
