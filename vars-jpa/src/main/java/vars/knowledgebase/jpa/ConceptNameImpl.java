@@ -54,10 +54,10 @@ import vars.knowledgebase.ConceptName;
                    @Index(name = "idx_ConceptName_LUT", columnList = "LAST_UPDATED_TIME")})
 @EntityListeners({ TransactionLogger.class, KeyNullifier.class })
 @NamedNativeQueries({
-        @NamedNativeQuery(name = "ConceptName.findAllNamesAsStrings",
-                query = "SELECT ConceptName FROM ConceptName ORDER BY ConceptName"),
-        @NamedNativeQuery(name = "ConceptName.countByName",
-        query = "SELECT count(*) FROM ConceptName WHERE ConceptName = ?")
+    @NamedNativeQuery(name = "ConceptName.findAllNamesAsStrings",
+            query = "SELECT ConceptName FROM ConceptName ORDER BY ConceptName"),
+    @NamedNativeQuery(name = "ConceptName.countByName",
+    query = "SELECT count(*) FROM ConceptName WHERE ConceptName = ?")
 })
 @NamedQueries( {
     @NamedQuery(name = "ConceptName.findById", query = "SELECT v FROM ConceptName v WHERE v.id = :id") ,
