@@ -28,6 +28,11 @@
             <version>${project.version}</version>
         </dependency>
         <dependency>
+            <groupId>com.rabbitmq</groupId>
+            <artifactId>amqp-client</artifactId>
+            <version>${rabbitmq.version}</version>
+        </dependency>
+        <dependency>
             <groupId>foxtrot</groupId>
             <artifactId>foxtrot-core</artifactId>
             <version>${foxtrot.version}</version>
