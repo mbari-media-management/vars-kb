@@ -230,7 +230,7 @@ public class ApproveHistoryTask extends AbstractHistoryTask {
 
             if (concept == null) {
                 dropHistory(history,
-                            "No child Concept containg the name '" + history.getOldValue() +
+                            "No child Concept containing the name '" + history.getOldValue() +
                             "' was found. I'll remove the obsolete history information", dao);
 
                 return;
@@ -493,7 +493,7 @@ public class ApproveHistoryTask extends AbstractHistoryTask {
                 final Frame frame = StateLookup.getApplicationFrame();
                 final int option = JOptionPane.showConfirmDialog(
                         frame, "Are you sure you want to delete '" + history.getOldValue() +
-                        "' ? Be aware that this will not effect existing annotations that use it.", "VARS - Delete LinkTemplate", JOptionPane
+                        "' ? Be aware that this will not affect existing annotations that use it.", "VARS - Delete LinkTemplate", JOptionPane
                             .YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
 
                 if (option != JOptionPane.YES_OPTION) {
@@ -514,7 +514,7 @@ public class ApproveHistoryTask extends AbstractHistoryTask {
                 /*
                  * Find the matching linkTemplate
                  */
-                Collection<ILink> linkTemplates = new ArrayList<ILink>(conceptMetadata.getLinkTemplates());
+                Collection<ILink> linkTemplates = new ArrayList<>(conceptMetadata.getLinkTemplates());
                 Collection<ILink> matchingLinkTemplates = LinkUtilities.findMatchingLinksIn(linkTemplates,
                     exampleTemplate);
                 LinkTemplate linkTemplate = null;

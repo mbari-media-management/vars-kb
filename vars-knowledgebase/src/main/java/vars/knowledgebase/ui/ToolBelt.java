@@ -26,6 +26,7 @@ import vars.knowledgebase.KnowledgebaseFactory;
 import vars.knowledgebase.ui.actions.ApproveHistoryTask;
 import vars.knowledgebase.ui.actions.RejectHistoryTask;
 import vars.knowledgebase.ui.annotation.AnnotationService;
+import vars.shared.rx.EventBus;
 
 /**
  * Container that holds on to a ton of shared objects that need to be widely
@@ -37,6 +38,7 @@ public class ToolBelt extends vars.ToolBelt {
     private final HistoryFactory historyFactory;
     private final RejectHistoryTask rejectHistoryTask;
     private final AnnotationService annotationService;
+    private final EventBus eventBus;
 
     /**
      * Constructs ...
@@ -60,8 +62,12 @@ public class ToolBelt extends vars.ToolBelt {
         approveHistoryTask = new ApproveHistoryTask(this);
         rejectHistoryTask = new RejectHistoryTask(this);
         this.annotationService = annotationService;
+        this.eventBus = new EventBus();
     }
 
+    public EventBus getEventBus() {
+        return eventBus;
+    }
 
     /**
      * @return

@@ -11,7 +11,12 @@ public interface AnnotationService {
     // TODO this should update both Observations and Associations
     void updateConceptUsedByAnnotations(String newConcept, Collection<String> oldConcepts);
 
-    void deleteAnnotationsByConcept(String concept);
 
+    /**
+     *
+     * @param concepts
+     * @return
+     * @deprecated
+     */
     int countByConcepts(Collection<String> concepts);
 }

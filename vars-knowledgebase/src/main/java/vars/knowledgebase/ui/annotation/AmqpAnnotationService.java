@@ -4,9 +4,9 @@ import java.util.Collection;
 
 /**
  * @author Brian Schlining
- * @since 2016-11-15T15:00:00
+ * @since 2018-01-17T17:03:00
  */
-public class MockAnnotationService implements AnnotationService {
+public class AmqpAnnotationService implements AnnotationService {
 
     @Override
     public void updateConceptUsedByAnnotations(String newConcept, Collection<String> oldConcepts) {
