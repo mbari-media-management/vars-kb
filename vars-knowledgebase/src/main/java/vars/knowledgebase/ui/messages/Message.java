@@ -5,4 +5,6 @@ package vars.knowledgebase.ui.messages;
  * @since 2018-01-17T16:49:00
  */
 public interface Message {
+
+    String getMessage();
 }

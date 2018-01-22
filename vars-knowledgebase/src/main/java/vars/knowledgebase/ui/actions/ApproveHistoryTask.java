@@ -360,9 +360,9 @@ public class ApproveHistoryTask extends AbstractHistoryTask {
                             .collect(Collectors.toList());
                     if (!oldNames.isEmpty()) {
                         toolBelt.getAnnotationService().updateConceptUsedByAnnotations(newName, oldNames);
-                        toolBelt.getKnowledgebaseDAOFactory()
-                                .newLinkTemplateDAO()
-                                .updateToConcepts(newName, oldNames);
+//                        toolBelt.getKnowledgebaseDAOFactory()
+//                                .newLinkTemplateDAO()
+//                                .updateToConcepts(newName, oldNames);
                     }
                 }
                 catch (Exception e) {

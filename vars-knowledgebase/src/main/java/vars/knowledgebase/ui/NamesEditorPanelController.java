@@ -222,10 +222,8 @@ class NamesEditorPanelController {
                         .map(ConceptName::getName)
                         .collect(Collectors.toList());
                 if (!oldNames.isEmpty()) {
+                    // NOTE: THis call is updating observations and associations
                     toolBelt.getAnnotationService().updateConceptUsedByAnnotations(conceptName, oldNames);
-                    toolBelt.getKnowledgebaseDAOFactory()
-                            .newLinkTemplateDAO()
-                            .updateToConcepts(conceptName, oldNames);
                 }
             }
             catch (Exception e) {

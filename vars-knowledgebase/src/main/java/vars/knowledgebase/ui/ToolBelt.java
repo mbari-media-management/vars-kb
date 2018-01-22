@@ -16,6 +16,10 @@
 package vars.knowledgebase.ui;
 
 import com.google.inject.Inject;
+import com.typesafe.config.Config;
+import com.typesafe.config.ConfigFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import vars.MiscDAOFactory;
 import vars.MiscFactory;
 import vars.PersistenceCacheProvider;
@@ -28,17 +32,25 @@ import vars.knowledgebase.ui.actions.RejectHistoryTask;
 import vars.knowledgebase.ui.annotation.AnnotationService;
 import vars.shared.rx.EventBus;
 
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+
 /**
  * Container that holds on to a ton of shared objects that need to be widely
  * used across this application
  */
 public class ToolBelt extends vars.ToolBelt {
 
+    private final Logger log = LoggerFactory.getLogger(getClass());
     private final ApproveHistoryTask approveHistoryTask;
     private final HistoryFactory historyFactory;
     private final RejectHistoryTask rejectHistoryTask;
     private final AnnotationService annotationService;
     private final EventBus eventBus;
+    private Config config;
+    private Path settingsDirectory;
 
     /**
      * Constructs ...
@@ -63,6 +75,7 @@ public class ToolBelt extends vars.ToolBelt {
         rejectHistoryTask = new RejectHistoryTask(this);
         this.annotationService = annotationService;
         this.eventBus = new EventBus();
+        config = Initializer.getConfig();
     }
 
     public EventBus getEventBus() {
@@ -93,4 +106,15 @@ public class ToolBelt extends vars.ToolBelt {
     public AnnotationService getAnnotationService() {
         return annotationService;
     }
+
+    /**
+     * First looks for the file `~/.vars/vars-annotation.conf` and, if found,
+     * loads that file. Otherwise used the usual `reference.conf`/`application.conf`
+     * combination for typesafe's config library.
+     * @return
+     */
+    public Config getConfig() {
+        return config;
+    }
+
 }

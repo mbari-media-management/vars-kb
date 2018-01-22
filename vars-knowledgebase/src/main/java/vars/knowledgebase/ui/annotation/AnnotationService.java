@@ -8,7 +8,9 @@ import java.util.Collection;
  */
 public interface AnnotationService {
 
-    // TODO this should update both Observations and Associations
+    /**
+     * This should update both Observations and Associations
+     */
     void updateConceptUsedByAnnotations(String newConcept, Collection<String> oldConcepts);
 
 
