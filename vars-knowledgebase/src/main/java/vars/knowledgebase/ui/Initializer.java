@@ -26,20 +26,23 @@ public class Initializer {
     private static final Logger log = LoggerFactory.getLogger(Initializer.class);
 
     /**
-     * First looks for the file `~/.vars/vars-annotation.conf` and, if found,
-     * loads that file. Otherwise used the usual `reference.conf`/`application.conf`
-     * combination for typesafe's config library.
+     * First looks for the file `~/.vars/vars-kb.conf` and, if found,
+     * loads that file and uses the default configs as fallbacks. Otherwise
+     * used the usual `reference.conf`/`application.conf` combination for
+     * typesafe's config library.
      * @return
      */
     public static Config getConfig() {
         if (config == null) {
+            Config defaultConfig =  ConfigFactory.load();
             final Path p0 = getSettingsDirectory();
             final Path path = p0.resolve("vars-kb.conf");
             if (Files.exists(path)) {
-                config = ConfigFactory.parseFile(path.toFile());
+                config = ConfigFactory.parseFile(path.toFile())
+                        .withFallback(defaultConfig);
             }
             else {
-                config = ConfigFactory.load();
+                config = defaultConfig;
             }
         }
         return config;
