@@ -51,7 +51,7 @@ public class HistoryCrudTest {
         // Update
         dao.startTransaction();
         history = dao.merge(history);
-        history.setComment("WOOOGA WOOGA WOOOGA");
+        //history.setComment("WOOOGA WOOGA WOOOGA");
         dao.endTransaction();
         log.info("UPDATED " + history + " in KNOWLEDGEBASE TREE:\n" + entityUtilities.buildTextTree(concept));
 

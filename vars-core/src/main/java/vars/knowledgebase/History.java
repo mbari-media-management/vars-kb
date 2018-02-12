@@ -107,7 +107,7 @@ public interface History extends KnowledgebaseObject {
      * Method description
      * @return
      */
-    String getComment();
+    //String getComment();
 
     /**
      * Not for Developer use. This is required for Castor/DAO
@@ -214,7 +214,7 @@ public interface History extends KnowledgebaseObject {
      * Method description
      * @param  comment
      */
-    void setComment(String comment);
+    //void setComment(String comment);
 
 
     /**

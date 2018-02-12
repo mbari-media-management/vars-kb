@@ -77,7 +77,7 @@ public class KnowledgebaseTestObjectFactory {
         History h = factory.newHistory();
         h.setCreationDate(new Date());
         h.setAction(History.ACTION_ADD);
-        h.setComment("test");
+        //h.setComment("test");
         h.setCreatorName("testy-the-testor");
         h.setField("TEST");
         h.setNewValue("NEW VALUE");

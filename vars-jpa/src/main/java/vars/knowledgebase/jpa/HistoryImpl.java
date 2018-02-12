@@ -82,7 +82,7 @@ import vars.knowledgebase.History;
     @NamedQuery(name = "History.findByOldValue", query = "SELECT h FROM History h WHERE h.oldValue = :oldValue") ,
     @NamedQuery(name = "History.findByNewValue", query = "SELECT h FROM History h WHERE h.newValue = :newValue") ,
     @NamedQuery(name = "History.findByAction", query = "SELECT h FROM History h WHERE h.action = :action") ,
-    @NamedQuery(name = "History.findByComment", query = "SELECT h FROM History h WHERE h.comment = :comment") ,
+    //@NamedQuery(name = "History.findByComment", query = "SELECT h FROM History h WHERE h.comment = :comment") ,
     @NamedQuery(name = "History.findByApproved", query = "SELECT h FROM History h WHERE h.approved = :approved"),
     @NamedQuery(name = "History.findPendingApproval", query = "SELECT h FROM History h WHERE h.processedDate IS NULL"),
     @NamedQuery(name = "History.findApproved", query = "SELECT h FROM History h WHERE h.processedDate IS NOT NULL")
@@ -130,8 +130,8 @@ public class HistoryImpl implements Serializable, History, JPAEntity {
     String action;
 
     //@Column(name = "HistoryComment", length = 2048) // Oracle won't allow columns named 'Comment'
-    @Column(name = "\"Comment\"", length = 2048)
-    String comment;
+    // @Column(name = "\"Comment\"", length = 2048)
+    // String comment;
 
     @Column(name = "Approved")
     private Short approved = 0;
@@ -274,9 +274,9 @@ public class HistoryImpl implements Serializable, History, JPAEntity {
         return processorName;
     }
 
-    public String getComment() {
-        return comment;
-    }
+    // public String getComment() {
+    //     return comment;
+    // }
 
     public ConceptMetadata getConceptMetadata() {
         return conceptMetadata;
@@ -322,9 +322,9 @@ public class HistoryImpl implements Serializable, History, JPAEntity {
         this.processorName = approverName;
     }
 
-    public void setComment(String comment) {
-        this.comment = comment;
-    }
+    // public void setComment(String comment) {
+    //     this.comment = comment;
+    // }
 
     public void setCreationDate(Date creationDate) {
         this.creationDate = creationDate;
