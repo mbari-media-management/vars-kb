@@ -10,24 +10,18 @@
  * limitations under the License.
  */
 
-
-
 package vars.shared.ui.tree;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Enumeration;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.concurrent.ArrayBlockingQueue;
-import java.util.concurrent.BlockingQueue;
 import javax.swing.SwingUtilities;
 import javax.swing.tree.DefaultTreeModel;
 import javax.swing.tree.TreeNode;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import vars.DAO;
 import vars.PersistenceCache;
 import vars.knowledgebase.Concept;
 import vars.knowledgebase.ConceptDAO;
@@ -42,8 +36,9 @@ import vars.knowledgebase.KnowledgebaseDAOFactory;
 public class ConceptTreeModel extends DefaultTreeModel {
 
     private final Logger log = LoggerFactory.getLogger(getClass());
-//    private final BlockingQueue<ConceptTreeNode> queue = new ArrayBlockingQueue<ConceptTreeNode>(1000);
-//    private Thread conceptLoaderThread;
+    // private final BlockingQueue<ConceptTreeNode> queue = new
+    // ArrayBlockingQueue<ConceptTreeNode>(1000);
+    // private Thread conceptLoaderThread;
     private final KnowledgebaseDAOFactory knowledgebaseDAOFactory;
 
     /**
@@ -58,12 +53,12 @@ public class ConceptTreeModel extends DefaultTreeModel {
     }
 
     /**
-    * Gets the list of <code>Concept</code> objects from the root down to the
-    * <code>Concept</code> for the specified concept name.
-    *
-    * @param  name           The name of the concept for the tree.
-    * @return  The list of concepts from the root to the parameter concept.
-    */
+     * Gets the list of <code>Concept</code> objects from the root down to the
+     * <code>Concept</code> for the specified concept name.
+     *
+     * @param name The name of the concept for the tree.
+     * @return The list of concepts from the root to the parameter concept.
+     */
     private List<Concept> findFamilyTree(final String name) {
 
         final LinkedList<Concept> conceptList = new LinkedList<Concept>();
@@ -94,14 +89,13 @@ public class ConceptTreeModel extends DefaultTreeModel {
     }
 
     /**
-     * Caches a concept from the database locally. Also caches all parents upto
-     * the root as well as it's immediate children. This calls
-     * the database so you should make calls to this method off of the EDT.
+     * Caches a concept from the database locally. Also caches all parents upto the
+     * root as well as it's immediate children. This calls the database so you
+     * should make calls to this method off of the EDT.
      *
      * @param node The concept to cache
      */
     private void loadChildConcepts(final ConceptTreeNode node) {
-
 
         if (!node.isLoaded()) {
 
@@ -111,7 +105,6 @@ public class ConceptTreeModel extends DefaultTreeModel {
             Concept concept = (Concept) node.getUserObject();
 
             concept = dao.find(concept);
-
 
             List<Concept> childConcepts = new ArrayList<Concept>(concept.getChildConcepts());
 
@@ -147,13 +140,12 @@ public class ConceptTreeModel extends DefaultTreeModel {
         }
     }
 
-
     /**
-     * Expands all tree nodes from the root down to the specified node name.
-     * This method is used to open multiple nodes in a single database transaction
-     * You MUST call dao.startTransaction() in the same thread as the call to loadNode
-     * before using this method. (DAO's are NOT thread safe so you can't pass
-     * one between threads)
+     * Expands all tree nodes from the root down to the specified node name. This
+     * method is used to open multiple nodes in a single database transaction You
+     * MUST call dao.startTransaction() in the same thread as the call to loadNode
+     * before using this method. (DAO's are NOT thread safe so you can't pass one
+     * between threads)
      *
      * @param name
      * @return
@@ -161,8 +153,8 @@ public class ConceptTreeModel extends DefaultTreeModel {
     ConceptTreeNode loadNode(final String name) {
 
         /*
-         * Get a list of the family tree for the parameter concept. This list is
-         * used to travel down the tree to the desired concept node.
+         * Get a list of the family tree for the parameter concept. This list is used to
+         * travel down the tree to the desired concept node.
          */
         List<Concept> list = findFamilyTree(name);
         Iterator<Concept> familyTree = list.iterator();
@@ -181,9 +173,9 @@ public class ConceptTreeModel extends DefaultTreeModel {
 
             // Find the child node for the next family member.
             boolean found = false;
-            Enumeration<ConceptTreeNode> childrenNodes = treeNode.children();
+            Enumeration<TreeNode> childrenNodes = treeNode.children();
             while (!found && childrenNodes.hasMoreElements()) {
-                treeNode = childrenNodes.nextElement();
+                treeNode = (ConceptTreeNode) childrenNodes.nextElement();
                 Concept concept = (Concept) treeNode.getUserObject();
 
                 if (nextConceptName.equals(concept.getPrimaryConceptName().getName())) {
@@ -197,8 +189,8 @@ public class ConceptTreeModel extends DefaultTreeModel {
 
     /**
      * Removes all nodes from the tree and refreshes the information from the
-     * database. Beaware you may need to clear the {@link PersistenceCache}
-     * for changes in the database to be picked up.
+     * database. Beaware you may need to clear the {@link PersistenceCache} for
+     * changes in the database to be picked up.
      */
     public void refresh() {
 
@@ -228,11 +220,11 @@ public class ConceptTreeModel extends DefaultTreeModel {
         super.reload();
     }
 
-
     /**
      * Sets the root node of the TreeModel
-     * @param root Must be an instance of ConceptTreeNode or an {@link IllegalArgumentException}
-     *      will be thrown
+     * 
+     * @param root Must be an instance of ConceptTreeNode or an
+     *             {@link IllegalArgumentException} will be thrown
      */
     @Override
     public void setRoot(TreeNode root) {

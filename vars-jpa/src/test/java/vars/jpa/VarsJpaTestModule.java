@@ -8,7 +8,6 @@ import vars.knowledgebase.jpa.H2TestDAOFactory;
  */
 public class VarsJpaTestModule extends VarsJpaModule {
 
-
     public VarsJpaTestModule() {
         super(H2TestDAOFactory.newEntityManagerFactory());
     }

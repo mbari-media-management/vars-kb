@@ -1,17 +1,16 @@
 package vars.jpa;
 
 import com.google.inject.Injector;
+
+import static org.junit.jupiter.api.Assertions.*;
+import org.junit.jupiter.api.Test;
+
 import com.google.inject.Guice;
 import vars.knowledgebase.KnowledgebaseDAOFactory;
-import org.junit.Test;
-import static org.junit.Assert.*;
 
 /**
- * Created by IntelliJ IDEA.
- * User: brian
- * Date: Aug 11, 2009
- * Time: 9:56:33 AM
- * To change this template use File | Settings | File Templates.
+ * Created by IntelliJ IDEA. User: brian Date: Aug 11, 2009 Time: 9:56:33 AM To
+ * change this template use File | Settings | File Templates.
  */
 public class DaoFactoryTest {
 

@@ -12,6 +12,7 @@
     </appender>
 
     <logger name="vars.jpa.TransactionLogger" level="INFO" />
+    <logger name="vars.knowledgebase.jpa.ConceptDAOImpl" level="INFO" />
 
     <root level="DEBUG">
         <appender-ref ref="CONSOLE"/>

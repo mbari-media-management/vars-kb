@@ -1,9 +1,5 @@
 package vars.jpa;
 
-import vars.knowledgebase.jpa.DerbyTestDAOFactory;
-
-import javax.persistence.EntityManagerFactory;
-
 /**
  * @author Brian Schlining
  * @since 2016-11-22T10:34:00

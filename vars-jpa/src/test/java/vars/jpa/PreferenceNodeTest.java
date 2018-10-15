@@ -11,9 +11,12 @@ import com.google.inject.Injector;
 import java.util.logging.Level;
 import java.util.prefs.BackingStoreException;
 import java.util.prefs.Preferences;
-import org.junit.Assert;
-import org.junit.Before;
-import org.junit.Test;
+
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestInstance;
+import org.junit.jupiter.api.TestInstance.Lifecycle;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import vars.MiscDAOFactory;
@@ -24,16 +27,17 @@ import vars.PersistenceCache;
  *
  * @author brian
  */
+@TestInstance(Lifecycle.PER_CLASS)
 public class PreferenceNodeTest {
-    
+
     MiscFactory miscFactory;
     MiscDAOFactory daoFactory;
     VarsUserPreferencesFactory prefsFactory;
     PersistenceCache cache;
-    
+
     public final Logger log = LoggerFactory.getLogger(getClass());
 
-    @Before
+    @BeforeAll
     public void setup() {
         Injector injector = Guice.createInjector(new VarsJpaTestModule());
 
@@ -49,7 +53,6 @@ public class PreferenceNodeTest {
         int testOrder = 0;
         String testName = "test-button";
 
-
         // Create nodes
         Preferences root = prefsFactory.userRoot("test");
         log.info("Absolutepath is " + root.absolutePath());
@@ -60,7 +63,7 @@ public class PreferenceNodeTest {
         Preferences buttonNode2 = test01.node("bbutton");
         buttonNode2.putInt("buttonOrder", testOrder + 1);
         buttonNode2.put("buttonName", testName + "-not");
-        
+
         // Clear cache
         cache.clear();
 
@@ -74,12 +77,11 @@ public class PreferenceNodeTest {
             // Clean up
             root.removeNode();
         } catch (BackingStoreException ex) {
-            Assert.fail(ex.getMessage());
+            Assertions.fail(ex.getMessage());
         }
 
-        Assert.assertEquals(testName, buttonName);
-        Assert.assertTrue(testOrder == buttonOrder);
-
+        Assertions.assertEquals(testName, buttonName);
+        Assertions.assertTrue(testOrder == buttonOrder);
 
     }
 

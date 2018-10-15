@@ -2,11 +2,10 @@ package vars.gson;
 
 import com.google.inject.Guice;
 import com.google.inject.Injector;
-import org.junit.Assert;
-import org.junit.Ignore;
-import org.junit.Test;
+
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 import org.mbari.net.URLUtilities;
-import vars.jpa.VarsJpaDevelopmentModule;
 import vars.jpa.VarsJpaTestModule;
 import vars.knowledgebase.Concept;
 import vars.knowledgebase.ConceptDAO;
@@ -22,7 +21,7 @@ import java.net.URL;
  */
 public class InitializeKnowledgebaseAppTest {
 
-    //@Ignore
+    // @Ignore
     @Test
     public void test() {
         URL url = getClass().getResource("/kb/kb-dump.json.zip");
@@ -32,28 +31,24 @@ public class InitializeKnowledgebaseAppTest {
 
         try {
             InitializeKnowledgebaseApp.run(file, knowledgebaseDAOFactory);
+        } catch (IOException e) {
+            Assertions.fail(e.getMessage());
         }
-        catch (IOException e) {
-            Assert.fail(e.getMessage());
-        }
-
-
 
         ConceptDAO dao = knowledgebaseDAOFactory.newConceptDAO();
         Concept root = dao.findRoot();
-        Assert.assertNotNull(root);
+        Assertions.assertNotNull(root);
 
-//        dao.startTransaction();
-//        Concept c = dao.findByName("Nanomia bijuga");
-//        dao.endTransaction();
-//        Assert.assertNotNull(c);
-//
-//        dao.startTransaction();
-//        root = dao.find(root);
-//        dao.remove(root);
-//        dao.endTransaction();
-//        dao.close();
-
+        // dao.startTransaction();
+        // Concept c = dao.findByName("Nanomia bijuga");
+        // dao.endTransaction();
+        // Assert.assertNotNull(c);
+        //
+        // dao.startTransaction();
+        // root = dao.find(root);
+        // dao.remove(root);
+        // dao.endTransaction();
+        // dao.close();
 
     }
 }

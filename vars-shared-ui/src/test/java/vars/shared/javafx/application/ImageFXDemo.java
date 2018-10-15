@@ -1,7 +1,6 @@
 package vars.shared.javafx.application;
 
 import javafx.application.Platform;
-import javafx.stage.Stage;
 import vars.shared.javafx.stage.ImageStage;
 
 import java.util.concurrent.CompletableFuture;
@@ -13,7 +12,8 @@ import java.util.concurrent.CompletableFuture;
 public class ImageFXDemo {
 
     public static void main(String[] args) {
-        final CompletableFuture<ImageStage> w = ImageFX.namedWindow("Foo", "http://www.mbari.org/staff/brian/images/storage/brian-schlining5_sm.jpg");
+        final CompletableFuture<ImageStage> w = ImageFX.namedWindow("Foo",
+                "http://www.mbari.org/staff/brian/images/storage/brian-schlining5_sm.jpg");
         w.thenAccept(stage -> {
             Platform.runLater(() -> stage.show());
         });

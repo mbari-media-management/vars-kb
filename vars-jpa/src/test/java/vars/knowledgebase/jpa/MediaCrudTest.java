@@ -10,8 +10,6 @@
  * limitations under the License.
  */
 
-
-
 package vars.knowledgebase.jpa;
 
 import com.google.inject.Guice;
@@ -19,9 +17,11 @@ import com.google.inject.Injector;
 import java.util.Collection;
 import java.util.Iterator;
 
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestInstance;
+import org.junit.jupiter.api.TestInstance.Lifecycle;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import vars.jpa.EntityUtilities;
@@ -37,6 +37,7 @@ import vars.testing.KnowledgebaseTestObjectFactory;
  *
  * @author brian
  */
+@TestInstance(Lifecycle.PER_CLASS)
 public class MediaCrudTest {
 
     public final Logger log = LoggerFactory.getLogger(getClass());
@@ -54,7 +55,8 @@ public class MediaCrudTest {
         dao.startTransaction();
         dao.persist(concept);
         dao.endTransaction();
-        log.info("INITIAL KNOWLEDGEBASE TREE:\n" + entityUtilities.buildTextTree(concept));
+        // log.info("INITIAL KNOWLEDGEBASE TREE:\n" +
+        // entityUtilities.buildTextTree(concept));
 
         // Insert
         Media media = testObjectFactory.makeMedia();
@@ -63,14 +65,16 @@ public class MediaCrudTest {
         concept.getConceptMetadata().addMedia(media);
         dao.persist(media);
         dao.endTransaction();
-        log.info("INSERTED " + media + " in KNOWLEDGEBASE TREE:\n" + entityUtilities.buildTextTree(concept));
+        // log.info("INSERTED " + media + " in KNOWLEDGEBASE TREE:\n" +
+        // entityUtilities.buildTextTree(concept));
 
         // Update
         dao.startTransaction();
         media = dao.merge(media);
         media.setUrl("WOOOGA WOOGA WOOOGA");
         dao.endTransaction();
-        log.info("UPDATED " + media + " in KNOWLEDGEBASE TREE:\n" + entityUtilities.buildTextTree(concept));
+        // log.info("UPDATED " + media + " in KNOWLEDGEBASE TREE:\n" +
+        // entityUtilities.buildTextTree(concept));
 
         // Delete
         dao.startTransaction();
@@ -79,33 +83,53 @@ public class MediaCrudTest {
         concept.getConceptMetadata().removeMedia(media);
         dao.remove(media);
         dao.endTransaction();
-        log.info("DELETED " + media + " in KNOWLEDGEBASE TREE:\n" + entityUtilities.buildTextTree(concept));
+        // log.info("DELETED " + media + " in KNOWLEDGEBASE TREE:\n" +
+        // entityUtilities.buildTextTree(concept));
 
         dao.cascadeRemove(concept);
 
     }
 
-    @After
-    public void report() {
-        Collection<Concept> badData = daoFactory.newConceptDAO().findAll();
-
-        if (badData.size() > 0) {
-
-            String s = "Concepts that shouldn't still be in the database:\n";
-            for (Concept c : badData) {
-                s += "\n" + entityUtilities.buildTextTree(c) + "\n";
-            }
-
-            log.info(s);
-        }
-    }
-
-    @Before
+    @BeforeAll
     public void setup() {
         Injector injector = Guice.createInjector(new VarsJpaTestModule());
         kbFactory = injector.getInstance(KnowledgebaseFactory.class);
         testObjectFactory = new KnowledgebaseTestObjectFactory(kbFactory);
         daoFactory = injector.getInstance(KnowledgebaseDAOFactory.class);
         entityUtilities = new EntityUtilities();
+
+        ConceptDAO dao = daoFactory.newConceptDAO();
+        dao.startTransaction();
+        Concept concept = dao.findRoot();
+        dao.endTransaction();
+        if (concept != null) {
+            dao.cascadeRemove(concept);
+        }
+        dao.close();
+    }
+
+    @AfterAll
+    public void cleanup() {
+        ConceptDAO dao = daoFactory.newConceptDAO();
+        dao.startTransaction();
+        Concept concept = dao.findRoot();
+        dao.endTransaction();
+        if (concept != null) {
+            dao.cascadeRemove(concept);
+        }
+        dao.close();
+
+        Collection<Concept> badData = daoFactory.newConceptDAO().findAll();
+
+        if (badData.size() > 0) {
+
+            // String s = "Concepts that shouldn't still be in the database:\n";
+            // for (Concept c : badData) {
+            // s += "\n" + entityUtilities.buildTextTree(c) + "\n";
+            // }
+            // log.info(s);
+            log.info("There are " + badData.size()
+                    + " concepts that are still in the knowledgebase that shouldn't be there.");
+        }
     }
 }

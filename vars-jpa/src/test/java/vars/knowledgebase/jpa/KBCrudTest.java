@@ -10,8 +10,6 @@
  * limitations under the License.
  */
 
-
-
 package vars.knowledgebase.jpa;
 
 import com.google.inject.Guice;
@@ -19,8 +17,12 @@ import com.google.inject.Injector;
 import java.util.ArrayList;
 import java.util.Collection;
 
-
-import org.junit.*;
+import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestInstance;
+import org.junit.jupiter.api.TestInstance.Lifecycle;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import vars.jpa.DAO;
@@ -40,12 +42,10 @@ import vars.knowledgebase.Media;
 import vars.testing.KnowledgebaseTestObjectFactory;
 
 /**
- * Created by IntelliJ IDEA.
- * User: brian
- * Date: Aug 12, 2009
- * Time: 11:42:53 AM
- * To change this template use File | Settings | File Templates.
+ * Created by IntelliJ IDEA. User: brian Date: Aug 12, 2009 Time: 11:42:53 AM To
+ * change this template use File | Settings | File Templates.
  */
+@TestInstance(Lifecycle.PER_CLASS)
 public class KBCrudTest {
 
     public final Logger log = LoggerFactory.getLogger(getClass());
@@ -54,7 +54,7 @@ public class KBCrudTest {
     KnowledgebaseTestObjectFactory testObjectFactory;
     EntityUtilities entityUtilities;
 
-    @Before
+    @BeforeAll
     public void setup() {
         Injector injector = Guice.createInjector(new VarsJpaTestModule());
 
@@ -62,20 +62,15 @@ public class KBCrudTest {
         testObjectFactory = new KnowledgebaseTestObjectFactory(kbFactory);
         daoFactory = injector.getInstance(KnowledgebaseDAOFactory.class);
         entityUtilities = new EntityUtilities();
-    }
 
-    @After
-    public void report() {
-        Collection<Concept> badData = daoFactory.newConceptDAO().findAll();
-
-        if (badData.size() > 0) {
-
-            String s = "Concepts that shouldn't still be in the database:\n";
-            for (Concept c : badData) {
-                s += "\n" + entityUtilities.buildTextTree(c) + "\n";
-            }
-            log.info(s);
+        ConceptDAO dao = daoFactory.newConceptDAO();
+        dao.startTransaction();
+        Concept concept = dao.findRoot();
+        dao.endTransaction();
+        if (concept != null) {
+            dao.cascadeRemove(concept);
         }
+        dao.close();
     }
 
     @Test
@@ -85,36 +80,36 @@ public class KBCrudTest {
         Concept c = testObjectFactory.makeObjectGraph("bigTest", 4);
         ConceptDAO dao = daoFactory.newConceptDAO();
 
-        log.info("KNOWLEDGEBASE TREE BEFORE TEST:\n" + entityUtilities.buildTextTree(c));
+        // log.info("KNOWLEDGEBASE TREE BEFORE TEST:\n" +
+        // entityUtilities.buildTextTree(c));
         dao.startTransaction();
         dao.persist(c);
         dao.endTransaction();
 
         Long cId = ((JPAEntity) c).getId();
 
-        Assert.assertNotNull("Primary Key [ID] was not set!", cId);
+        Assertions.assertNotNull(cId, "Primary Key [ID] was not set!");
         dao.startTransaction();
         c = dao.findByPrimaryKey(c.getClass(), ((JPAEntity) c).getId());
         dao.endTransaction();
-        Assert.assertTrue("Not all objects were inserted",
-                          PrimaryKeyUtilities.checkDbForAllPks(PrimaryKeyUtilities.primaryKeyMap(c), (DAO) dao));
-        log.info("KNOWLEDGEBASE TREE AFTER INSERT:\n" + entityUtilities.buildTextTree(c));
+        Assertions.assertTrue(PrimaryKeyUtilities.checkDbForAllPks(PrimaryKeyUtilities.primaryKeyMap(c), (DAO) dao),
+                "Not all objects were inserted");
+        // log.info("KNOWLEDGEBASE TREE AFTER INSERT:\n" +
+        // entityUtilities.buildTextTree(c));
 
         // Exercise the DAO methods
         dao.startTransaction();
         Concept root = dao.findRoot();
         dao.endTransaction();
-        Assert.assertNotNull("Whoops, couldn't get root", root);
+        Assertions.assertNotNull(root, "Whoops, couldn't get root");
 
         dao.cascadeRemove(root);
         dao.startTransaction();
         c = dao.findByPrimaryKey(c.getClass(), cId);
         dao.endTransaction();
-        Assert.assertNull("Whoops!! We can still lookup the entity after deleteing it", c);
+        Assertions.assertNull(c, "Whoops!! We can still lookup the entity after deleteing it");
 
     }
-
-    
 
     @Test
     public void incrementalBuildAndDeleteByConcept() {
@@ -128,7 +123,8 @@ public class KBCrudTest {
             dao.startTransaction();
             dao.persist(root);
             dao.endTransaction();
-            log.info("BUILDING KNOWLEDGEBASE TREE:\n" + entityUtilities.buildTextTree(root));
+            // log.info("BUILDING KNOWLEDGEBASE TREE:\n" +
+            // entityUtilities.buildTextTree(root));
 
             // ---- Step 1: Build up each node in the database
             log.info("---------- Add 2A ----------");
@@ -139,7 +135,8 @@ public class KBCrudTest {
             root.addChildConcept(concept2A);
             dao.persist(concept2A);
             dao.endTransaction();
-            log.info("BUILDING KNOWLEDGEBASE TREE:\n" + entityUtilities.buildTextTree(root));
+            // log.info("BUILDING KNOWLEDGEBASE TREE:\n" +
+            // entityUtilities.buildTextTree(root));
 
             log.info("---------- Add 3AA and 3AB ----------");
             Concept concept3AA = testObjectFactory.makeConcept("LEVEL 3 A A");
@@ -153,7 +150,8 @@ public class KBCrudTest {
             concept2A.addChildConcept(concept3AB);
             dao.persist(concept3AB);
             dao.endTransaction();
-            log.info("BUILDING KNOWLEDGEBASE TREE:\n" + entityUtilities.buildTextTree(root));
+            // log.info("BUILDING KNOWLEDGEBASE TREE:\n" +
+            // entityUtilities.buildTextTree(root));
 
             log.info("---------- Add 4A ----------");
             Concept concept4A = testObjectFactory.makeConcept("LEVEL 4 A");
@@ -163,7 +161,8 @@ public class KBCrudTest {
             concept3AA.addChildConcept(concept4A);
             dao.persist(concept4A);
             dao.endTransaction();
-            log.info("BUILDING KNOWLEDGEBASE TREE:\n" + entityUtilities.buildTextTree(root));
+            // log.info("BUILDING KNOWLEDGEBASE TREE:\n" +
+            // entityUtilities.buildTextTree(root));
 
             log.info("---------- Add 2B ----------");
             Concept concept2B = testObjectFactory.makeConcept("LEVEL 2 B");
@@ -173,10 +172,12 @@ public class KBCrudTest {
             root.addChildConcept(concept2B);
             dao.persist(concept2B);
             dao.endTransaction();
-            log.info("BUILDING KNOWLEDGEBASE TREE:\n" + entityUtilities.buildTextTree(root));
+            // log.info("BUILDING KNOWLEDGEBASE TREE:\n" +
+            // entityUtilities.buildTextTree(root));
         }
 
-        // ---- Step 2: Let's look up the references form the database so that we have the correct entities
+        // ---- Step 2: Let's look up the references form the database so that we have
+        // the correct entities
 
         execute: {
 
@@ -190,7 +191,7 @@ public class KBCrudTest {
             log.info("---------- Remove 2B ----------");
             concept2B.getParentConcept().removeChildConcept(concept2B);
             dao.remove(concept2B);
-            //log.info("---------- Remove 3AB ----------");
+            // log.info("---------- Remove 3AB ----------");
             concept3AB.getParentConcept().removeChildConcept(concept3AB);
             dao.remove(concept3AB);
             dao.endTransaction();
@@ -201,21 +202,18 @@ public class KBCrudTest {
             concept3AA.getParentConcept().removeChildConcept(concept3AA);
             dao.endTransaction();
             dao.cascadeRemove(concept3AA);
-            
 
             dao.startTransaction();
             root = dao.findByPrimaryKey(root.getClass(), ((JPAEntity) root).getId());
             dao.endTransaction();
-            log.info("KNOWLEDGEBASE TREE:\n" + entityUtilities.buildTextTree(root));
+            // log.info("KNOWLEDGEBASE TREE:\n" + entityUtilities.buildTextTree(root));
 
             log.info("---------- Remove __ROOT__ ----------");
             dao.cascadeRemove(root);
-            
+
         }
 
     }
-
-
 
     @Test
     public void bottomUpDelete() {
@@ -234,11 +232,11 @@ public class KBCrudTest {
         final Collection<LinkRealization> linkRealizations = new ArrayList<LinkRealization>();
 
         /*
-         * Handy 'Closure' to do all the dirty work of recursively filling in
-         * the collections for us
+         * Handy 'Closure' to do all the dirty work of recursively filling in the
+         * collections for us
          */
         class Collector {
-            
+
             void collect(Concept c) {
                 ConceptMetadata metadata = c.getConceptMetadata();
                 histories.addAll(metadata.getHistories());
@@ -249,13 +247,14 @@ public class KBCrudTest {
                     collect(child);
                 }
             }
-            
+
         }
 
         Collector collector = new Collector();
         collector.collect(concept);
 
-        log.info("KNOWLEDGEBASE TREE AFTER INITIAL INSERT:\n" + entityUtilities.buildTextTree(concept));
+        // log.info("KNOWLEDGEBASE TREE AFTER INITIAL INSERT:\n" +
+        // entityUtilities.buildTextTree(concept));
 
         dao.startTransaction();
         for (LinkRealization linkRealization : linkRealizations) {
@@ -263,7 +262,8 @@ public class KBCrudTest {
             dao.remove(linkRealization);
         }
         dao.endTransaction();
-        log.info("KNOWLEDGEBASE TREE AFTER LINKREALIZATION DELETE:\n" + entityUtilities.buildTextTree(concept));
+        // log.info("KNOWLEDGEBASE TREE AFTER LINKREALIZATION DELETE:\n" +
+        // entityUtilities.buildTextTree(concept));
 
         dao.startTransaction();
         for (LinkTemplate linkTemplate : linkTemplates) {
@@ -271,8 +271,8 @@ public class KBCrudTest {
             dao.remove(linkTemplate);
         }
         dao.endTransaction();
-        log.info("KNOWLEDGEBASE TREE AFTER LINKTEMPLATE DELETE:\n" + entityUtilities.buildTextTree(concept));
-
+        // log.info("KNOWLEDGEBASE TREE AFTER LINKTEMPLATE DELETE:\n" +
+        // entityUtilities.buildTextTree(concept));
 
         dao.startTransaction();
         for (Media media : medias) {
@@ -280,7 +280,8 @@ public class KBCrudTest {
             dao.remove(media);
         }
         dao.endTransaction();
-        log.info("KNOWLEDGEBASE TREE AFTER MEDIA DELETE:\n" + entityUtilities.buildTextTree(concept));
+        // log.info("KNOWLEDGEBASE TREE AFTER MEDIA DELETE:\n" +
+        // entityUtilities.buildTextTree(concept));
 
         dao.startTransaction();
         for (History history : histories) {
@@ -288,12 +289,36 @@ public class KBCrudTest {
             dao.remove(history);
         }
         dao.endTransaction();
-        log.info("KNOWLEDGEBASE TREE AFTER HISTORY DELETE:\n" + entityUtilities.buildTextTree(concept));
+        // log.info("KNOWLEDGEBASE TREE AFTER HISTORY DELETE:\n" +
+        // entityUtilities.buildTextTree(concept));
 
         dao.cascadeRemove(concept);
 
     }
 
+    @AfterAll
+    public void cleanup() {
+        ConceptDAO dao = daoFactory.newConceptDAO();
+        dao.startTransaction();
+        Concept concept = dao.findRoot();
+        dao.endTransaction();
+        if (concept != null) {
+            dao.cascadeRemove(concept);
+        }
+        dao.close();
 
+        Collection<Concept> badData = daoFactory.newConceptDAO().findAll();
+
+        if (badData.size() > 0) {
+
+            // String s = "Concepts that shouldn't still be in the database:\n";
+            // for (Concept c : badData) {
+            // s += "\n" + entityUtilities.buildTextTree(c) + "\n";
+            // }
+            // log.info(s);
+            log.info("There are " + badData.size()
+                    + " concepts that are still in the knowledgebase that shouldn't be there.");
+        }
+    }
 
 }
