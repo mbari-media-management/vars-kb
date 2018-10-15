@@ -14,6 +14,8 @@ Documentation for VARS is at [https://hohonuuli.github.io/vars/](https://hohonuu
 
 ## Building
 
+__Requires Java 11+__
+
 For the impatient:
 
 1. Checkout _vars-kb_  

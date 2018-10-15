@@ -5,7 +5,7 @@
     <groupId>org.mbari.vars</groupId>
     <artifactId>vars-kb</artifactId>
     <packaging>pom</packaging>
-    <version>11.0.1</version>
+    <version>11.0.2</version>
     <name>vars-kb</name>
     <inceptionYear>2002</inceptionYear>
     <organization>
@@ -34,6 +34,7 @@
         <jasypt.version>1.9.2</jasypt.version>
         <javax.persistence.version>2.2.1</javax.persistence.version>
         <javax.transaction.version>1.1</javax.transaction.version>
+        <javax.xml.bind.version>2.3.0</javax.xml.bind.version>
         <jgoodies.version>1.0.5</jgoodies.version>
         <jline.version>2.14.2</jline.version>
         <jtds.version>1.3.1</jtds.version>
@@ -51,6 +52,8 @@
         <scalatest.version>2.2.6</scalatest.version>
         <scalr.version>4.2</scalr.version>
         <slf4j.version>1.7.25</slf4j.version>
+        <sun.xml.bind.core.version>2.3.0.1</sun.xml.bind.core.version>
+        <sun.xml.bind.impl.version>2.3.1</sun.xml.bind.impl.version>
         <swingx.version>1.6.5-1</swingx.version>
         <swing.layout.version>1.0.3</swing.layout.version>
         <tagsoup.version>1.2.1</tagsoup.version>
@@ -350,6 +353,14 @@
             <id>Maven-Central</id>
             <name>Maven Central Repository</name>
             <url>http://repo1.maven.org/maven2</url>
+        </repository>
+        <repository>
+            <id>oss-sonatype</id>
+            <name>oss-sonatype</name>
+            <url>https://oss.sonatype.org/content/repositories/snapshots/</url>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
         </repository>
         <repository>
             <id>mbari-maven-repository</id>

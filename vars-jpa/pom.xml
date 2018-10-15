@@ -4,7 +4,7 @@
     <parent>
         <groupId>org.mbari.vars</groupId>
         <artifactId>vars-kb</artifactId>
-        <version>11.0.1</version>
+        <version>11.0.2</version>
     </parent>
     <artifactId>vars-jpa</artifactId>
     <name>vars-jpa [Library]</name>
@@ -72,6 +72,21 @@
             <version>${eclipselink.version}</version>
             <scope>compile</scope>
             <optional>false</optional>
+        </dependency>
+        <dependency>
+            <groupId>javax.xml.bind</groupId>
+            <artifactId>jaxb-api</artifactId>
+            <version>${javax.xml.bind.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.sun.xml.bind</groupId>
+            <artifactId>jaxb-core</artifactId>
+            <version>${sun.xml.bind.core.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.sun.xml.bind</groupId>
+            <artifactId>jaxb-impl</artifactId>
+            <version>${sun.xml.bind.impl.version}</version>
         </dependency>
         <!-- JDBC Driver -->
         <dependency>
