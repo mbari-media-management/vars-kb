@@ -27,7 +27,7 @@ public class AnnosaurusService implements AnnotationService {
         Function<String, CompletableFuture<ConceptsRenamed>> fn = (oldName) ->
                 annotationService.renameConcepts(oldName, newConcept);
 
-        AsyncUtils.await(AsyncUtils.collectAll(oldConcepts, fn), 
+        AsyncUtils.await(AsyncUtils.collectAll(oldConcepts, fn),
                 Duration.ofSeconds(10 * oldConcepts.size()));
 
     }
