@@ -4,7 +4,7 @@
     <parent>
         <groupId>org.mbari.vars</groupId>
         <artifactId>vars-kb</artifactId>
-        <version>11.0.2</version>
+        <version>11.0.3</version>
     </parent>
     <artifactId>vars-jpa</artifactId>
     <name>vars-jpa [Library]</name>
