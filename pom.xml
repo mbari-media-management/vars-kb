@@ -122,7 +122,7 @@
         <dependency>
             <groupId>org.mbari.m3</groupId>
             <artifactId>m3-corelib</artifactId>
-            <version>0.2.0-SNAPSHOT</version>
+            <version>0.1.1</version>
         </dependency>
         <dependency>
             <groupId>org.junit.jupiter</groupId>
@@ -367,11 +367,6 @@
             <snapshots>
                 <enabled>false</enabled>
             </snapshots>
-        </repository>
-        <repository>
-            <id>mbari-maven-repository</id>
-            <name>MBARI Maven Repository</name>
-            <url>http://dsg.mbari.org/mbari-maven-repository/repository/</url>
         </repository>
         <repository>
             <snapshots>
