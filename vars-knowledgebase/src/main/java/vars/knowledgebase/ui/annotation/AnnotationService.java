@@ -18,7 +18,6 @@ public interface AnnotationService {
      *
      * @param concepts
      * @return
-     * @deprecated
      */
     int countByConcepts(Collection<String> concepts);
 }
