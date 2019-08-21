@@ -1,8 +1,5 @@
 package vars.gson;
 
-import com.google.inject.Guice;
-import com.google.inject.Injector;
-import vars.jpa.InjectorModule;
 import vars.knowledgebase.Concept;
 import vars.knowledgebase.ConceptDAO;
 import vars.knowledgebase.ConceptMetadata;
@@ -12,6 +9,7 @@ import vars.knowledgebase.LinkRealization;
 import vars.knowledgebase.LinkTemplate;
 import vars.knowledgebase.Media;
 import vars.knowledgebase.jpa.ConceptImpl;
+import vars.knowledgebase.jpa.Factories;
 
 import java.io.BufferedInputStream;
 import java.io.File;
@@ -23,7 +21,6 @@ import java.util.Collection;
 import java.util.Enumeration;
 import java.util.List;
 import java.util.Scanner;
-import java.util.Set;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipFile;
 
@@ -43,8 +40,8 @@ public class InitializeKnowledgebaseApp {
         // -- Parse Args
         File source = new File(args[0]);
 
-        Injector injector = Guice.createInjector(new InjectorModule());
-        KnowledgebaseDAOFactory daoFactory = injector.getInstance(KnowledgebaseDAOFactory.class);
+        Factories factories = Factories.build();
+        KnowledgebaseDAOFactory daoFactory = factories.getKnowledgebaseDAOFactory();
         run(source, daoFactory);
 
     }

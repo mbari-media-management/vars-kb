@@ -7,13 +7,13 @@ import org.junit.jupiter.api.TestInstance;
 import org.junit.jupiter.api.TestInstance.Lifecycle;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import com.google.inject.Injector;
-import com.google.inject.Guice;
 import vars.DAO;
 import vars.MiscDAOFactory;
 import vars.MiscFactory;
 import vars.UserAccount;
 import vars.UserAccountRoles;
+import vars.knowledgebase.jpa.DerbyTestDAOFactory;
+import vars.knowledgebase.jpa.Factories;
 
 /**
  * Created by IntelliJ IDEA. User: brian Date: Aug 19, 2009 Time: 3:37:47 PM To
@@ -29,10 +29,10 @@ public class UserAccountCrudTest {
 
     @BeforeAll
     public void setup() {
-        Injector injector = Guice.createInjector(new VarsJpaTestModule());
+        Factories factories = new Factories(DerbyTestDAOFactory.newEntityManagerFactory());
 
-        miscFactory = injector.getInstance(MiscFactory.class);
-        daoFactory = injector.getInstance(MiscDAOFactory.class);
+        miscFactory = factories.getMiscFactory();
+        daoFactory = factories.getMiscDAOFactory();
     }
 
     @Test

@@ -10,8 +10,6 @@ import java.util.Map;
 import java.util.HashMap;
 import java.util.Collection;
 
-import com.google.inject.Inject;
-import com.google.inject.name.Named;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
@@ -37,8 +35,7 @@ public class VarsUserPreferences extends AbstractPreferences {
      * construct a preferences object that has the whole preferences tree (at the root with all
      * users)
      */
-    @Inject
-    public VarsUserPreferences(@Named("miscPersistenceUnit") String persistenceUnit) {
+    public VarsUserPreferences( String persistenceUnit) {
         this(Persistence.createEntityManagerFactory(persistenceUnit), null, "");
     }
 

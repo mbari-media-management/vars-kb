@@ -22,7 +22,6 @@ import org.junit.jupiter.api.TestInstance.Lifecycle;
 import org.mbari.movie.Timecode;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import vars.jpa.VarsJpaTestModule;
 
 /**
  *

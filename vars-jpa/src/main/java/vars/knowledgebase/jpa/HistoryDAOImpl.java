@@ -9,7 +9,6 @@ import java.util.Map;
 import java.util.HashMap;
 import java.util.HashSet;
 
-import com.google.inject.Inject;
 import javax.persistence.EntityManager;
 
 /**
@@ -21,7 +20,6 @@ import javax.persistence.EntityManager;
  */
 public class HistoryDAOImpl extends DAO implements HistoryDAO {
 
-    @Inject
     public HistoryDAOImpl(EntityManager entityManager) {
         super(entityManager);
     }

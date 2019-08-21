@@ -1,19 +1,6 @@
 package vars.knowledgebase.jpa;
 
-import vars.jpa.VarsJpaDevelopmentModule;
-import vars.knowledgebase.KnowledgebaseDAOFactory;
-import vars.knowledgebase.ConceptDAO;
-import vars.knowledgebase.Concept;
-import vars.knowledgebase.ConceptName;
 
-import java.util.Collection;
-
-import com.google.inject.Injector;
-import com.google.inject.Guice;
-
-import org.junit.jupiter.api.AfterAll;
-import org.junit.jupiter.api.Disabled;
-import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInstance;
 import org.junit.jupiter.api.TestInstance.Lifecycle;
 import org.slf4j.Logger;

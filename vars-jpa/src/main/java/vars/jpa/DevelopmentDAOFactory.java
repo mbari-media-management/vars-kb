@@ -1,6 +1,5 @@
 package vars.jpa;
 
-import vars.jpa.EntityManagerFactories;
 
 import javax.persistence.EntityManagerFactory;
 

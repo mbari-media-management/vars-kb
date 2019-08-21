@@ -6,9 +6,6 @@
 package vars.jpa;
 
 import vars.VarsUserPreferencesFactory;
-import com.google.inject.Guice;
-import com.google.inject.Injector;
-import java.util.logging.Level;
 import java.util.prefs.BackingStoreException;
 import java.util.prefs.Preferences;
 
@@ -22,6 +19,8 @@ import org.slf4j.LoggerFactory;
 import vars.MiscDAOFactory;
 import vars.MiscFactory;
 import vars.PersistenceCache;
+import vars.knowledgebase.jpa.DerbyTestDAOFactory;
+import vars.knowledgebase.jpa.Factories;
 
 /**
  *
@@ -39,12 +38,11 @@ public class PreferenceNodeTest {
 
     @BeforeAll
     public void setup() {
-        Injector injector = Guice.createInjector(new VarsJpaTestModule());
-
-        miscFactory = injector.getInstance(MiscFactory.class);
-        daoFactory = injector.getInstance(MiscDAOFactory.class);
-        prefsFactory = injector.getInstance(VarsUserPreferencesFactory.class);
-        cache = injector.getInstance(PersistenceCache.class);
+        Factories factories = new Factories(DerbyTestDAOFactory.newEntityManagerFactory());
+        miscFactory = factories.getMiscFactory();
+        daoFactory = factories.getMiscDAOFactory();
+        prefsFactory = factories.getVarsUserPreferencesFactory();
+        cache = factories.getPersistenceCache();
     }
 
     @Test

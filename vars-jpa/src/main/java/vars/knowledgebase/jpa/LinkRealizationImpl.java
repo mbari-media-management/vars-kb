@@ -5,7 +5,6 @@
 
 package vars.knowledgebase.jpa;
 
-import com.google.common.collect.ImmutableList;
 import java.io.Serializable;
 import java.sql.Timestamp;
 import java.util.List;
@@ -70,7 +69,7 @@ import vars.knowledgebase.LinkRealization;
 public class LinkRealizationImpl implements Serializable, LinkRealization, JPAEntity {
 
     @Transient
-    private static final List<String> PROPS = ImmutableList.of(LinkRealization.PROP_LINKNAME,
+    private static final List<String> PROPS = List.of(LinkRealization.PROP_LINKNAME,
             LinkRealization.PROP_TOCONCEPT, LinkRealization.PROP_LINKVALUE) ;
 
     @Exclude

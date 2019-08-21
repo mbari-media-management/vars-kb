@@ -1,15 +1,11 @@
 package vars.knowledgebase.jpa;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import vars.jpa.DAO;
 import vars.jpa.JPAEntity;
 import vars.knowledgebase.ConceptDAO;
 import vars.knowledgebase.Concept;
-import vars.knowledgebase.ConceptMetadata;
 import vars.knowledgebase.ConceptName;
 import vars.VARSPersistenceException;
-import com.google.inject.Inject;
 
 import java.util.Collection;
 import java.util.ArrayList;
@@ -32,7 +28,6 @@ import javax.persistence.Query;
 public class ConceptDAOImpl extends DAO implements ConceptDAO {
 
 
-    @Inject
     public ConceptDAOImpl(EntityManager entityManager) {
         super(entityManager);
     }

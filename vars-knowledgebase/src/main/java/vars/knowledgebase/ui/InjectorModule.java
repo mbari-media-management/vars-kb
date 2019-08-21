@@ -25,7 +25,7 @@ public class InjectorModule implements Module {
 
     @Override
     public void configure(Binder binder) {
-        binder.install(new vars.jpa.InjectorModule());
+//        binder.install(new vars.jpa.InjectorModule());
         bindAnnotationService(binder);
     }
 

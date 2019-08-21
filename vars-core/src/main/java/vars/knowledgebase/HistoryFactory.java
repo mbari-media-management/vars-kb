@@ -5,7 +5,6 @@
 
 package vars.knowledgebase;
 
-import com.google.inject.Inject;
 import java.util.Date;
 import vars.UserAccount;
 
@@ -17,7 +16,6 @@ public class HistoryFactory {
 
     private final KnowledgebaseFactory knowledgebaseFactory;
 
-    @Inject
     public HistoryFactory(KnowledgebaseFactory knowledgebaseFactory) {
         this.knowledgebaseFactory = knowledgebaseFactory;
     }

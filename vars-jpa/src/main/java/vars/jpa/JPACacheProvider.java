@@ -10,8 +10,6 @@ import vars.PersistenceCacheProvider;
 import javax.persistence.Cache;
 import javax.persistence.EntityManagerFactory;
 
-import com.google.inject.Inject;
-import com.google.inject.name.Named;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import vars.VARSObject;
@@ -30,10 +28,8 @@ public class JPACacheProvider implements PersistenceCacheProvider {
 
 
 
-    @Inject
-    public JPACacheProvider(
-            @Named("knowledgebasePersistenceUnit") EntityManagerFactory kbEmf,
-            @Named("miscPersistenceUnit") EntityManagerFactory miscEmf) {
+    public JPACacheProvider(EntityManagerFactory kbEmf,
+            EntityManagerFactory miscEmf) {
 
         this.kbEmf = kbEmf;
         this.miscEmf = miscEmf;

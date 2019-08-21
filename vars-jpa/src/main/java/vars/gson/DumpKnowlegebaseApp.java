@@ -1,12 +1,10 @@
 package vars.gson;
 
 import com.google.gson.Gson;
-import com.google.inject.Guice;
-import com.google.inject.Injector;
-import vars.jpa.InjectorModule;
 import vars.knowledgebase.Concept;
 import vars.knowledgebase.ConceptDAO;
 import vars.knowledgebase.KnowledgebaseDAOFactory;
+import vars.knowledgebase.jpa.Factories;
 
 import java.io.BufferedWriter;
 import java.io.File;
@@ -30,8 +28,9 @@ public class DumpKnowlegebaseApp {
         File target = new File(args[0]);
 
         // -- Load root Concept from KB
-        Injector injector = Guice.createInjector(new InjectorModule());
-        KnowledgebaseDAOFactory daoFactory = injector.getInstance(KnowledgebaseDAOFactory.class);
+
+        Factories factories = Factories.build();
+        KnowledgebaseDAOFactory daoFactory = factories.getKnowledgebaseDAOFactory();
         ConceptDAO dao = daoFactory.newConceptDAO();
         Concept root = dao.findRoot();
 

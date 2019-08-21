@@ -13,9 +13,8 @@ package vars;
 
 import java.util.Collection;
 import java.util.Comparator;
+import java.util.stream.Collectors;
 
-import com.google.common.base.Predicate;
-import com.google.common.collect.Collections2;
 
 /**
  *
@@ -55,10 +54,9 @@ public class LinkUtilities {
      * @return
      */
     public static Collection<ILink> findMatchingLinksIn(Collection<ILink> links, final ILink templateLink) {
-        return Collections2.filter(links, new Predicate<ILink>() {
-            public boolean apply(ILink input) {
-                return COMPARATOR.compare(input, templateLink) == 0;
-            }
-        });
+        return links.stream()
+                .filter(input -> COMPARATOR.compare(input, templateLink) == 0)
+                .collect(Collectors.toList());
+
     }
 }

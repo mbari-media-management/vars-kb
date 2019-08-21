@@ -15,8 +15,6 @@
 
 package vars.knowledgebase.jpa;
 
-import com.google.inject.Inject;
-import com.google.inject.name.Named;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import vars.DAO;
@@ -39,9 +37,7 @@ public class KnowledgebaseDAOFactoryImpl implements KnowledgebaseDAOFactory, Ent
      *
      * @param entityManagerFactory
      */
-    @Inject
-    public KnowledgebaseDAOFactoryImpl(
-            @Named("knowledgebasePersistenceUnit") EntityManagerFactory entityManagerFactory) {
+    public KnowledgebaseDAOFactoryImpl(EntityManagerFactory entityManagerFactory) {
         this.entityManagerFactory = entityManagerFactory;
     }
 

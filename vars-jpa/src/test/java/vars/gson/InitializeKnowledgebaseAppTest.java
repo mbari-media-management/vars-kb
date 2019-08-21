@@ -1,15 +1,14 @@
 package vars.gson;
 
-import com.google.inject.Guice;
-import com.google.inject.Injector;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.mbari.net.URLUtilities;
-import vars.jpa.VarsJpaTestModule;
 import vars.knowledgebase.Concept;
 import vars.knowledgebase.ConceptDAO;
 import vars.knowledgebase.KnowledgebaseDAOFactory;
+import vars.knowledgebase.jpa.DerbyTestDAOFactory;
+import vars.knowledgebase.jpa.Factories;
 
 import java.io.File;
 import java.io.IOException;
@@ -26,8 +25,8 @@ public class InitializeKnowledgebaseAppTest {
     public void test() {
         URL url = getClass().getResource("/kb/kb-dump.json.zip");
         File file = URLUtilities.toFile(url);
-        Injector injector = Guice.createInjector(new VarsJpaTestModule());
-        KnowledgebaseDAOFactory knowledgebaseDAOFactory = injector.getInstance(KnowledgebaseDAOFactory.class);
+        Factories factories = new Factories(DerbyTestDAOFactory.newEntityManagerFactory());
+        KnowledgebaseDAOFactory knowledgebaseDAOFactory = factories.getKnowledgebaseDAOFactory();
 
         try {
             InitializeKnowledgebaseApp.run(file, knowledgebaseDAOFactory);

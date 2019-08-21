@@ -15,7 +15,6 @@
 
 package vars.jpa;
 
-import com.google.inject.Inject;
 import java.lang.reflect.Method;
 import java.util.HashMap;
 import java.util.List;
@@ -57,7 +56,6 @@ public class DAO implements vars.DAO, EntityManagerAspect {
      *
      * @param entityManager
      */
-    @Inject
     public DAO(final EntityManager entityManager) {
         this.entityManager = entityManager;
         if (log.isInfoEnabled() && entityManager != null) {

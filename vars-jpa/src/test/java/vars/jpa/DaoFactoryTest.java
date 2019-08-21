@@ -1,12 +1,12 @@
 package vars.jpa;
 
-import com.google.inject.Injector;
 
 import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.Test;
 
-import com.google.inject.Guice;
 import vars.knowledgebase.KnowledgebaseDAOFactory;
+import vars.knowledgebase.jpa.DerbyTestDAOFactory;
+import vars.knowledgebase.jpa.Factories;
 
 /**
  * Created by IntelliJ IDEA. User: brian Date: Aug 11, 2009 Time: 9:56:33 AM To
@@ -16,8 +16,8 @@ public class DaoFactoryTest {
 
     @Test
     public void test01() {
-        Injector injector = Guice.createInjector(new VarsJpaTestModule());
-        KnowledgebaseDAOFactory kf = injector.getInstance(KnowledgebaseDAOFactory.class);
+        Factories factories = new Factories(DerbyTestDAOFactory.newEntityManagerFactory());
+        KnowledgebaseDAOFactory kf = factories.getKnowledgebaseDAOFactory();
         assertNotNull(kf.newConceptDAO());
         assertNotNull(kf.newConceptMetadataDAO());
         assertNotNull(kf.newConceptNameDAO());

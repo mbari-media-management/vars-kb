@@ -15,7 +15,6 @@ package vars;
 
 
 
-import com.google.inject.Inject;
 import vars.knowledgebase.ConceptCache;
 import vars.knowledgebase.KnowledgebaseDAOFactory;
 import vars.knowledgebase.KnowledgebaseFactory;
@@ -42,7 +41,6 @@ public class ToolBelt {
      * @param miscFactory
      * @param persistenceCacheProvider
      */
-    @Inject
     public ToolBelt(
             KnowledgebaseDAOFactory knowledgebaseDAOFactory,
             KnowledgebaseFactory knowledgebaseFactory,

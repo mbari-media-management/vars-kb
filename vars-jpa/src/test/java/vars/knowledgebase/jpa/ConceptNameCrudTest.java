@@ -9,7 +9,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import vars.testing.KnowledgebaseTestObjectFactory;
 import vars.jpa.EntityUtilities;
-import vars.jpa.VarsJpaTestModule;
 import com.google.inject.Injector;
 import com.google.inject.Guice;
 
@@ -37,11 +36,11 @@ public class ConceptNameCrudTest {
 
     @BeforeAll
     public void setup() {
-        Injector injector = Guice.createInjector(new VarsJpaTestModule());
+        Factories factories = new Factories(DerbyTestDAOFactory.newEntityManagerFactory());
 
-        kbFactory = injector.getInstance(KnowledgebaseFactory.class);
-        testObjectFactory = new KnowledgebaseTestObjectFactory(kbFactory);
-        daoFactory = injector.getInstance(KnowledgebaseDAOFactory.class);
+        kbFactory = factories.getKnowledgebaseFactory();
+        testObjectFactory = new KnowledgebaseTestObjectFactory(factories.getKnowledgebaseFactory());
+        daoFactory = factories.getKnowledgebaseDAOFactory();
         entityUtilities = new EntityUtilities();
 
         ConceptDAO dao = daoFactory.newConceptDAO();

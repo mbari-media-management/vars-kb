@@ -18,9 +18,6 @@ import java.util.prefs.Preferences;
 
 import javax.persistence.EntityManagerFactory;
 
-import com.google.inject.Inject;
-import com.google.inject.name.Named;
-
 /**
  *
  * @author brian
@@ -36,10 +33,9 @@ public class VarsUserPreferencesFactoryImpl implements VarsUserPreferencesFactor
     /**
      * Constructs ...
      *
-     * @param eao
+     * @param entityManagerFactory
      */
-    @Inject
-    public VarsUserPreferencesFactoryImpl(@Named("miscPersistenceUnit") EntityManagerFactory entityManagerFactory) {
+    public VarsUserPreferencesFactoryImpl(EntityManagerFactory entityManagerFactory) {
         this.entityManagerFactory = entityManagerFactory;
     }
 

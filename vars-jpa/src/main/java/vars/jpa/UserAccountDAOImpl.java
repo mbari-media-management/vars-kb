@@ -34,7 +34,7 @@ public class UserAccountDAOImpl extends DAO implements UserAccountDAO {
     /**
      * Constructs ...
      *
-     * @param eao
+     * @param entityManager
      */
     public UserAccountDAOImpl(EntityManager entityManager) {
         super(entityManager);

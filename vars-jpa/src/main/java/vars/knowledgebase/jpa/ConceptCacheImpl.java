@@ -1,6 +1,5 @@
 package vars.knowledgebase.jpa;
 
-import com.google.inject.Inject;
 import org.mbari.text.IgnoreCaseToStringComparator;
 import vars.CacheClearedEvent;
 import vars.CacheClearedListener;
@@ -38,7 +37,6 @@ public class ConceptCacheImpl implements ConceptCache {
     private final Object lock = new Object();
 
 
-    @Inject
     public ConceptCacheImpl(KnowledgebaseDAOFactory factory, PersistenceCache persistenceCache) {
         this.factory = factory;
         persistenceCache.addCacheClearedListener(new CacheClearedListener() {

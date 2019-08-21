@@ -1,0 +1,23 @@
+plugins {
+    id 'org.openjfx.javafxplugin'
+}
+
+dependencies {
+  compile project(":vars-core")
+
+  implementation 'com.google.guava:guava'
+  implementation 'com.google.inject:guice'
+  implementation 'com.typesafe:config'
+  implementation 'org.eclipse.persistence:org.eclipse.persistence.jpa'
+  implementation 'org.mbari:mbarix4j'
+  implementation 'org.mbari.m3:m3-corelib'
+  implementation 'org.slf4j:slf4j-api'
+}
+
+javafx {
+    version = "11.0.2"
+    modules = [
+            'javafx.base',
+            'javafx.controls'
+    ]
+}

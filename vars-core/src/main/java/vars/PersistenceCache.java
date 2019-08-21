@@ -14,12 +14,10 @@
 
 package vars;
 
-import com.google.inject.Inject;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+
 import vars.knowledgebase.KnowledgebaseObject;
 
 /**
@@ -35,14 +33,12 @@ public class PersistenceCache {
     private final List<CacheClearedListener> clearCacheListeners = Collections.synchronizedList(
         new ArrayList<CacheClearedListener>());
     private final PersistenceCacheProvider provider;
-    private final Logger log = LoggerFactory.getLogger(getClass());
 
     /**
      * Constructs ...
      *
      * @param provider
      */
-    @Inject
     public PersistenceCache(PersistenceCacheProvider provider) {
         this.provider = provider;
     }
@@ -52,7 +48,6 @@ public class PersistenceCache {
     }
 
     public void clear() {
-        log.debug("Clearing persistence cache");
         notifyCacheClearedListenersBeforeClear();
         provider.clear();
         notifyCacheClearedListenersAfterClear();

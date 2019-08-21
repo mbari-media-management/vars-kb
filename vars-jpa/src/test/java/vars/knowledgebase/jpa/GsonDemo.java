@@ -3,18 +3,12 @@ package vars.knowledgebase.jpa;
 import com.google.gson.FieldNamingPolicy;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import com.google.inject.Guice;
-import com.google.inject.Injector;
 import vars.gson.AnnotatedFieldExclusionStrategy;
 import vars.gson.ConceptSerializer;
 import vars.gson.UnderscoreFieldExclusionStrategy;
-import vars.jpa.DevelopmentDAOFactory;
-import vars.jpa.VarsJpaModule;
 import vars.knowledgebase.ConceptDAO;
 import vars.knowledgebase.KnowledgebaseDAOFactory;
 import vars.knowledgebase.KnowledgebaseFactory;
-
-import java.util.Collection;
 
 /**
  * @author Brian Schlining
@@ -37,9 +31,9 @@ public class GsonDemo {
         Gson gson = gsonBuilder.create();
 
 
-        Injector injector = Guice.createInjector(new VarsJpaModule(DevelopmentDAOFactory.newEntityManagerFactory()));
-        KnowledgebaseDAOFactory daoFactory = injector.getInstance(KnowledgebaseDAOFactory.class);
-        KnowledgebaseFactory kbFactory = injector.getInstance(KnowledgebaseFactory.class);
+        Factories factories = new Factories(DerbyTestDAOFactory.newEntityManagerFactory());
+        KnowledgebaseDAOFactory daoFactory = factories.getKnowledgebaseDAOFactory();
+        KnowledgebaseFactory kbFactory = factories.getKnowledgebaseFactory();
 
         ConceptDAO dao = daoFactory.newConceptDAO();
         //ConceptImpl root = (ConceptImpl) dao.findRoot();

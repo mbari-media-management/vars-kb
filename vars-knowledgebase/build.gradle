@@ -1,0 +1,112 @@
+plugins {
+    id 'application'
+    id 'org.openjfx.javafxplugin'
+    id 'org.beryx.jlink'
+}
+
+dependencies {
+
+  compile project(':vars-core')
+  compile project(':vars-shared-ui')
+  compile project(':vars-jpa')
+
+  implementation 'com.google.guava:guava'
+  implementation 'com.google.inject:guice'
+  implementation 'com.rabbitmq:amqp-client'
+  implementation 'com.typesafe:config'
+  implementation 'foxtrot:foxtrot-core'
+  implementation 'org.bushe:eventbus'
+  implementation 'org.eclipse.persistence:javax.persistence'
+  implementation 'org.mbari:mbarix4j'
+  implementation 'org.mbari.m3:m3-corelib'
+  implementation 'org.slf4j:slf4j-api'
+  implementation 'org.swinglabs:swing-layout'
+  runtimeOnly 'ch.qos.logback:logback-classic'
+  runtimeOnly 'net.sourceforge.jtds:jtds'
+  runtimeOnly 'org.apache.derby:derby'
+  runtimeOnly 'org.apache.derby:derbyclient'
+  runtimeOnly 'org.apache.derby:derbynet'
+  runtimeOnly 'org.apache.derby:derbyshared'
+  runtimeOnly 'org.apache.derby:derbytools'
+  runtimeOnly 'org.postgresql:postgresql'
+}
+
+def runtimeJvmArgs = [
+        '-Xms1g'
+]
+
+def confEnvParams = [
+    "DATABASE_ENVIRONMENT",
+    "DATABASE_LOGLEVEL",
+    "ORG_MBARI_VARS_KNOWLEDGEBASE_PRODUCTION_DRIVER",
+    "ORG_MBARI_VARS_KNOWLEDGEBASE_PRODUCTION_PASSWORD",
+    "ORG_MBARI_VARS_KNOWLEDGEBASE_PRODUCTION_URL",
+    "ORG_MBARI_VARS_KNOWLEDGEBASE_PRODUCTION_USER",
+    "ORG_MBARI_VARS_KNOWLEDGEBASE_PRODUCTION_NAME"
+]
+confEnvParams.each { k ->
+    def v = System.getenv(k)
+    if (v) {
+        runtimeJvmArgs.add("-D${k}=${v}")
+    }
+}
+
+/* *****************************************************************************
+ Use the jlink plugin to build a dist with a JVM
+ */
+application {
+    mainClassName = "vars-knowledgebase/vars.knowledgebase.ui.App"
+    applicationDefaultJvmArgs = runtimeJvmArgs
+}
+
+
+jlink {
+    imageZip = file("$buildDir/image-zip/vars-knowledgebase.zip")
+    options = [
+            '--bind-services',
+            '--strip-debug',
+            '--compress', '2',
+            '--no-header-files',
+            '--no-man-pages',
+    ]
+
+    if(System.getenv("CI")) {
+        ["win", "linux", "mac"].each { name ->
+            targetPlatform(name) {
+                jdkHome = System.getenv("JDK_HOME_${name.toUpperCase()}")
+                addExtraModulePath(System.getenv("OPENJFX_MODS_${name.toUpperCase()}"))
+            }
+        }
+    }
+
+    launcher {
+        name = 'VARS Knowledgebase'
+        jvmArgs = runtimeJvmArgs
+    }
+
+    jpackage {
+        jpackageHome = System.getenv("JPACKAGE_HOME")
+
+        def customInstallerOptions = [
+                "--identifier", project.name,
+                "--copyright", "Monterey Bay Aquarium Research Institute",
+                "--vendor", "org.mbari"
+        ]
+
+        if  (org.gradle.internal.os.OperatingSystem.current().isLinux()) {
+            installerType = "deb"
+        }
+        else if (org.gradle.internal.os.OperatingSystem.current().isWindows()) {
+            installerType = "msi"
+        }
+        else {
+            installerType = "dmg"
+            customInstallerOptions.addAll([
+                    "--mac-bundle-name", "VARS Knowledgebase",
+            ])
+        }
+        installerOptions = customInstallerOptions
+
+    }
+
+}

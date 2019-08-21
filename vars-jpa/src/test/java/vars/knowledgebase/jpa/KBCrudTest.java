@@ -12,8 +12,6 @@
 
 package vars.knowledgebase.jpa;
 
-import com.google.inject.Guice;
-import com.google.inject.Injector;
 import java.util.ArrayList;
 import java.util.Collection;
 
@@ -29,7 +27,6 @@ import vars.jpa.DAO;
 import vars.jpa.EntityUtilities;
 import vars.jpa.JPAEntity;
 import vars.jpa.PrimaryKeyUtilities;
-import vars.jpa.VarsJpaTestModule;
 import vars.knowledgebase.Concept;
 import vars.knowledgebase.ConceptDAO;
 import vars.knowledgebase.ConceptMetadata;
@@ -56,11 +53,11 @@ public class KBCrudTest {
 
     @BeforeAll
     public void setup() {
-        Injector injector = Guice.createInjector(new VarsJpaTestModule());
+        Factories factories = new Factories(DerbyTestDAOFactory.newEntityManagerFactory());
 
-        kbFactory = injector.getInstance(KnowledgebaseFactory.class);
+        kbFactory = factories.getKnowledgebaseFactory();
         testObjectFactory = new KnowledgebaseTestObjectFactory(kbFactory);
-        daoFactory = injector.getInstance(KnowledgebaseDAOFactory.class);
+        daoFactory = factories.getKnowledgebaseDAOFactory();
         entityUtilities = new EntityUtilities();
 
         ConceptDAO dao = daoFactory.newConceptDAO();

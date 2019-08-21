@@ -1,6 +1,5 @@
 package vars.jpa;
 
-import com.google.common.collect.ImmutableMap;
 import com.typesafe.config.Config;
 import com.typesafe.config.ConfigFactory;
 
@@ -16,15 +15,16 @@ import java.util.Map;
 public class EntityManagerFactories {
 
     private static Config config = ConfigFactory.load();
-    private static final Map<String, String> productionProps = ImmutableMap.<String, String>builder()
-            .put("eclipselink.connection-pool.default.initial", "2")
-            .put("eclipselink.connection-pool.default.max", "16")
-            .put("eclipselink.connection-pool.default.min", "2")
-            .put("eclipselink.logging.session", "false")
-            .put("eclipselink.logging.thread", "false")
-            .put("eclipselink.logging.timestamp", "false")
-            .put("javax.persistence.schema-generation.database.action", "create")
-            .build();
+    private static final Map<String, String> productionProps = Map.of(
+            "eclipselink.connection-pool.default.initial", "2",
+            "eclipselink.connection-pool.default.max", "16",
+            "eclipselink.connection-pool.default.min", "2",
+            "eclipselink.logging.session", "false",
+            "eclipselink.logging.thread", "false",
+            "eclipselink.logging.timestamp", "false",
+            "javax.persistence.schema-generation.database.action", "create"
+    );
+
 
     public static EntityManagerFactory newEntityManagerFactory(String configNode) {
         String driver = config.getString(configNode + ".driver");

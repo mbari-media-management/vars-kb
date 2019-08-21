@@ -2,7 +2,6 @@ package vars.knowledgebase.jpa;
 
 import vars.knowledgebase.ConceptMetadataDAO;
 import vars.jpa.DAO;
-import com.google.inject.Inject;
 import javax.persistence.EntityManager;
 
 /**
@@ -14,7 +13,6 @@ import javax.persistence.EntityManager;
  */
 public class ConceptMetadataDAOImpl extends DAO implements ConceptMetadataDAO {
 
-    @Inject
     public ConceptMetadataDAOImpl(EntityManager entityManager) {
         super(entityManager);
     }

@@ -12,10 +12,7 @@
 
 package vars.knowledgebase.jpa;
 
-import com.google.inject.Guice;
-import com.google.inject.Injector;
 import java.util.Collection;
-import java.util.Iterator;
 
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
@@ -25,7 +22,6 @@ import org.junit.jupiter.api.TestInstance.Lifecycle;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import vars.jpa.EntityUtilities;
-import vars.jpa.VarsJpaTestModule;
 import vars.knowledgebase.Concept;
 import vars.knowledgebase.ConceptDAO;
 import vars.knowledgebase.KnowledgebaseDAOFactory;
@@ -92,10 +88,10 @@ public class MediaCrudTest {
 
     @BeforeAll
     public void setup() {
-        Injector injector = Guice.createInjector(new VarsJpaTestModule());
-        kbFactory = injector.getInstance(KnowledgebaseFactory.class);
+        Factories factories = new Factories(DerbyTestDAOFactory.newEntityManagerFactory());
+        kbFactory = factories.getKnowledgebaseFactory();
         testObjectFactory = new KnowledgebaseTestObjectFactory(kbFactory);
-        daoFactory = injector.getInstance(KnowledgebaseDAOFactory.class);
+        daoFactory = factories.getKnowledgebaseDAOFactory();
         entityUtilities = new EntityUtilities();
 
         ConceptDAO dao = daoFactory.newConceptDAO();

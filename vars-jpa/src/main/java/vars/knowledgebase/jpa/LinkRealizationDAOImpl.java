@@ -10,7 +10,6 @@ import java.util.Map;
 import java.util.HashMap;
 import java.util.Collection;
 
-import com.google.inject.Inject;
 import javax.persistence.EntityManager;
 
 /**
@@ -24,7 +23,6 @@ public class LinkRealizationDAOImpl extends DAO implements LinkRealizationDAO {
 
     private final ConceptDAO conceptDAO;
 
-    @Inject
     public LinkRealizationDAOImpl(EntityManager entityManager) {
         super(entityManager);
         this.conceptDAO = new ConceptDAOImpl(entityManager);

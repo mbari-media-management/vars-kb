@@ -1,0 +1,12 @@
+dependencies {
+
+  implementation 'com.typesafe:config'
+  implementation 'org.eclipse.persistence:org.eclipse.persistence.jpa'
+  implementation 'org.mbari:mbarix4j'
+
+//  implementation('org.mbari.m3:m3-corelib') {
+//    exclude group: 'org.glassfish.hk2.external', module: 'jakarta.inject'
+//    exclude group: 'jakarta.annotation', module: 'jakarta.annotation-api'
+//    because("Inject is duplicate in Guice")
+//  }
+}

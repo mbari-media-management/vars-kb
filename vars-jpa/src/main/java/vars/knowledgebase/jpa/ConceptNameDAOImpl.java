@@ -7,7 +7,6 @@ import vars.knowledgebase.ConceptName;
 import java.util.HashMap;
 import java.util.List;
 
-import com.google.inject.Inject;
 import java.util.Collection;
 import java.util.Map;
 import javax.persistence.EntityManager;
@@ -22,7 +21,6 @@ import javax.persistence.Query;
  */
 public class ConceptNameDAOImpl extends DAO implements ConceptNameDAO {
 
-    @Inject
     public ConceptNameDAOImpl(EntityManager entityManager) {
         super(entityManager);
     }

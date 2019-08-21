@@ -15,13 +15,12 @@
 
 package vars.knowledgebase.jpa;
 
-import com.google.common.base.Predicate;
-import com.google.common.collect.Collections2;
-import com.google.inject.Inject;
+
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.util.*;
+import java.util.stream.Collectors;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
 
@@ -53,7 +52,6 @@ public class LinkTemplateDAOImpl extends DAO implements LinkTemplateDAO {
      *
      * @param entityManager
      */
-    @Inject
     public LinkTemplateDAOImpl(EntityManager entityManager) {
         super(entityManager);
         this.conceptDAO = new ConceptDAOImpl(entityManager);
@@ -118,8 +116,10 @@ public class LinkTemplateDAOImpl extends DAO implements LinkTemplateDAO {
     public Collection<LinkTemplate> findAllByLinkName(final String linkName, Concept concept) {
 
         Collection<LinkTemplate> linkTemplates = findAllApplicableToConcept(concept);
-        return Collections2.filter(linkTemplates, linkTemplate ->
-                linkTemplate.getLinkName().equals(linkName));
+        return  linkTemplates.stream()
+                .filter(linkTemplate -> linkTemplate.getLinkName().equals(linkName))
+                .collect(Collectors.toList());
+
     }
 
     @Override
