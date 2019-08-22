@@ -9,8 +9,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import vars.testing.KnowledgebaseTestObjectFactory;
 import vars.jpa.EntityUtilities;
-import com.google.inject.Injector;
-import com.google.inject.Guice;
+
 
 import java.util.Collection;
 import vars.knowledgebase.Concept;

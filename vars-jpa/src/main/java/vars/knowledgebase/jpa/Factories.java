@@ -31,6 +31,15 @@ public class Factories {
         persistenceCache = new PersistenceCache(getPersistenceCacheProvider());
     }
 
+    public ToolBelt getToolBelt() {
+        return new ToolBelt(getKnowledgebaseDAOFactory(),
+                getKnowledgebaseFactory(),
+                getMiscDAOFactory(),
+                getMiscFactory(),
+                getPersistenceCacheProvider(),
+                getConceptCache());
+    }
+
 
     public EntityManagerFactory getEntityManagerFactory() {
         return entityManagerFactory;

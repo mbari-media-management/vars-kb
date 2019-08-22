@@ -4,18 +4,25 @@ plugins {
 
 dependencies {
   compile project(":vars-core")
+  compile project(":vars-jpa")
 
   implementation 'com.google.guava:guava'
   implementation 'com.google.inject:guice'
   implementation 'com.typesafe:config'
+  implementation 'foxtrot:foxtrot-core'
+  implementation 'io.reactivex.rxjava2:rxjava'
+  implementation 'org.apache.commons:commons-email'
+  implementation 'org.bushe:eventbus'
   implementation 'org.eclipse.persistence:org.eclipse.persistence.jpa'
+  implementation 'org.mbari.m3:org.mbari.vars.services'
   implementation 'org.mbari:mbarix4j'
-  implementation 'org.mbari.m3:m3-corelib'
   implementation 'org.slf4j:slf4j-api'
+  implementation 'org.swinglabs.swingx:swingx-all'
+  implementation 'org.swinglabs:swing-layout'
 }
 
 javafx {
-    version = "11.0.2"
+    version = javafxVersion
     modules = [
             'javafx.base',
             'javafx.controls'

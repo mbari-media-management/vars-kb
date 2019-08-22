@@ -15,9 +15,7 @@
 
 package vars.knowledgebase.ui;
 
-import com.google.inject.Inject;
 import com.typesafe.config.Config;
-import com.typesafe.config.ConfigFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import vars.MiscDAOFactory;
@@ -32,10 +30,7 @@ import vars.knowledgebase.ui.actions.RejectHistoryTask;
 import vars.knowledgebase.ui.annotation.AnnotationService;
 import vars.shared.rx.EventBus;
 
-import java.io.IOException;
-import java.nio.file.Files;
 import java.nio.file.Path;
-import java.nio.file.Paths;
 
 /**
  * Container that holds on to a ton of shared objects that need to be widely
@@ -62,7 +57,6 @@ public class ToolBelt extends vars.ToolBelt {
      * @param persistenceCacheProvider
      * @param conceptCache
      */
-    @Inject
     public ToolBelt(KnowledgebaseDAOFactory knowledgebaseDAOFactory, KnowledgebaseFactory knowledgebaseFactory,
                     MiscDAOFactory miscDAOFactory, MiscFactory miscFactory,
                     PersistenceCacheProvider persistenceCacheProvider,

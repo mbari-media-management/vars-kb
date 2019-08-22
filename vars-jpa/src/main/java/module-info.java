@@ -1,12 +1,17 @@
 module vars.jpa {
-  requires java.persistence;
-  requires gson;
   requires gson.javatime.serialisers;
-  requires vars.core;
+  requires gson;
+  requires jasypt;
+  requires java.persistence;
+  requires java.prefs;
+  requires java.sql;
+  requires mbarix4j;
   requires slf4j.api;
   requires typesafe.config;
-  requires java.sql;
-  requires jasypt;
-  requires java.prefs;
-  requires mbarix4j;
+  requires vars.core;
+
+  exports vars.gson;
+  exports vars.jpa;
+  exports vars.knowledgebase.jpa;
+
 }

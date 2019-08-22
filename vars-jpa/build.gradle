@@ -2,16 +2,16 @@ dependencies {
 
   compile project(':vars-core')
 
+  implementation 'com.fatboyindustrial.gson-javatime-serialisers:gson-javatime-serialisers'
   implementation 'com.google.code.gson:gson'
   implementation 'com.google.guava:guava'
   implementation 'com.sun.xml.bind:jaxb-core'
   implementation 'com.sun.xml.bind:jaxb-impl'
   implementation 'com.typesafe:config'
-//  implementation 'javax.transaction:jta'
   implementation 'org.eclipse.persistence:org.eclipse.persistence.jpa'
   implementation 'org.jasypt:jasypt'
+  implementation 'org.mbari.m3:org.mbari.vars.services'
   implementation 'org.mbari:mbarix4j'
-  implementation 'org.mbari.m3:m3-corelib'
   implementation 'org.slf4j:slf4j-api'
   testRuntimeOnly 'com.h2database:h2'
   testRuntimeOnly 'net.sourceforge.jtds:jtds'
@@ -32,7 +32,7 @@ task performJPAWeaving(type: JavaExec, dependsOn: "compileJava"){
         "src/main/resources",
         compileJava.destinationDir.getAbsolutePath(),
         compileJava.destinationDir.getAbsolutePath()
-  classpath = configurations.compile
+  classpath += sourceSets.main.runtimeClasspath
 }
 
 tasks.withType(Jar){

@@ -1,15 +1,16 @@
 package vars.knowledgebase.ui.annotation;
 
 import com.typesafe.config.Config;
-import org.mbari.m3.corelib.Initializer;
-import org.mbari.m3.corelib.model.Authorization;
-import org.mbari.m3.corelib.model.ConceptCount;
-import org.mbari.m3.corelib.model.ConceptsRenamed;
-import org.mbari.m3.corelib.services.AuthService;
-import org.mbari.m3.corelib.services.BasicJWTAuthService;
-import org.mbari.m3.corelib.services.annosaurus.v1.AnnoService;
-import org.mbari.m3.corelib.services.annosaurus.v1.AnnoWebServiceFactory;
-import org.mbari.m3.corelib.util.AsyncUtils;
+import org.mbari.vars.core.util.AsyncUtils;
+import org.mbari.vars.services.AuthService;
+import org.mbari.vars.services.BasicJWTAuthService;
+import org.mbari.vars.services.impl.annosaurus.v1.AnnoService;
+import org.mbari.vars.services.impl.annosaurus.v1.AnnoWebServiceFactory;
+import org.mbari.vars.services.model.Authorization;
+import org.mbari.vars.services.model.ConceptCount;
+import org.mbari.vars.services.model.ConceptsRenamed;
+import vars.knowledgebase.ui.Initializer;
+
 
 import java.time.Duration;
 import java.util.Collection;
@@ -23,7 +24,7 @@ import java.util.function.Function;
  */
 public class AnnosaurusService implements AnnotationService {
 
-    private final org.mbari.m3.corelib.services.AnnotationService annotationService;
+    private final org.mbari.vars.services.AnnotationService annotationService;
 
     public AnnosaurusService() {
 
