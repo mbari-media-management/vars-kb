@@ -16,7 +16,7 @@ String[] modules = [
   'org.mbari.kb.core',
   'org.mbari.kb.jpa',
   'org.mbari.kb.shared',
-  'vars-knowledgebase'
+  'org.mbari.kb.ui'
 ]
 
 include modules
