@@ -31,10 +31,10 @@ import org.mbari.kb.core.knowledgebase.Concept;
 import org.mbari.kb.core.knowledgebase.History;
 import org.mbari.kb.core.knowledgebase.HistoryFactory;
 import vars.knowledgebase.ui.dialogs.AddConceptDialog;
-import vars.shared.ui.ILockableEditor;
-import vars.shared.ui.tree.ConceptTreeModel;
-import vars.shared.ui.tree.ConceptTreeNode;
-import vars.shared.ui.tree.ConceptTreePopupMenu;
+import org.mbari.kb.shared.ui.ILockableEditor;
+import org.mbari.kb.shared.ui.tree.ConceptTreeModel;
+import org.mbari.kb.shared.ui.tree.ConceptTreeNode;
+import org.mbari.kb.shared.ui.tree.ConceptTreePopupMenu;
 
 /**
  *

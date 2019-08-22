@@ -43,10 +43,10 @@ import org.mbari.kb.core.knowledgebase.LinkTemplate;
 import org.mbari.kb.core.knowledgebase.SimpleConceptBean;
 import org.mbari.kb.core.knowledgebase.SimpleConceptNameBean;
 import vars.knowledgebase.ui.StateLookup;
-import vars.shared.ui.ILockableEditor;
+import org.mbari.kb.shared.ui.ILockableEditor;
 import vars.knowledgebase.ui.ToolBelt;
-import vars.shared.ui.HierachicalConceptNameComboBox;
-import vars.shared.ui.OkCancelButtonPanel;
+import org.mbari.kb.shared.ui.HierachicalConceptNameComboBox;
+import org.mbari.kb.shared.ui.OkCancelButtonPanel;
 
 /**
  * @author brian

@@ -15,8 +15,8 @@
 package vars.knowledgebase.ui;
 
 import org.mbari.text.ObjectToStringConverter;
-import vars.shared.ui.FullLinkListCellRender;
-import vars.shared.ui.ILockableEditor;
+import org.mbari.kb.shared.ui.FullLinkListCellRender;
+import org.mbari.kb.shared.ui.ILockableEditor;
 import foxtrot.Job;
 import foxtrot.Worker;
 import java.awt.event.ActionEvent;
@@ -42,7 +42,7 @@ import org.mbari.kb.core.knowledgebase.KnowledgebaseFactory;
 import org.mbari.kb.core.knowledgebase.LinkTemplateDAO;
 import org.mbari.kb.core.knowledgebase.SimpleConceptBean;
 import org.mbari.kb.core.knowledgebase.SimpleConceptNameBean;
-import vars.shared.ui.AllConceptNamesComboBox;
+import org.mbari.kb.shared.ui.AllConceptNamesComboBox;
 
 /**
  *

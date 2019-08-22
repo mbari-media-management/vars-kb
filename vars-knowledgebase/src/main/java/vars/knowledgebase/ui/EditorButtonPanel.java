@@ -9,7 +9,7 @@ package vars.knowledgebase.ui;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
-import vars.shared.ui.FancyButton;
+import org.mbari.kb.shared.ui.FancyButton;
 
 
 /**

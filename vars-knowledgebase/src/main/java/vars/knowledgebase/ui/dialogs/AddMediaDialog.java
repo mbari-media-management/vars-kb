@@ -47,7 +47,7 @@ import org.mbari.kb.core.knowledgebase.MediaTypes;
 import vars.knowledgebase.ui.MediaViewPanel;
 import vars.knowledgebase.ui.StateLookup;
 import vars.knowledgebase.ui.ToolBelt;
-import vars.shared.ui.OkCancelButtonPanel;
+import org.mbari.kb.shared.ui.OkCancelButtonPanel;
 
 /**
  * Class description

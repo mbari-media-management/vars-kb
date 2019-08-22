@@ -23,7 +23,7 @@ import org.slf4j.LoggerFactory;
 import org.mbari.kb.core.PersistenceCache;
 import org.mbari.kb.core.knowledgebase.Concept;
 import org.mbari.kb.core.knowledgebase.ConceptDAO;
-import vars.shared.ui.tree.ConceptTreePanel;
+import org.mbari.kb.shared.ui.tree.ConceptTreePanel;
 
 /**
  *

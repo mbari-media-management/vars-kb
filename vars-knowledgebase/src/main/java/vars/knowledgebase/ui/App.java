@@ -35,10 +35,10 @@ import org.slf4j.LoggerFactory;
 import org.mbari.kb.core.knowledgebase.Concept;
 import org.mbari.kb.core.knowledgebase.ConceptDAO;
 import vars.knowledgebase.ui.actions.PopulateDatabaseAction;
-import vars.shared.ui.event.ExitTopicSubscriber;
-import vars.shared.ui.event.FatalExceptionSubscriber;
-import vars.shared.ui.event.NonFatalErrorSubscriber;
-import vars.shared.ui.event.WarningSubscriber;
+import org.mbari.kb.shared.ui.event.ExitTopicSubscriber;
+import org.mbari.kb.shared.ui.event.FatalExceptionSubscriber;
+import org.mbari.kb.shared.ui.event.NonFatalErrorSubscriber;
+import org.mbari.kb.shared.ui.event.WarningSubscriber;
 
 /**
  *

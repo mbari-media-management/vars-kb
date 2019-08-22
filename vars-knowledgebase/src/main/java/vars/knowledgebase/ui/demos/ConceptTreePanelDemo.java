@@ -19,9 +19,9 @@ import javax.swing.JFrame;
 import org.jdesktop.swingx.JXTree;
 import vars.knowledgebase.ui.StateLookup;
 import vars.knowledgebase.ui.ToolBelt;
-import vars.shared.ui.tree.ConceptTreeCellRenderer;
-import vars.shared.ui.tree.ConceptTreeModel;
-import vars.shared.ui.tree.ConceptTreePanel;
+import org.mbari.kb.shared.ui.tree.ConceptTreeCellRenderer;
+import org.mbari.kb.shared.ui.tree.ConceptTreeModel;
+import org.mbari.kb.shared.ui.tree.ConceptTreePanel;
 
 /**
  *

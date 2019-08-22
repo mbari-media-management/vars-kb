@@ -15,7 +15,7 @@ rootProject.name = 'vars-query'
 String[] modules = [
   'org.mbari.kb.core',
   'org.mbari.kb.jpa',
-  'vars-shared-ui',
+  'org.mbari.kb.shared',
   'vars-knowledgebase'
 ]
 

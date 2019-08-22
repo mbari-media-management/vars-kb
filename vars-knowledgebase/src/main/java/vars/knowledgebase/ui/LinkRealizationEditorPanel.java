@@ -60,8 +60,8 @@ import org.mbari.kb.core.knowledgebase.SimpleConceptBean;
 import org.mbari.kb.core.knowledgebase.SimpleConceptNameBean;
 import vars.knowledgebase.ui.dialogs.AddLinkRealizationDialog;
 //import vars.knowledgebase.ui.dialogs.LinkEditorDialog;
-import vars.shared.ui.HierachicalConceptNameComboBox;
-import vars.shared.ui.LinkListCellRenderer;
+import org.mbari.kb.shared.ui.HierachicalConceptNameComboBox;
+import org.mbari.kb.shared.ui.LinkListCellRenderer;
 
 /**
  * Class description

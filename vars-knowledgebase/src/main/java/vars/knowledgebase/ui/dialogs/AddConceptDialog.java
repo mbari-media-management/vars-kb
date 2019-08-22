@@ -36,9 +36,9 @@ import org.mbari.kb.core.knowledgebase.HistoryFactory;
 import org.mbari.kb.core.knowledgebase.KnowledgebaseFactory;
 import vars.knowledgebase.ui.StateLookup;
 import vars.knowledgebase.ui.ToolBelt;
-import vars.shared.ui.AllConceptNamesComboBox;
-import vars.shared.ui.FancyButton;
-import vars.shared.ui.GlobalStateLookup;
+import org.mbari.kb.shared.ui.AllConceptNamesComboBox;
+import org.mbari.kb.shared.ui.FancyButton;
+import org.mbari.kb.shared.ui.GlobalStateLookup;
 
 /**
  * @author brian

@@ -24,7 +24,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import org.mbari.kb.core.knowledgebase.Concept;
 import org.mbari.kb.core.UserAccount;
-import vars.shared.ui.FancyButton;
+import org.mbari.kb.shared.ui.FancyButton;
 
 
 /**

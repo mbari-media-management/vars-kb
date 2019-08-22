@@ -47,7 +47,7 @@ import org.mbari.kb.core.UserAccount;
 import org.mbari.kb.core.knowledgebase.Concept;
 import org.mbari.kb.core.knowledgebase.ConceptName;
 import org.mbari.kb.core.knowledgebase.ConceptNameTypes;
-import vars.shared.ui.ILockableEditor;
+import org.mbari.kb.shared.ui.ILockableEditor;
 
 /**
  *

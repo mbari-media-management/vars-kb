@@ -28,7 +28,7 @@ import org.mbari.kb.core.knowledgebase.ConceptNameTypes;
 import org.mbari.kb.core.knowledgebase.KnowledgebaseFactory;
 import vars.knowledgebase.ui.StateLookup;
 import vars.knowledgebase.ui.ToolBelt;
-import vars.shared.ui.dialogs.CreateUserAccountDialog;
+import org.mbari.kb.shared.ui.dialogs.CreateUserAccountDialog;
 
 
 /**

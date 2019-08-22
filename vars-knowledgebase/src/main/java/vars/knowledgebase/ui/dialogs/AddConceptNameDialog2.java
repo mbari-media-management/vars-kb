@@ -40,7 +40,7 @@ import org.mbari.kb.core.knowledgebase.KnowledgebaseFactory;
 import vars.knowledgebase.ui.StateLookup;
 import vars.knowledgebase.ui.ToolBelt;
 import vars.knowledgebase.ui.actions.ApproveHistoryTask;
-import vars.shared.ui.FancyButton;
+import org.mbari.kb.shared.ui.FancyButton;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.LayoutStyle.ComponentPlacement;
 

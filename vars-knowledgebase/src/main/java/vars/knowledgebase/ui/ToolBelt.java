@@ -28,7 +28,7 @@ import org.mbari.kb.core.knowledgebase.KnowledgebaseFactory;
 import vars.knowledgebase.ui.actions.ApproveHistoryTask;
 import vars.knowledgebase.ui.actions.RejectHistoryTask;
 import vars.knowledgebase.ui.annotation.AnnotationService;
-import vars.shared.rx.EventBus;
+import org.mbari.kb.shared.rx.EventBus;
 
 import java.nio.file.Path;
 

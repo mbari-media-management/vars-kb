@@ -48,7 +48,7 @@ import org.mbari.kb.core.knowledgebase.History;
 import org.mbari.kb.core.knowledgebase.Media;
 import org.mbari.kb.core.knowledgebase.MediaTypes;
 import vars.knowledgebase.ui.dialogs.AddMediaDialog;
-import vars.shared.ui.ILockableEditor;
+import org.mbari.kb.shared.ui.ILockableEditor;
 
 /**
  * Class description

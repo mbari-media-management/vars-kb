@@ -45,13 +45,13 @@ import org.mbari.kb.core.CacheClearedEvent;
 import org.mbari.kb.core.CacheClearedListener;
 import org.mbari.kb.core.knowledgebase.Concept;
 
-import vars.shared.ui.ILockableEditor;
-import vars.shared.ui.dialogs.AdministorUserAccountDialog;
-import vars.shared.ui.dialogs.LoginAction;
-import vars.shared.ui.tree.ConceptTreeCellRenderer;
-import vars.shared.ui.tree.ConceptTreeModel;
-import vars.shared.ui.tree.ConceptTreeNode;
-import vars.shared.ui.tree.ConceptTreePanel;
+import org.mbari.kb.shared.ui.ILockableEditor;
+import org.mbari.kb.shared.ui.dialogs.AdministorUserAccountDialog;
+import org.mbari.kb.shared.ui.dialogs.LoginAction;
+import org.mbari.kb.shared.ui.tree.ConceptTreeCellRenderer;
+import org.mbari.kb.shared.ui.tree.ConceptTreeModel;
+import org.mbari.kb.shared.ui.tree.ConceptTreeNode;
+import org.mbari.kb.shared.ui.tree.ConceptTreePanel;
 
 /**
  *

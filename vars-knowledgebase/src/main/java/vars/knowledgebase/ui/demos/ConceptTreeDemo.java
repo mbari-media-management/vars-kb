@@ -14,8 +14,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import vars.knowledgebase.ui.StateLookup;
 import vars.knowledgebase.ui.ToolBelt;
-import vars.shared.ui.tree.ConceptTreeCellRenderer;
-import vars.shared.ui.tree.ConceptTreeModel;
+import org.mbari.kb.shared.ui.tree.ConceptTreeCellRenderer;
+import org.mbari.kb.shared.ui.tree.ConceptTreeModel;
 
 /**
  *

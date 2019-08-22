@@ -37,7 +37,7 @@ import vars.knowledgebase.ui.LinkEditorPanel;
 import vars.knowledgebase.ui.StateLookup;
 import vars.knowledgebase.ui.ToolBelt;
 import vars.knowledgebase.ui.actions.ApproveHistoryTask;
-import vars.shared.ui.OkCancelButtonPanel;
+import org.mbari.kb.shared.ui.OkCancelButtonPanel;
 
 /**
  * @version

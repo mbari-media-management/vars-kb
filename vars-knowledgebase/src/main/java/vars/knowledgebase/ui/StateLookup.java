@@ -9,7 +9,7 @@ import org.bushe.swing.event.EventBus;
 import org.bushe.swing.event.EventTopicSubscriber;
 import org.mbari.swing.ProgressDialog;
 import org.mbari.kb.core.knowledgebase.Concept;
-import vars.shared.ui.GlobalStateLookup;
+import org.mbari.kb.shared.ui.GlobalStateLookup;
 
 import javax.swing.JTree;
 import java.awt.Frame;

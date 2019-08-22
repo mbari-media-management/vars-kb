@@ -43,8 +43,8 @@ import org.mbari.kb.core.knowledgebase.Concept;
 import org.mbari.kb.core.knowledgebase.History;
 import vars.knowledgebase.ui.actions.ApproveHistoryTask;
 import vars.knowledgebase.ui.actions.RejectHistoryTask;
-import vars.shared.ui.ILockableEditor;
-import vars.shared.ui.OkCancelButtonPanel;
+import org.mbari.kb.shared.ui.ILockableEditor;
+import org.mbari.kb.shared.ui.OkCancelButtonPanel;
 
 /**
  * <p><!-- Class description --></p>
