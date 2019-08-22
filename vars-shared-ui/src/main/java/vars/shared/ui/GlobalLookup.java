@@ -16,7 +16,7 @@ import java.util.TimeZone;
 import org.bushe.swing.event.EventBus;
 import org.bushe.swing.event.EventTopicSubscriber;
 import org.mbari.util.Dispatcher;
-import vars.UserAccount;
+import org.mbari.kb.core.UserAccount;
 import vars.shared.ui.event.LoggingTopicSubscriber;
 
 /**

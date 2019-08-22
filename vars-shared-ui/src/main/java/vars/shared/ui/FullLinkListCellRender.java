@@ -5,8 +5,8 @@ import java.awt.Component;
 import javax.swing.DefaultListCellRenderer;
 import javax.swing.JList;
 
-import vars.ILink;
-import vars.LinkUtilities;
+import org.mbari.kb.core.ILink;
+import org.mbari.kb.core.LinkUtilities;
 
 public class FullLinkListCellRender extends DefaultListCellRenderer {
 

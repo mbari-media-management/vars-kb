@@ -16,16 +16,16 @@ import javax.swing.JOptionPane;
 
 import org.mbari.awt.event.ActionAdapter;
 
-import vars.MiscFactory;
-import vars.UserAccount;
-import vars.UserAccountDAO;
-import vars.UserAccountRoles;
-import vars.VARSPersistenceException;
-import vars.knowledgebase.Concept;
-import vars.knowledgebase.ConceptDAO;
-import vars.knowledgebase.ConceptName;
-import vars.knowledgebase.ConceptNameTypes;
-import vars.knowledgebase.KnowledgebaseFactory;
+import org.mbari.kb.core.MiscFactory;
+import org.mbari.kb.core.UserAccount;
+import org.mbari.kb.core.UserAccountDAO;
+import org.mbari.kb.core.UserAccountRoles;
+import org.mbari.kb.core.VARSPersistenceException;
+import org.mbari.kb.core.knowledgebase.Concept;
+import org.mbari.kb.core.knowledgebase.ConceptDAO;
+import org.mbari.kb.core.knowledgebase.ConceptName;
+import org.mbari.kb.core.knowledgebase.ConceptNameTypes;
+import org.mbari.kb.core.knowledgebase.KnowledgebaseFactory;
 import vars.knowledgebase.ui.StateLookup;
 import vars.knowledgebase.ui.ToolBelt;
 import vars.shared.ui.dialogs.CreateUserAccountDialog;

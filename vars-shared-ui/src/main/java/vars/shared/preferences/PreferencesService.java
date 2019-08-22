@@ -28,7 +28,7 @@ import java.util.prefs.PreferencesFactory;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import vars.VARSException;
+import org.mbari.kb.core.VARSException;
 import vars.shared.awt.AWTUtilities;
 import vars.shared.ui.GlobalStateLookup;
 

@@ -16,12 +16,12 @@
 package vars.shared.ui.dialogs;
 
 import org.bushe.swing.event.EventBus;
-import vars.MiscDAOFactory;
-import vars.ToolBelt;
-import vars.UserAccount;
-import vars.UserAccountDAO;
-import vars.jpa.DevelopmentDAOFactory;
-import vars.knowledgebase.jpa.Factories;
+import org.mbari.kb.core.MiscDAOFactory;
+import org.mbari.kb.core.ToolBelt;
+import org.mbari.kb.core.UserAccount;
+import org.mbari.kb.core.UserAccountDAO;
+import org.mbari.kb.jpa.DevelopmentDAOFactory;
+import org.mbari.kb.jpa.knowledgebase.Factories;
 import vars.shared.ui.GlobalStateLookup;
 
 import java.awt.Frame;

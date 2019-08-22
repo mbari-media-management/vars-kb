@@ -18,9 +18,9 @@ package vars.knowledgebase.ui;
 import java.util.Collection;
 import org.bushe.swing.event.EventBus;
 import org.bushe.swing.event.EventTopicSubscriber;
-import vars.UserAccount;
-import vars.knowledgebase.Concept;
-import vars.knowledgebase.History;
+import org.mbari.kb.core.UserAccount;
+import org.mbari.kb.core.knowledgebase.Concept;
+import org.mbari.kb.core.knowledgebase.History;
 import vars.knowledgebase.ui.actions.ApproveHistoryTask;
 
 /**

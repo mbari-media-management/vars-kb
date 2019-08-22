@@ -6,8 +6,8 @@ module vars.shared.ui {
   requires javafx.controls;
   requires javafx.graphics;
   requires slf4j.api;
-  requires vars.core;
-  requires vars.jpa;
+  requires org.mbari.kb.core;
+  requires org.mbari.kb.jpa;
 
   exports vars.shared.awt;
   exports vars.shared.javafx.application;

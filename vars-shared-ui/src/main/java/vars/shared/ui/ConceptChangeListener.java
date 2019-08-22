@@ -17,8 +17,8 @@
 
 package vars.shared.ui; 
 
-import vars.knowledgebase.Concept;
-import vars.knowledgebase.ConceptName;
+import org.mbari.kb.core.knowledgebase.Concept;
+import org.mbari.kb.core.knowledgebase.ConceptName;
 
 //~--- interfaces -------------------------------------------------------------
 

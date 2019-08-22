@@ -4,10 +4,10 @@ import org.bushe.swing.event.EventBus;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import vars.DAO;
-import vars.UserAccount;
-import vars.knowledgebase.ConceptMetadata;
-import vars.knowledgebase.History;
+import org.mbari.kb.core.DAO;
+import org.mbari.kb.core.UserAccount;
+import org.mbari.kb.core.knowledgebase.ConceptMetadata;
+import org.mbari.kb.core.knowledgebase.History;
 import vars.knowledgebase.ui.StateLookup;
 
 public abstract class AbstractHistoryTask {

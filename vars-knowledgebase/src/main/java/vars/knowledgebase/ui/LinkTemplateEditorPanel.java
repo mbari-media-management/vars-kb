@@ -24,15 +24,15 @@ import java.util.Collection;
 import javax.swing.BorderFactory;
 import org.bushe.swing.event.EventBus;
 import org.mbari.awt.event.ActionAdapter;
+import org.mbari.kb.core.knowledgebase.*;
 import org.mbari.swing.SpinningDialWaitIndicator;
 import org.mbari.swing.WaitIndicator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import vars.DAO;
-import vars.ILink;
-import vars.LinkBean;
-import vars.UserAccount;
-import vars.knowledgebase.*;
+import org.mbari.kb.core.DAO;
+import org.mbari.kb.core.ILink;
+import org.mbari.kb.core.LinkBean;
+import org.mbari.kb.core.UserAccount;
 import vars.knowledgebase.ui.dialogs.AddLinkTemplateDialog;
 
 /**

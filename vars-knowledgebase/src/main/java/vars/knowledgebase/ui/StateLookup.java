@@ -8,7 +8,7 @@ import javafx.beans.property.SimpleObjectProperty;
 import org.bushe.swing.event.EventBus;
 import org.bushe.swing.event.EventTopicSubscriber;
 import org.mbari.swing.ProgressDialog;
-import vars.knowledgebase.Concept;
+import org.mbari.kb.core.knowledgebase.Concept;
 import vars.shared.ui.GlobalStateLookup;
 
 import javax.swing.JTree;

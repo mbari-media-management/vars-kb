@@ -31,17 +31,17 @@ import javax.swing.JTextField;
 import org.mbari.swing.SearchableComboBoxModel;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import vars.ILink;
-import vars.LinkBean;
-import vars.LinkComparator;
-import vars.knowledgebase.Concept;
-import vars.knowledgebase.ConceptDAO;
-import vars.knowledgebase.ConceptName;
-import vars.knowledgebase.ConceptNameTypes;
-import vars.knowledgebase.KnowledgebaseFactory;
-import vars.knowledgebase.LinkTemplateDAO;
-import vars.knowledgebase.SimpleConceptBean;
-import vars.knowledgebase.SimpleConceptNameBean;
+import org.mbari.kb.core.ILink;
+import org.mbari.kb.core.LinkBean;
+import org.mbari.kb.core.LinkComparator;
+import org.mbari.kb.core.knowledgebase.Concept;
+import org.mbari.kb.core.knowledgebase.ConceptDAO;
+import org.mbari.kb.core.knowledgebase.ConceptName;
+import org.mbari.kb.core.knowledgebase.ConceptNameTypes;
+import org.mbari.kb.core.knowledgebase.KnowledgebaseFactory;
+import org.mbari.kb.core.knowledgebase.LinkTemplateDAO;
+import org.mbari.kb.core.knowledgebase.SimpleConceptBean;
+import org.mbari.kb.core.knowledgebase.SimpleConceptNameBean;
 import vars.shared.ui.AllConceptNamesComboBox;
 
 /**

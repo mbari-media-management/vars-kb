@@ -9,8 +9,8 @@ import javax.swing.JTextField;
 import javax.swing.LayoutStyle.ComponentPlacement;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import vars.UserAccount;
-import vars.UserAccountRoles;
+import org.mbari.kb.core.UserAccount;
+import org.mbari.kb.core.UserAccountRoles;
 import javax.swing.JComboBox;
 
 public class UserAccountPreferencesPanel extends JPanel {

@@ -43,10 +43,10 @@ import org.mbari.swing.ListListModel;
 import org.mbari.text.IgnoreCaseToStringComparator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import vars.UserAccount;
-import vars.knowledgebase.Concept;
-import vars.knowledgebase.ConceptName;
-import vars.knowledgebase.ConceptNameTypes;
+import org.mbari.kb.core.UserAccount;
+import org.mbari.kb.core.knowledgebase.Concept;
+import org.mbari.kb.core.knowledgebase.ConceptName;
+import org.mbari.kb.core.knowledgebase.ConceptNameTypes;
 import vars.shared.ui.ILockableEditor;
 
 /**

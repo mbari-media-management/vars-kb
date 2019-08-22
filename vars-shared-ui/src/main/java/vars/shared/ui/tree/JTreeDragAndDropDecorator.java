@@ -21,7 +21,7 @@ import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.TreePath;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import vars.knowledgebase.Concept;
+import org.mbari.kb.core.knowledgebase.Concept;
 import vars.shared.ui.StringTransferable;
 import vars.shared.ui.UIDecorator;
 

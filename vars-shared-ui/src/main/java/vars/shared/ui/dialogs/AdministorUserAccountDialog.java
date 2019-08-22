@@ -16,9 +16,9 @@
 package vars.shared.ui.dialogs;
 
 import org.bushe.swing.event.EventBus;
-import vars.MiscDAOFactory;
-import vars.UserAccount;
-import vars.UserAccountDAO;
+import org.mbari.kb.core.MiscDAOFactory;
+import org.mbari.kb.core.UserAccount;
+import org.mbari.kb.core.UserAccountDAO;
 import vars.shared.ui.GlobalStateLookup;
 import vars.shared.ui.UserAccountComboBox;
 import vars.shared.ui.UserAccountPreferencesPanel;

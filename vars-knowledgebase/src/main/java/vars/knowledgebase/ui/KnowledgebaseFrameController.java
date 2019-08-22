@@ -20,9 +20,9 @@ import org.mbari.swing.LabeledSpinningDialWaitIndicator;
 import org.mbari.swing.WaitIndicator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import vars.PersistenceCache;
-import vars.knowledgebase.Concept;
-import vars.knowledgebase.ConceptDAO;
+import org.mbari.kb.core.PersistenceCache;
+import org.mbari.kb.core.knowledgebase.Concept;
+import org.mbari.kb.core.knowledgebase.ConceptDAO;
 import vars.shared.ui.tree.ConceptTreePanel;
 
 /**

@@ -1,7 +1,0 @@
-dependencies {
-
-  implementation 'com.typesafe:config'
-  implementation 'org.eclipse.persistence:org.eclipse.persistence.jpa'
-  implementation 'org.mbari:mbarix4j'
-
-}

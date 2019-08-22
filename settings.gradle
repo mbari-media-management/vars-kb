@@ -13,8 +13,8 @@ pluginManagement {
 rootProject.name = 'vars-query'
 
 String[] modules = [
-  'vars-core',
-  'vars-jpa',
+  'org.mbari.kb.core',
+  'org.mbari.kb.jpa',
   'vars-shared-ui',
   'vars-knowledgebase'
 ]

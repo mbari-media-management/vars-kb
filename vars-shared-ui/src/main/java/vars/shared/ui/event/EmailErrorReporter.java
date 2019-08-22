@@ -8,7 +8,7 @@ import org.jdesktop.swingx.error.ErrorReporter;
 import org.mbari.awt.AwtUtilities;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import vars.UserAccount;
+import org.mbari.kb.core.UserAccount;
 import vars.shared.ui.GlobalStateLookup;
 
 import java.awt.*;

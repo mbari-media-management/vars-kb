@@ -25,7 +25,7 @@ import java.awt.event.FocusEvent;
 import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import vars.knowledgebase.ConceptCache;
+import org.mbari.kb.core.knowledgebase.ConceptCache;
 
 import javax.inject.Inject;
 

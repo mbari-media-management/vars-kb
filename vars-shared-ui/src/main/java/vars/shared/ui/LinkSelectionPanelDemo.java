@@ -4,10 +4,10 @@ import java.awt.BorderLayout;
 import java.awt.event.ActionListener;
 import java.util.List;
 
-import vars.ILink;
-import vars.jpa.DevelopmentDAOFactory;
-import vars.knowledgebase.ConceptCache;
-import vars.knowledgebase.jpa.Factories;
+import org.mbari.kb.core.ILink;
+import org.mbari.kb.jpa.DevelopmentDAOFactory;
+import org.mbari.kb.core.knowledgebase.ConceptCache;
+import org.mbari.kb.jpa.knowledgebase.Factories;
 import vars.shared.ui.dialogs.StandardDialog;
 
 public class LinkSelectionPanelDemo {

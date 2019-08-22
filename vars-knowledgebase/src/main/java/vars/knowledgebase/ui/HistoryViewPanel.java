@@ -23,7 +23,7 @@ import java.util.Date;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
-import vars.knowledgebase.History;
+import org.mbari.kb.core.knowledgebase.History;
 
 /**
  * @version        $date$, 2009.10.27 at 11:32:46 PDT

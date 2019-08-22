@@ -23,8 +23,8 @@ import java.util.Collection;
 import org.mbari.swing.FancyComboBox;
 import org.mbari.swing.SortedComboBoxModel;
 import org.mbari.text.IgnoreCaseToStringComparator;
-import vars.knowledgebase.Concept;
-import vars.knowledgebase.ConceptName;
+import org.mbari.kb.core.knowledgebase.Concept;
+import org.mbari.kb.core.knowledgebase.ConceptName;
 
 /**
  * A <code>ConceptNameComboBox</code> displays all the current

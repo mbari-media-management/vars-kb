@@ -39,12 +39,12 @@ import org.mbari.swing.SearchableComboBoxModel;
 import org.mbari.swing.SortedComboBoxModel;
 import org.mbari.swing.WaitIndicator;
 import org.mbari.text.ObjectToStringConverter;
-import vars.ILink;
-import vars.LinkBean;
-import vars.LinkComparator;
-import vars.LinkUtilities;
-import vars.knowledgebase.Concept;
-import vars.knowledgebase.ConceptCache;
+import org.mbari.kb.core.ILink;
+import org.mbari.kb.core.LinkBean;
+import org.mbari.kb.core.LinkComparator;
+import org.mbari.kb.core.LinkUtilities;
+import org.mbari.kb.core.knowledgebase.Concept;
+import org.mbari.kb.core.knowledgebase.ConceptCache;
 
 /**
  *

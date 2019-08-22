@@ -23,10 +23,10 @@ import javax.swing.JTextField;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import vars.ToolBelt;
-import vars.UserAccount;
-import vars.jpa.DevelopmentDAOFactory;
-import vars.knowledgebase.jpa.Factories;
+import org.mbari.kb.core.ToolBelt;
+import org.mbari.kb.core.UserAccount;
+import org.mbari.kb.jpa.DevelopmentDAOFactory;
+import org.mbari.kb.jpa.knowledgebase.Factories;
 import vars.shared.ui.UserAccountPreferencesPanel;
 
 /**

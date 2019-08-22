@@ -18,10 +18,10 @@ package vars.shared.ui.dialogs;
 import org.mbari.awt.event.ActionAdapter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import vars.MiscDAOFactory;
-import vars.MiscFactory;
-import vars.UserAccount;
-import vars.UserAccountDAO;
+import org.mbari.kb.core.MiscDAOFactory;
+import org.mbari.kb.core.MiscFactory;
+import org.mbari.kb.core.UserAccount;
+import org.mbari.kb.core.UserAccountDAO;
 import vars.shared.ui.GlobalStateLookup;
 
 import java.awt.Frame;

@@ -37,11 +37,11 @@ import org.mbari.swing.LabeledSpinningDialWaitIndicator;
 import org.mbari.swing.SearchableTreePanel;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import vars.PersistenceCache;
-import vars.knowledgebase.Concept;
-import vars.knowledgebase.ConceptName;
-import vars.knowledgebase.ConceptNameDAO;
-import vars.knowledgebase.KnowledgebaseDAOFactory;
+import org.mbari.kb.core.PersistenceCache;
+import org.mbari.kb.core.knowledgebase.Concept;
+import org.mbari.kb.core.knowledgebase.ConceptName;
+import org.mbari.kb.core.knowledgebase.ConceptNameDAO;
+import org.mbari.kb.core.knowledgebase.KnowledgebaseDAOFactory;
 import vars.shared.ui.GlobalStateLookup;
 
 /**

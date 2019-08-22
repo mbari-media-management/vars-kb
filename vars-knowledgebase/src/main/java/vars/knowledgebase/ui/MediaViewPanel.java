@@ -26,7 +26,7 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
-import vars.knowledgebase.Media;
+import org.mbari.kb.core.knowledgebase.Media;
 
 /**
  * Displays properties of a single media 

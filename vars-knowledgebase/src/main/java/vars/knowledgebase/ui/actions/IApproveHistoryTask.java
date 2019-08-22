@@ -1,8 +1,8 @@
 package vars.knowledgebase.ui.actions;
 
-import vars.knowledgebase.History;
-import vars.DAO;
-import vars.UserAccount;
+import org.mbari.kb.core.knowledgebase.History;
+import org.mbari.kb.core.DAO;
+import org.mbari.kb.core.UserAccount;
 
 
 public interface IApproveHistoryTask {

@@ -4,7 +4,7 @@ import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import org.bushe.swing.event.EventBus;
 import org.bushe.swing.event.EventTopicSubscriber;
-import vars.UserAccount;
+import org.mbari.kb.core.UserAccount;
 import vars.shared.ui.event.LoggingTopicSubscriber;
 
 import java.awt.Frame;

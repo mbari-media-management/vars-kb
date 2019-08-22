@@ -22,10 +22,10 @@ import javax.swing.tree.DefaultTreeModel;
 import javax.swing.tree.TreeNode;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import vars.PersistenceCache;
-import vars.knowledgebase.Concept;
-import vars.knowledgebase.ConceptDAO;
-import vars.knowledgebase.KnowledgebaseDAOFactory;
+import org.mbari.kb.core.PersistenceCache;
+import org.mbari.kb.core.knowledgebase.Concept;
+import org.mbari.kb.core.knowledgebase.ConceptDAO;
+import org.mbari.kb.core.knowledgebase.KnowledgebaseDAOFactory;
 
 /**
  * Class that represents a threaded database aware TreeModel. Data is loaded

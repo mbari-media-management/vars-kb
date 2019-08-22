@@ -5,7 +5,7 @@ module vars.knowledgebase {
     requires javafx.base;
     requires slf4j.api;
     requires typesafe.config;
-    requires vars.core;
+    requires org.mbari.kb.core;
     requires vars.shared.ui;
     requires org.mbari.vars.core;
     requires org.mbari.vars.services;

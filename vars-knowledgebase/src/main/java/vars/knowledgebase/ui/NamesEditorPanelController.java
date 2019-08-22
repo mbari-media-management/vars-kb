@@ -23,17 +23,17 @@ import org.mbari.awt.event.ActionAdapter;
 import org.mbari.swing.WaitIndicator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import vars.DAO;
-import vars.UserAccount;
-import vars.knowledgebase.Concept;
-import vars.knowledgebase.ConceptCache;
-import vars.knowledgebase.ConceptDAO;
-import vars.knowledgebase.ConceptMetadata;
-import vars.knowledgebase.ConceptName;
-import vars.knowledgebase.ConceptNameTypes;
-import vars.knowledgebase.History;
-import vars.knowledgebase.HistoryFactory;
-import vars.knowledgebase.KnowledgebaseFactory;
+import org.mbari.kb.core.DAO;
+import org.mbari.kb.core.UserAccount;
+import org.mbari.kb.core.knowledgebase.Concept;
+import org.mbari.kb.core.knowledgebase.ConceptCache;
+import org.mbari.kb.core.knowledgebase.ConceptDAO;
+import org.mbari.kb.core.knowledgebase.ConceptMetadata;
+import org.mbari.kb.core.knowledgebase.ConceptName;
+import org.mbari.kb.core.knowledgebase.ConceptNameTypes;
+import org.mbari.kb.core.knowledgebase.History;
+import org.mbari.kb.core.knowledgebase.HistoryFactory;
+import org.mbari.kb.core.knowledgebase.KnowledgebaseFactory;
 import vars.knowledgebase.ui.dialogs.AddConceptNameDialog2;
 
 /**

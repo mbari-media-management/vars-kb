@@ -22,9 +22,9 @@ import java.util.List;
 import org.mbari.swing.FancyComboBox;
 import org.mbari.swing.SortedComboBoxModel;
 import org.mbari.text.IgnoreCaseToStringComparator;
-import vars.MiscDAOFactory;
-import vars.UserAccount;
-import vars.UserAccountDAO;
+import org.mbari.kb.core.MiscDAOFactory;
+import org.mbari.kb.core.UserAccount;
+import org.mbari.kb.core.UserAccountDAO;
 
 /**
  * Use as:

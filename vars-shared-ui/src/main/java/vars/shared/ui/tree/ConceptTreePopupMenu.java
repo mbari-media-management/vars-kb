@@ -33,10 +33,10 @@ import javax.swing.tree.TreePath;
 import org.bushe.swing.event.EventBus;
 import org.mbari.swing.JImageFrame;
 import org.mbari.swing.JImageUrlFrame;
-import vars.knowledgebase.Concept;
-import vars.knowledgebase.ConceptDAO;
-import vars.knowledgebase.KnowledgebaseDAOFactory;
-import vars.knowledgebase.Media;
+import org.mbari.kb.core.knowledgebase.Concept;
+import org.mbari.kb.core.knowledgebase.ConceptDAO;
+import org.mbari.kb.core.knowledgebase.KnowledgebaseDAOFactory;
+import org.mbari.kb.core.knowledgebase.Media;
 import vars.shared.ui.GlobalStateLookup;
 
 /**

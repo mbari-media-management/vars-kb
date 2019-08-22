@@ -18,13 +18,13 @@ package vars.knowledgebase.ui;
 import com.typesafe.config.Config;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import vars.MiscDAOFactory;
-import vars.MiscFactory;
-import vars.PersistenceCacheProvider;
-import vars.knowledgebase.ConceptCache;
-import vars.knowledgebase.HistoryFactory;
-import vars.knowledgebase.KnowledgebaseDAOFactory;
-import vars.knowledgebase.KnowledgebaseFactory;
+import org.mbari.kb.core.MiscDAOFactory;
+import org.mbari.kb.core.MiscFactory;
+import org.mbari.kb.core.PersistenceCacheProvider;
+import org.mbari.kb.core.knowledgebase.ConceptCache;
+import org.mbari.kb.core.knowledgebase.HistoryFactory;
+import org.mbari.kb.core.knowledgebase.KnowledgebaseDAOFactory;
+import org.mbari.kb.core.knowledgebase.KnowledgebaseFactory;
 import vars.knowledgebase.ui.actions.ApproveHistoryTask;
 import vars.knowledgebase.ui.actions.RejectHistoryTask;
 import vars.knowledgebase.ui.annotation.AnnotationService;
@@ -36,7 +36,7 @@ import java.nio.file.Path;
  * Container that holds on to a ton of shared objects that need to be widely
  * used across this application
  */
-public class ToolBelt extends vars.ToolBelt {
+public class ToolBelt extends org.mbari.kb.core.ToolBelt {
 
     private final Logger log = LoggerFactory.getLogger(getClass());
     private final ApproveHistoryTask approveHistoryTask;

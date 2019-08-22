@@ -29,8 +29,8 @@ import org.mbari.swing.SpinningDialWaitIndicator;
 import org.mbari.swing.WaitIndicator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import vars.knowledgebase.Concept;
-import vars.knowledgebase.ConceptCache;
+import org.mbari.kb.core.knowledgebase.Concept;
+import org.mbari.kb.core.knowledgebase.ConceptCache;
 
 /**
  * <p>Displays the Concept and all it's children in the drop-down list. Names are stored internally as Strings</p>

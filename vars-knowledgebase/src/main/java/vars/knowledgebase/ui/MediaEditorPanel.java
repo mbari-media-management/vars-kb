@@ -41,12 +41,12 @@ import org.mbari.swing.JImageUrlFrame;
 import org.mbari.swing.ListListModel;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import vars.DAO;
-import vars.UserAccount;
-import vars.knowledgebase.Concept;
-import vars.knowledgebase.History;
-import vars.knowledgebase.Media;
-import vars.knowledgebase.MediaTypes;
+import org.mbari.kb.core.DAO;
+import org.mbari.kb.core.UserAccount;
+import org.mbari.kb.core.knowledgebase.Concept;
+import org.mbari.kb.core.knowledgebase.History;
+import org.mbari.kb.core.knowledgebase.Media;
+import org.mbari.kb.core.knowledgebase.MediaTypes;
 import vars.knowledgebase.ui.dialogs.AddMediaDialog;
 import vars.shared.ui.ILockableEditor;
 

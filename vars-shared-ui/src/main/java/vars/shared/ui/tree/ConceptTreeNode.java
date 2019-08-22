@@ -9,8 +9,8 @@ import java.util.Comparator;
 import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.MutableTreeNode;
 import javax.swing.tree.TreeNode;
-import vars.knowledgebase.Concept;
-import vars.knowledgebase.ConceptPrimaryNameComparator;
+import org.mbari.kb.core.knowledgebase.Concept;
+import org.mbari.kb.core.knowledgebase.ConceptPrimaryNameComparator;
 
 /**
  * {@link  TreeNode} used to construct the {@link ConceptTreeModel}
