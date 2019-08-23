@@ -27,5 +27,6 @@ target/
 gradlew
 gradlew.bat
 /build/
+**/bin/
 gradle-wrapper.jar
 **/build/
