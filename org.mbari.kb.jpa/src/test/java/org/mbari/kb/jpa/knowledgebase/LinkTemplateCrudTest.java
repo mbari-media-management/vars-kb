@@ -10,7 +10,7 @@
  * limitations under the License.
  */
 
-package vars.knowledgebase.jpa;
+package org.mbari.kb.jpa.knowledgebase;
 
 import java.util.Collection;
 
@@ -19,7 +19,6 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInstance;
 import org.junit.jupiter.api.TestInstance.Lifecycle;
-import org.mbari.kb.jpa.knowledgebase.Factories;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.mbari.kb.jpa.EntityUtilities;

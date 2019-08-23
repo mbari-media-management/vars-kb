@@ -1,7 +1,6 @@
-package vars.knowledgebase.jpa;
+package org.mbari.kb.jpa.knowledgebase;
 
 import org.junit.jupiter.api.Test;
-import org.mbari.kb.jpa.knowledgebase.Factories;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

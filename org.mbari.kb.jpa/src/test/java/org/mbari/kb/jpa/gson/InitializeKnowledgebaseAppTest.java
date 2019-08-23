@@ -7,7 +7,7 @@ import org.mbari.net.URLUtilities;
 import org.mbari.kb.core.knowledgebase.Concept;
 import org.mbari.kb.core.knowledgebase.ConceptDAO;
 import org.mbari.kb.core.knowledgebase.KnowledgebaseDAOFactory;
-import vars.knowledgebase.jpa.DerbyTestDAOFactory;
+import org.mbari.kb.jpa.knowledgebase.DerbyTestDAOFactory;
 import org.mbari.kb.jpa.knowledgebase.Factories;
 
 import java.io.File;

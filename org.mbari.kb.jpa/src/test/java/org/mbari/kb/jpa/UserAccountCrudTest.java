@@ -1,12 +1,10 @@
-package vars.jpa;
+package org.mbari.kb.jpa;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInstance;
 import org.junit.jupiter.api.TestInstance.Lifecycle;
-import org.mbari.kb.jpa.JPAEntity;
-import org.mbari.kb.jpa.UserAccountImpl;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.mbari.kb.core.DAO;
@@ -14,7 +12,7 @@ import org.mbari.kb.core.MiscDAOFactory;
 import org.mbari.kb.core.MiscFactory;
 import org.mbari.kb.core.UserAccount;
 import org.mbari.kb.core.UserAccountRoles;
-import vars.knowledgebase.jpa.DerbyTestDAOFactory;
+import org.mbari.kb.jpa.knowledgebase.DerbyTestDAOFactory;
 import org.mbari.kb.jpa.knowledgebase.Factories;
 
 /**

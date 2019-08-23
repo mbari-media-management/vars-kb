@@ -3,7 +3,7 @@
  * and open the template in the editor.
  */
 
-package vars;
+package org.mbari.kb.jpa;
 
 import java.text.DateFormat;
 import java.text.ParseException;
@@ -28,7 +28,7 @@ import org.slf4j.LoggerFactory;
  * @author brian
  */
 @TestInstance(Lifecycle.PER_CLASS)
-public class EXPDDataPeristenceServiceTest {
+public class EXPDPersistenceServiceTest {
 
     private final Logger log = LoggerFactory.getLogger(getClass());
 

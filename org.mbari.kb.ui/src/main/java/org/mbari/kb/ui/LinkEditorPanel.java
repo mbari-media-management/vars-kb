@@ -15,7 +15,7 @@
 package org.mbari.kb.ui;
 
 import org.mbari.kb.shared.ui.GlobalLookup;
-import org.mbari.text.ObjectToStringConverter;
+import mbarix4j.text.ObjectToStringConverter;
 import org.mbari.kb.shared.ui.FullLinkListCellRender;
 import org.mbari.kb.shared.ui.ILockableEditor;
 import java.awt.event.ActionEvent;
@@ -27,7 +27,7 @@ import java.util.List;
 import java.util.Vector;
 import javax.swing.*;
 
-import org.mbari.swing.SearchableComboBoxModel;
+import mbarix4j.swing.SearchableComboBoxModel;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.mbari.kb.core.ILink;

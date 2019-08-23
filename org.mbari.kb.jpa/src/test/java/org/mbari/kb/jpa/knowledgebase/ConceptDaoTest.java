@@ -1,4 +1,4 @@
-package vars.knowledgebase.jpa;
+package org.mbari.kb.jpa.knowledgebase;
 
 
 import org.junit.jupiter.api.TestInstance;

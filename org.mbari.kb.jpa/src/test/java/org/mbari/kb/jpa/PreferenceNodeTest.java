@@ -3,7 +3,7 @@
  * and open the template in the editor.
  */
 
-package vars.jpa;
+package org.mbari.kb.jpa;
 
 import org.mbari.kb.core.VarsUserPreferencesFactory;
 import java.util.prefs.BackingStoreException;
@@ -19,7 +19,7 @@ import org.slf4j.LoggerFactory;
 import org.mbari.kb.core.MiscDAOFactory;
 import org.mbari.kb.core.MiscFactory;
 import org.mbari.kb.core.PersistenceCache;
-import vars.knowledgebase.jpa.DerbyTestDAOFactory;
+import org.mbari.kb.jpa.knowledgebase.DerbyTestDAOFactory;
 import org.mbari.kb.jpa.knowledgebase.Factories;
 
 /**

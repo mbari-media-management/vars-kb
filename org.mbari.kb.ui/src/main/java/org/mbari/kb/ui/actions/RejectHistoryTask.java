@@ -28,7 +28,7 @@ import java.util.stream.Collectors;
 import javax.swing.*;
 
 import org.bushe.swing.event.EventBus;
-import org.mbari.swing.LabeledSpinningDialWaitIndicator;
+import mbarix4j.swing.LabeledSpinningDialWaitIndicator;
 import org.mbari.kb.core.DAO;
 import org.mbari.kb.core.ILink;
 import org.mbari.kb.core.LinkBean;

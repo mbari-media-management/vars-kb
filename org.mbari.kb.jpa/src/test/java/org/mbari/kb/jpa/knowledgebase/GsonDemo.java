@@ -1,4 +1,4 @@
-package vars.knowledgebase.jpa;
+package org.mbari.kb.jpa.knowledgebase;
 
 import com.google.gson.FieldNamingPolicy;
 import com.google.gson.Gson;
@@ -9,8 +9,6 @@ import org.mbari.kb.jpa.gson.UnderscoreFieldExclusionStrategy;
 import org.mbari.kb.core.knowledgebase.ConceptDAO;
 import org.mbari.kb.core.knowledgebase.KnowledgebaseDAOFactory;
 import org.mbari.kb.core.knowledgebase.KnowledgebaseFactory;
-import org.mbari.kb.jpa.knowledgebase.ConceptImpl;
-import org.mbari.kb.jpa.knowledgebase.Factories;
 
 /**
  * @author Brian Schlining

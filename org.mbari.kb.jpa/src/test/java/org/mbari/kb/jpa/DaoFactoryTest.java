@@ -1,11 +1,11 @@
-package vars.jpa;
+package org.mbari.kb.jpa;
 
 
 import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.Test;
 
 import org.mbari.kb.core.knowledgebase.KnowledgebaseDAOFactory;
-import vars.knowledgebase.jpa.DerbyTestDAOFactory;
+import org.mbari.kb.jpa.knowledgebase.DerbyTestDAOFactory;
 import org.mbari.kb.jpa.knowledgebase.Factories;
 
 /**

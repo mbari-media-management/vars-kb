@@ -14,7 +14,7 @@ import java.awt.Frame;
 import java.util.Collection;
 import javax.swing.JOptionPane;
 
-import org.mbari.awt.event.ActionAdapter;
+import mbarix4j.awt.event.ActionAdapter;
 
 import org.mbari.kb.core.MiscFactory;
 import org.mbari.kb.core.UserAccount;
