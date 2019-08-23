@@ -1,0 +1,10 @@
+remote_theme: pmarsceill/just-the-docs
+search_enabled: true
+aux_links:
+    "MBARI":
+      - "http://www.mbari.org"
+    "MBARI Media Management":
+      - "//github.com/mbari-media-management"
+    "Source":
+      - "//github.com/mbari-media-management/vars-annotation"
+color_scheme: "dark"
