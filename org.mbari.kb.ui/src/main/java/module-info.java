@@ -1,6 +1,8 @@
 module org.mbari.kb.ui {
 
+    requires com.rabbitmq.client;
     requires eventbus;
+    requires gson;
     requires java.desktop;
     requires javafx.base;
     requires mbarix4j;
@@ -9,11 +11,9 @@ module org.mbari.kb.ui {
     requires org.mbari.kb.shared;
     requires org.mbari.vars.core;
     requires org.mbari.vars.services;
+    requires org.slf4j;
+    requires swing.layout;
     requires swingx.all;
     requires typesafe.config;
-    requires swing.layout;
-    requires gson;
-    requires com.rabbitmq.client;
-    requires org.slf4j;
 
 }
