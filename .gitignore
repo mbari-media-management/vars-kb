@@ -21,3 +21,11 @@ target/
 .project
 .manager
 .scala_dependencies
+
+# Gradle
+.gradle
+gradlew
+gradlew.bat
+/build/
+gradle-wrapper.jar
+**/build/
