@@ -56,9 +56,9 @@ public class ConceptPanel extends JPanel {
     
     /** Creates new form ConceptPanel */
     public ConceptPanel() {
-        lockedIcon = new ImageIcon(getClass().getResource("/images/vars/knowledgebase/lock.png"));
+        lockedIcon = new ImageIcon(getClass().getResource("/org/mbari/kb/ui/images/lock.png"));
         unlockedIcon = new ImageIcon(
-                getClass().getResource("/images/vars/knowledgebase/lock_open.png"));
+                getClass().getResource("/org/mbari/kb/ui/images/lock_open.png"));
         initialize();
         setConcept(null);
         setUserAccount(null);
@@ -261,7 +261,7 @@ public class ConceptPanel extends JPanel {
     public JButton getLockButton() {
         if (lockButton == null) {
             lockButton = new FancyButton();
-            lockButton.setIcon(new ImageIcon(getClass().getResource("/images/vars/knowledgebase/lock.png")));
+            lockButton.setIcon(new ImageIcon(getClass().getResource("/org/mbari/kb/ui/images/lock.png")));
         }
         return lockButton;
     }

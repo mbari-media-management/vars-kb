@@ -9,11 +9,11 @@ module org.mbari.kb.ui {
     requires org.mbari.kb.shared;
     requires org.mbari.vars.core;
     requires org.mbari.vars.services;
-    requires slf4j.api;
     requires swingx.all;
     requires typesafe.config;
     requires swing.layout;
     requires gson;
     requires com.rabbitmq.client;
+    requires org.slf4j;
 
 }

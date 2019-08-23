@@ -20,7 +20,7 @@ import javax.swing.Action;
 import javax.swing.BorderFactory;
 import javax.swing.Icon;
 import javax.swing.border.Border;
-import org.mbari.swing.JFancyButton;
+import mbarix4j.swing.JFancyButton;
 
 /**
  *

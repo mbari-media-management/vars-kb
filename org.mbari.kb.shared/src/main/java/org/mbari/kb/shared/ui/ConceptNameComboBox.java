@@ -20,9 +20,9 @@ import java.awt.event.FocusListener;
 import java.util.Arrays;
 import java.util.Collection;
 
-import org.mbari.swing.FancyComboBox;
-import org.mbari.swing.SortedComboBoxModel;
-import org.mbari.text.IgnoreCaseToStringComparator;
+import mbarix4j.swing.FancyComboBox;
+import mbarix4j.swing.SortedComboBoxModel;
+import mbarix4j.text.IgnoreCaseToStringComparator;
 import org.mbari.kb.core.knowledgebase.Concept;
 import org.mbari.kb.core.knowledgebase.ConceptName;
 

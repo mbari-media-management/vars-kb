@@ -1,6 +1,6 @@
 package org.mbari.kb.jpa.knowledgebase;
 
-import org.mbari.text.IgnoreCaseToStringComparator;
+import mbarix4j.text.IgnoreCaseToStringComparator;
 import org.mbari.kb.core.CacheClearedEvent;
 import org.mbari.kb.core.CacheClearedListener;
 import org.mbari.kb.core.ILink;

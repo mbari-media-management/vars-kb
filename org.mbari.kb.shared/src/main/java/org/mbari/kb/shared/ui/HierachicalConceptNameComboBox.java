@@ -23,9 +23,9 @@ import java.util.Collection;
 import java.util.Vector;
 import javax.swing.*;
 
-import org.mbari.swing.SortedComboBoxModel;
-import org.mbari.swing.SpinningDialWaitIndicator;
-import org.mbari.swing.WaitIndicator;
+import mbarix4j.swing.SortedComboBoxModel;
+import mbarix4j.swing.SpinningDialWaitIndicator;
+import mbarix4j.swing.WaitIndicator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.mbari.kb.core.knowledgebase.Concept;

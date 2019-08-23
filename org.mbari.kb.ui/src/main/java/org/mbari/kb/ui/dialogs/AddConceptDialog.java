@@ -156,7 +156,7 @@ public class AddConceptDialog extends javax.swing.JDialog {
         getConceptComboBox().setToolTipText("The parent concept. This concept will be a child of this parent.");
 
         cancelButton.setText("Cancel");
-        cancelButton.setIcon(new ImageIcon(getClass().getResource("/images/vars/knowledgebase/delete2.png")));
+        cancelButton.setIcon(new ImageIcon(getClass().getResource("/org/mbari/kb/ui/images/delete2.png")));
 
         cancelButton.addActionListener(new java.awt.event.ActionListener() {
 
@@ -175,7 +175,7 @@ public class AddConceptDialog extends javax.swing.JDialog {
         });
 
         okButton.setText("OK");
-        okButton.setIcon(new ImageIcon(getClass().getResource("/images/vars/knowledgebase/check2.png")));
+        okButton.setIcon(new ImageIcon(getClass().getResource("/org/mbari/kb/ui/images/check2.png")));
         okButton.addActionListener(new java.awt.event.ActionListener() {
 
             public void actionPerformed(java.awt.event.ActionEvent evt) {

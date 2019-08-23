@@ -25,7 +25,7 @@ import java.awt.event.FocusEvent;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.util.Collection;
-import org.mbari.swing.SortedComboBoxModel;
+import mbarix4j.swing.SortedComboBoxModel;
 import org.mbari.kb.shared.ui.ConceptNameComboBox;
 
 /**

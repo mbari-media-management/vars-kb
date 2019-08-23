@@ -11,7 +11,7 @@ module org.mbari.kb.shared {
   requires mbarix4j;
   requires org.mbari.kb.core;
   requires org.mbari.kb.jpa;
-  requires slf4j.api;
+  requires org.slf4j;
   requires swing.layout;
   requires swingx.all;
   requires typesafe.config;

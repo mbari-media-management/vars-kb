@@ -17,9 +17,9 @@ import java.util.concurrent.ForkJoinPool;
 
 import org.bushe.swing.event.EventBus;
 import org.bushe.swing.event.EventTopicSubscriber;
-import org.mbari.util.Dispatcher;
 import org.mbari.kb.core.UserAccount;
 import org.mbari.kb.shared.ui.event.LoggingTopicSubscriber;
+import org.mbari.kb.shared.util.Dispatcher;
 
 /**
  * Central lookup for coordinating shared UI resources.

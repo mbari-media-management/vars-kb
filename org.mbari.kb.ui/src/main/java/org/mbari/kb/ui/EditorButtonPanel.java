@@ -35,7 +35,7 @@ public class EditorButtonPanel extends javax.swing.JPanel {
     public javax.swing.JButton getDeleteButton() {
         if (deleteButton == null) {
             deleteButton = new FancyButton();
-            deleteButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/vars/knowledgebase/delete2.png")));
+            deleteButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/org/mbari/kb/ui/images/delete2.png")));
             deleteButton.setText("Delete");
         }
         return deleteButton;
@@ -47,7 +47,7 @@ public class EditorButtonPanel extends javax.swing.JPanel {
     public javax.swing.JButton getNewButton() {
         if (newButton == null) {
             newButton = new FancyButton();
-            newButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/vars/knowledgebase/add2.png")));
+            newButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/org/mbari/kb/ui/images/add2.png")));
             newButton.setText("New");
         }
         return newButton;
@@ -59,7 +59,7 @@ public class EditorButtonPanel extends javax.swing.JPanel {
     public javax.swing.JButton getUpdateButton() {
         if (updateButton == null) {
             updateButton = new FancyButton();
-            updateButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/vars/knowledgebase/replace2.png")));
+            updateButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/org/mbari/kb/ui/images/replace2.png")));
             updateButton.setText("Update");
         }
         return updateButton;

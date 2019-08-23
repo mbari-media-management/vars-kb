@@ -1,6 +1,6 @@
 package org.mbari.kb.shared.ui;
 
-import org.mbari.awt.event.ActionAdapter;
+import mbarix4j.awt.event.ActionAdapter;
 
 /**
  * @author Brian Schlining

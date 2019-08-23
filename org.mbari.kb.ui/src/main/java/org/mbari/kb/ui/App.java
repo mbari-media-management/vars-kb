@@ -164,7 +164,7 @@ public class App {
      */
     private void initialize() {
         ImageIcon mbariLogo = new ImageIcon(
-            getClass().getResource("/images/vars/knowledgebase/knowledgebase-splash.png"));
+            getClass().getResource("/org/mbari/kb/ui/images/knowledgebase-splash.png"));
         SplashFrame splashFrame = new SplashFrame(mbariLogo);
 
         /*

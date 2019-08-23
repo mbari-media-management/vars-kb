@@ -155,7 +155,7 @@ private void initComponents() {
         formerRb.setMargin(new java.awt.Insets(0, 10, 0, 0));
 
         cancelButton.setText("Cancel");
-        cancelButton.setIcon(new ImageIcon(getClass().getResource("/images/vars/knowledgebase/delete2.png")));
+        cancelButton.setIcon(new ImageIcon(getClass().getResource("/org/mbari/kb/ui/images/delete2.png")));
         cancelButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cancelButtonActionPerformed(evt);
@@ -169,7 +169,7 @@ private void initComponents() {
         });
 
         okButton.setText("OK");
-        okButton.setIcon(new ImageIcon(getClass().getResource("/images/vars/knowledgebase/check2.png")));
+        okButton.setIcon(new ImageIcon(getClass().getResource("/org/mbari/kb/ui/images/check2.png")));
         okButton.setEnabled(false);
         okButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

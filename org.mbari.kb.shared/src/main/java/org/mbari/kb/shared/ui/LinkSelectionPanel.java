@@ -15,7 +15,6 @@
 
 package org.mbari.kb.shared.ui;
 
-
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.FocusAdapter;
@@ -28,16 +27,15 @@ import javax.swing.*;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.LayoutStyle.ComponentPlacement;
 import org.bushe.swing.event.EventBus;
-import org.mbari.swing.LabeledSpinningDialWaitIndicator;
-import org.mbari.swing.SearchableComboBoxModel;
-import org.mbari.swing.SortedComboBoxModel;
-import org.mbari.swing.WaitIndicator;
-import org.mbari.text.ObjectToStringConverter;
+import mbarix4j.swing.LabeledSpinningDialWaitIndicator;
+import mbarix4j.swing.SearchableComboBoxModel;
+import mbarix4j.swing.SortedComboBoxModel;
+import mbarix4j.swing.WaitIndicator;
+import mbarix4j.text.ObjectToStringConverter;
 import org.mbari.kb.core.ILink;
 import org.mbari.kb.core.LinkBean;
 import org.mbari.kb.core.LinkComparator;
 import org.mbari.kb.core.LinkUtilities;
-import org.mbari.kb.core.knowledgebase.Concept;
 import org.mbari.kb.core.knowledgebase.ConceptCache;
 
 /**

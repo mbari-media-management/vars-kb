@@ -12,9 +12,10 @@
 
 package org.mbari.kb.core;
 
+import mbarix4j.text.IgnoreCaseToStringComparator;
+
 import java.util.Comparator;
 
-import org.mbari.text.IgnoreCaseToStringComparator;
 
 /**
  * For comparing links using linkName, toConcept and linkValue fields.

@@ -7,9 +7,9 @@ module org.mbari.kb.jpa {
   requires java.prefs;
   requires java.sql;
   requires mbarix4j;
-  requires slf4j.api;
-  requires typesafe.config;
   requires org.mbari.kb.core;
+  requires org.slf4j;
+  requires typesafe.config;
 
   opens org.mbari.kb.jpa to org.eclipse.persistence.core;
   opens org.mbari.kb.jpa.knowledgebase to org.eclipse.persistence.core;
