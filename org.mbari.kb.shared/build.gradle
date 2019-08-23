@@ -1,0 +1,33 @@
+plugins {
+    id 'org.openjfx.javafxplugin'
+}
+
+dependencies {
+  compile project(":org.mbari.kb.core")
+  compile project(":org.mbari.kb.jpa")
+
+  implementation 'com.google.guava:guava'
+  implementation 'com.google.inject:guice'
+  implementation 'com.typesafe:config'
+  implementation 'io.reactivex.rxjava2:rxjava'
+  implementation 'org.bushe:eventbus'
+  implementation 'org.eclipse.persistence:org.eclipse.persistence.jpa'
+  implementation 'org.mbari.m3:org.mbari.vars.services'
+  implementation 'org.mbari:mbarix4j'
+  implementation 'org.slf4j:slf4j-api'
+  implementation 'org.swinglabs.swingx:swingx-all'
+  implementation 'org.swinglabs:swing-layout'
+
+  implementation('org.apache.commons:commons-email') {
+      exclude group: 'javax.activation', module: 'activation'
+      because("Modules activation and java.activation export package com.sun.activation.registries")
+  }
+}
+
+javafx {
+    version = javafxVersion
+    modules = [
+            'javafx.base',
+            'javafx.controls'
+    ]
+}

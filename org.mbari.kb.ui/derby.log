@@ -1,0 +1,13 @@
+----------------------------------------------------------------
+Fri Aug 23 00:02:14 UTC 2019:
+Booting Derby version The Apache Software Foundation - Apache Derby - 10.15.1.3 - (1853019): instance a816c00e-016c-bbc7-dfd5-00000c789e00 
+on database directory memory:/Users/brian/workspace/vars-kb/org.mbari.kb.ui/video-asset-manager with class loader jdk.internal.loader.ClassLoaders$AppClassLoader@11758f2a 
+Loaded from file:/Users/brian/.gradle/caches/modules-2/files-2.1/org.apache.derby/derby/10.15.1.3/79505f952a4f8d6be761413d7b10a64d6405e57a/derby-10.15.1.3.jar
+java.vendor=AdoptOpenJDK
+java.runtime.version=11.0.4+11
+user.dir=/Users/brian/workspace/vars-kb/org.mbari.kb.ui
+os.name=Mac OS X
+os.arch=x86_64
+os.version=10.14.6
+derby.system.home=null
+Database Class Loader started - derby.database.classpath=''

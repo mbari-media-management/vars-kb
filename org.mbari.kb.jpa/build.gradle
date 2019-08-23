@@ -1,0 +1,38 @@
+dependencies {
+
+  compile project(':org.mbari.kb.core')
+
+  implementation 'com.fatboyindustrial.gson-javatime-serialisers:gson-javatime-serialisers'
+  implementation 'com.google.code.gson:gson'
+  implementation 'com.google.guava:guava'
+  implementation 'com.typesafe:config'
+  implementation 'org.eclipse.persistence:org.eclipse.persistence.jpa'
+  implementation 'org.jasypt:jasypt'
+  implementation 'org.mbari.m3:org.mbari.vars.services'
+  implementation 'org.mbari:mbarix4j'
+  implementation 'org.slf4j:slf4j-api'
+  testRuntimeOnly 'com.h2database:h2'
+  testRuntimeOnly 'net.sourceforge.jtds:jtds'
+  testRuntimeOnly 'org.apache.derby:derby'
+  testRuntimeOnly 'org.apache.derby:derbyclient'
+  testRuntimeOnly 'org.apache.derby:derbynet'
+  testRuntimeOnly 'org.apache.derby:derbyshared'
+  testRuntimeOnly 'org.apache.derby:derbytools'
+}
+
+task performJPAWeaving(type: JavaExec, dependsOn: "compileJava"){
+  inputs.dir compileJava.destinationDir
+  outputs.dir compileJava.destinationDir
+  main "org.eclipse.persistence.tools.weaving.jpa.StaticWeave"
+  args  "-loglevel",
+        "FINE", 
+        "-persistenceinfo",
+        "src/main/resources",
+        compileJava.destinationDir.getAbsolutePath(),
+        compileJava.destinationDir.getAbsolutePath()
+  classpath += sourceSets.main.runtimeClasspath
+}
+
+tasks.withType(Jar){
+  dependsOn "performJPAWeaving"
+}
