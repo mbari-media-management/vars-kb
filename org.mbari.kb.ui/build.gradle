@@ -24,7 +24,9 @@ dependencies {
   implementation 'org.swinglabs.swingx:swingx-all'
   implementation 'org.swinglabs:swing-layout'
   runtimeOnly 'com.microsoft.sqlserver:mssql-jdbc'
-  runtimeOnly 'ch.qos.logback:logback-classic'
+  runtimeOnly('ch.qos.logback:logback-classic') {
+      exclude group: 'javax.activation'
+  }
   runtimeOnly 'net.sourceforge.jtds:jtds'
   runtimeOnly 'org.apache.derby:derby'
   runtimeOnly 'org.apache.derby:derbyclient'
