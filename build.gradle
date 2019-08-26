@@ -21,6 +21,7 @@ subprojects {
     repositories {
         jcenter()
         mavenCentral()
+        mavenLocal()
         maven {
             url 'http://dl.bintray.com/hohonuuli/maven'
         }
@@ -59,7 +60,7 @@ subprojects {
         implementation 'org.bushe:eventbus:1.4'
         implementation 'org.eclipse.persistence:org.eclipse.persistence.jpa:2.7.4'
         implementation 'org.jasypt:jasypt:1.9.3'
-        implementation 'org.mbari:mbarix4j:2.0.2.jre11'
+        implementation 'org.mbari:mbarix4j:2.0.3.jre11'
         implementation 'org.mbari.m3:org.mbari.vars.core:0.3.3'
         implementation 'org.mbari.m3:org.mbari.vars.services:0.3.3'
         implementation 'org.mbari.vcr4j:vcr4j-core:4.0.2'
