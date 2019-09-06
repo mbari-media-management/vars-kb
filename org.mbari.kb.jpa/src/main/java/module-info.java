@@ -2,6 +2,7 @@ module org.mbari.kb.jpa {
   requires gson.javatime.serialisers;
   requires gson;
   requires jasypt;
+  requires java.desktop;
   requires java.instrument;
   requires java.persistence;
   requires java.prefs;
