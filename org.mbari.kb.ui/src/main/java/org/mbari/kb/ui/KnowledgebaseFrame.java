@@ -23,20 +23,13 @@ import java.util.Iterator;
 import java.util.Locale;
 import java.util.ResourceBundle;
 import java.util.Set;
-import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JMenu;
-import javax.swing.JMenuBar;
-import javax.swing.JMenuItem;
-import javax.swing.JPanel;
-import javax.swing.JSplitPane;
-import javax.swing.JTabbedPane;
+import javax.swing.*;
 import javax.swing.event.TreeSelectionEvent;
 import javax.swing.event.TreeSelectionListener;
 import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.TreePath;
 import org.bushe.swing.event.EventBus;
-import org.jdesktop.swingx.JXTree;
+//import org.jdesktop.swingx.JXTree;
 import mbarix4j.awt.event.ActionAdapter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -295,7 +288,7 @@ public class KnowledgebaseFrame extends JFrame {
 
             final ConceptTreeModel treeModel = new ConceptTreeModel(toolBelt.getKnowledgebaseDAOFactory());
 
-            final JXTree tree = new JXTree(treeModel);
+            final JTree tree = new JTree(treeModel);
             tree.setCellRenderer(new ConceptTreeCellRenderer());
             tree.addTreeSelectionListener(getTreeSelectionListener());
             treePanel.setJTree(tree);

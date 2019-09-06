@@ -12,7 +12,7 @@ dependencies {
   implementation 'io.reactivex.rxjava2:rxjava'
   implementation 'org.bushe:eventbus'
   implementation 'org.eclipse.persistence:org.eclipse.persistence.jpa'
-  implementation 'org.mbari.m3:org.mbari.vars.services'
+//  implementation 'org.mbari.m3:org.mbari.vars.services'
   implementation 'org.mbari:mbarix4j'
   implementation 'org.slf4j:slf4j-api'
   implementation 'org.swinglabs.swingx:swingx-all'
