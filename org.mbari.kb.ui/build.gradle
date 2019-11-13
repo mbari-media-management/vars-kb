@@ -137,9 +137,9 @@ jlink {
         jpackageHome = System.getenv("JPACKAGE_HOME")
 
         def customInstallerOptions = [
-                "--identifier", project.name,
                 "--copyright", "Monterey Bay Aquarium Research Institute",
-                "--vendor", "org.mbari"
+                "--vendor", "org.mbari",
+                "--app-version", project.version
         ]
 
         if  (org.gradle.internal.os.OperatingSystem.current().isLinux()) {
@@ -151,7 +151,8 @@ jlink {
         else {
             installerType = "dmg"
             customInstallerOptions.addAll([
-                    "--mac-bundle-name", "VARS Knowledgebase",
+                "--mac-package-name", "VARS Knowledgebase",
+                "--mac-package-identifier", project.name
             ])
         }
         installerOptions = customInstallerOptions
