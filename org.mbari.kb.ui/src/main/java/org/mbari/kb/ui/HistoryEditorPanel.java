@@ -97,32 +97,26 @@ public class HistoryEditorPanel extends EditorPanel implements ILockableEditor {
             final JButton okButton = p.getOkayButton();
 
             okButton.setText("Accept");
-            okButton.addActionListener(new ActionListener() {
+            okButton.addActionListener(e -> {
+                final UserAccount userAccount = getUserAccount();
+                final History history = (History) getHistoryList().getSelectedValue();
+                String name = history.getConceptMetadata().getConcept().getPrimaryConceptName().getName();
 
-                public void actionPerformed(ActionEvent e) {
-                    final UserAccount userAccount = getUserAccount();
-                    final History history = (History) getHistoryList().getSelectedValue();
-                    String name = history.getConceptMetadata().getConcept().getPrimaryConceptName().getName();
+                approveHistoryTask.doTask(userAccount, history);
 
-                    approveHistoryTask.doTask(userAccount, history);
-
-                    /*
-                     * At this point the concept may be modified or removed. We'll check the name again; if the
-                     * check fails we'll end up using the name fetched earlier
-                     */
-                    try {
-                        String newName = history.getConceptMetadata().getConcept().getPrimaryConceptName().getName();
-
-                        name = newName;
-                    }
-                    catch (NullPointerException e1) {
-
-                        // Do nothing
-                    }
-
-                    EventBus.publish(StateLookup.TOPIC_REFRESH_KNOWLEGEBASE, name);
+                /*
+                 * At this point the concept may be modified or removed. We'll check the name again; if the
+                 * check fails we'll end up using the name fetched earlier
+                 */
+                try {
+                    String newName = history.getConceptMetadata().getConcept().getPrimaryConceptName().getName();
+                    name = newName;
+                }
+                catch (NullPointerException e1) {
+                    log.warn("Null pointer??", e1);
                 }
 
+                EventBus.publish(StateLookup.TOPIC_REFRESH_KNOWLEGEBASE, name);
             });
 
             /*
@@ -131,32 +125,26 @@ public class HistoryEditorPanel extends EditorPanel implements ILockableEditor {
             final JButton cancelButton = p.getCancelButton();
 
             cancelButton.setText("Reject");
-            cancelButton.addActionListener(new ActionListener() {
+            cancelButton.addActionListener(e -> {
+                final UserAccount userAccount = getUserAccount();
+                final History history = (History) getHistoryList().getSelectedValue();
+                String name = history.getConceptMetadata().getConcept().getPrimaryConceptName().getName();
+                rejectHistoryTask.doTask(userAccount, history);
 
-                public void actionPerformed(ActionEvent e) {
-                    final UserAccount userAccount = getUserAccount();
-                    final History history = (History) getHistoryList().getSelectedValue();
-                    String name = history.getConceptMetadata().getConcept().getPrimaryConceptName().getName();
-
-                    rejectHistoryTask.doTask(userAccount, history);
-
-                    /*
-                     * At this point the concept may be modified or removed. We'll check the name again; if the
-                     * check fails we'll end up using the name fetched earlier
-                     */
-                    try {
-                        String newName = history.getConceptMetadata().getConcept().getPrimaryConceptName().getName();
-
-                        name = newName;
-                    }
-                    catch (NullPointerException e1) {
-
-                        // Do nothing
-                    }
-
-                    EventBus.publish(StateLookup.TOPIC_REFRESH_KNOWLEGEBASE, name);
+                /*
+                 * At this point the concept may be modified or removed. We'll check the name again; if the
+                 * check fails we'll end up using the name fetched earlier
+                 */
+                try {
+                    String newName = history.getConceptMetadata().getConcept().getPrimaryConceptName().getName();
+                    name = newName;
+                }
+                catch (NullPointerException e1) {
+                    log.warn("Null pointer??", e1);
+                    // Do nothing
                 }
 
+                EventBus.publish(StateLookup.TOPIC_REFRESH_KNOWLEGEBASE, name);
             });
 
             buttonPanel = p;

@@ -115,81 +115,69 @@ public class NamesEditorPanel extends EditorPanel implements ILockableEditor {
             buttonPanel = new EditorButtonPanel();
 
             JButton deleteButton = buttonPanel.getDeleteButton();
-            deleteButton.addActionListener(new ActionListener() {
-
-                public void actionPerformed(ActionEvent e) {
-                    final String selectedName = (String) getNamesList().getSelectedValue();
-                    final Concept concept = getConcept();
-                    final String primaryName = concept.getPrimaryConceptName().getName();
-                    final ConceptName conceptName = concept.getConceptName(selectedName);
-                    controller.deleteConceptName(conceptName);
-                }
+            deleteButton.addActionListener(e -> {
+                final String selectedName = (String) getNamesList().getSelectedValue();
+                final Concept concept = getConcept();
+                final String primaryName = concept.getPrimaryConceptName().getName();
+                final ConceptName conceptName = concept.getConceptName(selectedName);
+                controller.deleteConceptName(conceptName);
             });
             deleteButton.setEnabled(false);
 
             JButton updateButton = buttonPanel.getUpdateButton();
             updateButton.setEnabled(false);
-            updateButton.addActionListener(new ActionListener() {
+            updateButton.addActionListener(e -> {
 
-                public void actionPerformed(ActionEvent e) {
+                /*
+                    * Get the name that's selected in the UI for the current concept.
+                    */
+                final String selectedName = (String) getNamesList().getSelectedValue();
+                final Concept concept = getConcept();
+                ConceptName oldConceptName = concept.getConceptName(selectedName);
+                boolean okToProceed = true;
 
-
-                    /*
-                        * Get the name that's selected in the UI for the current concept.
-                        */
-                    final String selectedName = (String) getNamesList().getSelectedValue();
-                    final Concept concept = getConcept();
-                    ConceptName oldConceptName = concept.getConceptName(selectedName);
-                    boolean okToProceed = true;
-
-                    /*
-                     * Retrieve the parameters from the interface
-                     */
-                    final String name = getNameField().getText();
-                    int value = JOptionPane.showConfirmDialog(NamesEditorPanel.this,
-                        "Do want to change '" + selectedName + "' to '" + name + "'?", "VARS - Confirm",
-                        JOptionPane.YES_NO_OPTION, JOptionPane.PLAIN_MESSAGE);
-                    final String author = getAuthorField().getText();
-                    String nameType = ConceptNameTypes.SYNONYM.toString();
-                    if (getPrimaryRb().isSelected()) {
-                        nameType = ConceptNameTypes.PRIMARY.toString();
-                    }
-                    else if (getCommonRb().isSelected()) {
-                        nameType = ConceptNameTypes.COMMON.toString();
-                    }
-                    else if (getFormerRb().isSelected()) {
-                        nameType = ConceptNameTypes.FORMER.toString();
-                    }
-
-                    /*
-                     * Exit if the values are invalid
-                     */
-                    okToProceed = (value == JOptionPane.YES_OPTION) && !name.equals(selectedName) &&
-                                  (name.equals("")) && (selectedName != null) && (oldConceptName != null);
-
-                    final UserAccount userAccount = StateLookup.getUserAccount();
-
-                    /*
-                     * Warn users if they are trying to change the primary name.
-                     */
-                    if (okToProceed && nameType.equalsIgnoreCase(ConceptNameTypes.PRIMARY.toString())) {
-                        value = JOptionPane.showConfirmDialog(NamesEditorPanel.this,
-                                "Are you really sure that you want\n" + "to change the primary name?",
-                                "VARS - Confirm", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
-                        okToProceed = (value == JOptionPane.YES_OPTION);
-                    }
-
-
-                    controller.updateConceptName(concept, name, author, nameType, selectedName, userAccount);
+                /*
+                 * Retrieve the parameters from the interface
+                 */
+                final String name = getNameField().getText();
+                int value = JOptionPane.showConfirmDialog(NamesEditorPanel.this,
+                    "Do want to change '" + selectedName + "' to '" + name + "'?", "VARS - Confirm",
+                    JOptionPane.YES_NO_OPTION, JOptionPane.PLAIN_MESSAGE);
+                final String author = getAuthorField().getText();
+                String nameType = ConceptNameTypes.SYNONYM.toString();
+                if (getPrimaryRb().isSelected()) {
+                    nameType = ConceptNameTypes.PRIMARY.toString();
                 }
+                else if (getCommonRb().isSelected()) {
+                    nameType = ConceptNameTypes.COMMON.toString();
+                }
+                else if (getFormerRb().isSelected()) {
+                    nameType = ConceptNameTypes.FORMER.toString();
+                }
+
+                /*
+                 * Exit if the values are invalid
+                 */
+                okToProceed = (value == JOptionPane.YES_OPTION) && !name.equals(selectedName) &&
+                              (name.equals("")) && (selectedName != null) && (oldConceptName != null);
+
+                final UserAccount userAccount = StateLookup.getUserAccount();
+
+                /*
+                 * Warn users if they are trying to change the primary name.
+                 */
+                if (okToProceed && nameType.equalsIgnoreCase(ConceptNameTypes.PRIMARY.toString())) {
+                    value = JOptionPane.showConfirmDialog(NamesEditorPanel.this,
+                            "Are you really sure that you want\n" + "to change the primary name?",
+                            "VARS - Confirm", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
+                    okToProceed = (value == JOptionPane.YES_OPTION);
+                }
+
+                controller.updateConceptName(concept, name, author, nameType, selectedName, userAccount);
             });
 
             JButton newButton = buttonPanel.getNewButton();
-            newButton.addActionListener(new ActionListener() {
-                public void actionPerformed(ActionEvent e) {
-                    controller.newConceptName();
-                }
-            });
+            newButton.addActionListener(e -> controller.newConceptName());
         }
 
         return buttonPanel;

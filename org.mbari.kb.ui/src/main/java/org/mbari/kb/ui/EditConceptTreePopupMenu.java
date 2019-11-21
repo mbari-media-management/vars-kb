@@ -71,26 +71,16 @@ public class EditConceptTreePopupMenu extends ConceptTreePopupMenu implements IL
         moveConceptItem = new JMenuItem("Edit Concept", 'M');
 
 
-        addConceptMenuItem.addActionListener(new ActionListener() {
+        addConceptMenuItem.addActionListener(e -> triggerAddAction());
 
-            public void actionPerformed(ActionEvent e) {
-                triggerAddAction();
+        removeConceptMenuItem.addActionListener(evt -> {
+            try {
+                triggerRemoveAction();
             }
-
-        });
-
-        removeConceptMenuItem.addActionListener(new ActionListener() {
-
-            public void actionPerformed(ActionEvent evt) {
-                try {
-                    triggerRemoveAction();
-                }
-                catch (Exception e) {
-                    EventBus.publish(StateLookup.TOPIC_NONFATAL_ERROR, e);
-                    EventBus.publish(StateLookup.TOPIC_REFRESH_KNOWLEGEBASE, null);
-                }
+            catch (Exception e) {
+                EventBus.publish(StateLookup.TOPIC_NONFATAL_ERROR, e);
+                EventBus.publish(StateLookup.TOPIC_REFRESH_KNOWLEGEBASE, null);
             }
-
         });
 
         moveConceptItem.addActionListener(new ActionListener() {

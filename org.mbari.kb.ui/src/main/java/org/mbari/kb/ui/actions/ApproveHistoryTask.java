@@ -80,38 +80,43 @@ public class ApproveHistoryTask extends AbstractHistoryTask {
          * IAction> String defines which field was added. See History.FIELD_*
          * for acceptable values. The Map holds that process the approval
          */
-        final Map<String, GenericApproveTask> addMap = new HashMap<String, GenericApproveTask>();
-
+        var addMap = Map.of(
+                History.FIELD_CONCEPT_CHILD, DEFAULT_TASK,
+                History.FIELD_CONCEPTNAME, DEFAULT_TASK,
+                History.FIELD_LINKREALIZATION, DEFAULT_TASK,
+                History.FIELD_LINKTEMPLATE, DEFAULT_TASK,
+                History.FIELD_MEDIA, DEFAULT_TASK);
         actionMap.put(History.ACTION_ADD, addMap);
-        addMap.put(History.FIELD_CONCEPT_CHILD, DEFAULT_TASK);
-        addMap.put(History.FIELD_CONCEPTNAME, DEFAULT_TASK);
-        addMap.put(History.FIELD_LINKREALIZATION, DEFAULT_TASK);
-        addMap.put(History.FIELD_LINKTEMPLATE, DEFAULT_TASK);
-        addMap.put(History.FIELD_MEDIA, DEFAULT_TASK);
 
         /*
          * This map holds actions that process the approval of remove actions
-         * deleteMap<String, IAction> String defines which field was Added
-         */
-        final Map<String, GenericApproveTask> deleteMap = new HashMap<String, GenericApproveTask>();
-
-        actionMap.put(History.ACTION_DELETE, deleteMap);
-
-        /*
-         * A concept is never deleted directly. It's deleted from the parent
+         * deleteMap<String, IAction> String defines which field was Added.
+         *
+         * Note: A concept is never deleted directly. It's deleted from the parent
          * concept. This allows us to track History better.
          * deleteMap.put(History.FIELD_CONCEPT, new RemoveConceptAction());
          */
-        deleteMap.put(History.FIELD_CONCEPT_CHILD, new ADeleteChildConceptTask());
-        deleteMap.put(History.FIELD_CONCEPTNAME, new ADeleteConceptNameAction());
-        deleteMap.put(History.FIELD_LINKREALIZATION, new ADeleteLinkRealizationTask());
-        deleteMap.put(History.FIELD_LINKTEMPLATE, new ADeleteLinkTemplateTask());
-        deleteMap.put(History.FIELD_MEDIA, new ADeleteMediaTask());
+        var deleteMap = Map.of(History.FIELD_CONCEPT_CHILD, new ADeleteChildConceptTask(),
+                History.FIELD_CONCEPTNAME, new ADeleteConceptNameAction(),
+                History.FIELD_LINKREALIZATION, new ADeleteLinkRealizationTask(),
+                History.FIELD_LINKTEMPLATE, new ADeleteLinkTemplateTask(),
+                History.FIELD_MEDIA, new ADeleteMediaTask());
+        actionMap.put(History.ACTION_DELETE, deleteMap);
 
-        final Map<String, GenericApproveTask> replaceMap = new HashMap<String, GenericApproveTask>();
+        /**
+         * Relacement map
+         */
+        actionMap.put(History.ACTION_REPLACE,
+                Map.of(History.FIELD_CONCEPT_PARENT, DEFAULT_TASK));
+    }
 
-        actionMap.put(History.ACTION_REPLACE, replaceMap);
-        replaceMap.put(History.FIELD_CONCEPT_PARENT, DEFAULT_TASK);
+    private IApproveHistoryTask resolveApproveHistoryTask(History history) {
+        var map = actionMap.get(history.getAction());
+        if (map == null) {
+            return DEFAULT_TASK;
+        }
+        var action = map.get(history.getField());
+        return action == null ? DEFAULT_TASK : action;
     }
 
     /**
@@ -125,15 +130,8 @@ public class ApproveHistoryTask extends AbstractHistoryTask {
             if (log.isDebugEnabled()) {
                 log.debug("Approving " + history);
             }
-
-            final Map<String, GenericApproveTask> approveActions = actionMap.get(history.getAction());
-            GenericApproveTask processer = approveActions.get(history.getField());
-
-            if (processer == null) {
-                processer = DEFAULT_TASK;
-            }
-
-            processer.approve(userAccount, history, dao);
+            var task = resolveApproveHistoryTask(history);
+            task.approve(userAccount, history, dao);
         }
     }
 
@@ -152,6 +150,7 @@ public class ApproveHistoryTask extends AbstractHistoryTask {
             	history = dao.merge(history);
             }
             catch (Exception e) {
+                log.warn("Failed to merge " + history + ". Fetching from datastore", e);
             	history = dao.find(history);
             }
             approve(userAccount, history, dao);
@@ -173,20 +172,19 @@ public class ApproveHistoryTask extends AbstractHistoryTask {
      */
     public void doTask(final UserAccount userAccount, Collection<? extends History> histories) {
         DAO dao = toolBelt.getKnowledgebaseDAOFactory().newDAO();
+        dao.startTransaction();
         for (History history : histories) {
-
             // Skip histories that have already been accepted or rejected
             if (history.isProcessed()) {
                 continue;
             }
-
             try {
-                dao.startTransaction();
                 // Bring History into transaction
                 history = dao.find(history);
                 approve(userAccount, history, dao);
             }
             catch (Exception e) {
+                log.warn("Failed to look up " + history, e);
                 EventBus.publish(StateLookup.TOPIC_NONFATAL_ERROR, e);
             }
         }
@@ -302,6 +300,7 @@ public class ApproveHistoryTask extends AbstractHistoryTask {
             }
 
             // Delete the concept and it's children
+
             super.approve(userAccount, history, dao);
             conceptDAO.endTransaction();
             conceptDAO.cascadeRemove(concept);    // This handles starting and stopping the transaction internally
@@ -600,9 +599,10 @@ public class ApproveHistoryTask extends AbstractHistoryTask {
         public void approve(UserAccount userAccount, History history, DAO dao) {
 
             if (canDo(userAccount, history)) {
-                history.setProcessedDate(new Date());
-                history.setProcessorName(userAccount.getUserName());
-                history.setApproved(Boolean.TRUE);
+                var h = dao.isPersistent(history) ? history : dao.merge(history);
+                h.setProcessedDate(new Date());
+                h.setProcessorName(userAccount.getUserName());
+                h.setApproved(Boolean.TRUE);
             }
             else {
                 final String msg = "Unable to approve the History [" + history + "]";

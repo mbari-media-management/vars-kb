@@ -68,6 +68,14 @@ confEnvParams.each { k ->
     }
 }
 
+tasks.withType(JavaExec) {
+  if (System.getProperty('DEBUG', 'false') == 'true') {
+    def debugJvmArgs = ['-Xdebug', '-Xrunjdwp:transport=dt_socket,server=y,suspend=y,address=*:5005']
+    debugJvmArgs.addAll(runtimeJvmArgs)
+    jvmArgs(debugJvmArgs)
+  }
+}
+
 /* *****************************************************************************
  Use the jlink plugin to build a dist with a JVM
  */
