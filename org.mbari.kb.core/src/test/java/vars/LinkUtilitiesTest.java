@@ -1,8 +1,8 @@
 package vars;
 
 import java.util.Collection;
+import java.util.List;
 
-import com.google.common.collect.ImmutableList;
 
 import org.mbari.kb.core.ILink;
 import org.mbari.kb.core.LinkBean;
@@ -20,7 +20,7 @@ public class LinkUtilitiesTest {
 
         ILink link = new LinkBean("test", ILink.VALUE_SELF, ILink.VALUE_NIL);
 
-        Collection<ILink> links = ImmutableList.of(new LinkBean("test", ILink.VALUE_NIL, ILink.VALUE_NIL),
+        Collection<ILink> links = List.of(new LinkBean("test", ILink.VALUE_NIL, ILink.VALUE_NIL),
                 new LinkBean("test-02", ILink.VALUE_SELF, ILink.VALUE_SELF),
                 new LinkBean("test-03", ILink.VALUE_SELF, ILink.VALUE_NIL),
                 new LinkBean("test-04", ILink.VALUE_SELF, ILink.VALUE_NIL),

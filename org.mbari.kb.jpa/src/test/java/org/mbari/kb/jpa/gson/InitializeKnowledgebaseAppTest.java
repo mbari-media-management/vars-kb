@@ -1,9 +1,9 @@
 package org.mbari.kb.jpa.gson;
 
 
+import mbarix4j.net.URLUtilities;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-import org.mbari.net.URLUtilities;
 import org.mbari.kb.core.knowledgebase.Concept;
 import org.mbari.kb.core.knowledgebase.ConceptDAO;
 import org.mbari.kb.core.knowledgebase.KnowledgebaseDAOFactory;
