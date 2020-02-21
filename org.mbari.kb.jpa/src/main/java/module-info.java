@@ -1,6 +1,6 @@
 module org.mbari.kb.jpa {
   requires gson.javatime.serialisers;
-  requires gson;
+  requires com.google.gson;
   requires jasypt;
   requires java.desktop;
   requires java.instrument;
