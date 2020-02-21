@@ -24,6 +24,10 @@ subprojects {
         jcenter()
         mavenCentral()
         mavenLocal()
+
+        maven {
+            url 'http://dl.bintray.com/org-mbari/maven'
+        }
         maven {
             url 'http://dl.bintray.com/hohonuuli/maven'
         }
@@ -61,10 +65,10 @@ subprojects {
         implementation 'org.bushe:eventbus:1.4'
         implementation 'org.eclipse.persistence:org.eclipse.persistence.jpa:2.7.4'
         implementation 'org.jasypt:jasypt:1.9.3'
-        implementation 'org.mbari:mbarix4j:2.0.4.jre11'
+        implementation 'org.mbari:mbarix4j:2.0.5.jre11'
         implementation 'org.mbari.m3:org.mbari.vars.core:0.3.3'
         implementation 'org.mbari.m3:org.mbari.vars.services:0.3.3'
-        implementation 'org.mbari.vcr4j:vcr4j-core:4.0.2'
+        implementation 'org.mbari.vcr4j:vcr4j-core:4.3.0.jre11'
         implementation 'org.slf4j:slf4j-api:2.0.0-alpha0'
         implementation 'org.swinglabs:swing-layout:1.0.3'
         implementation 'org.swinglabs.swingx:swingx-all:1.6.5'
@@ -78,6 +82,7 @@ subprojects {
         runtimeOnly 'org.apache.derby:derbynet:10.15.1.3'
         runtimeOnly 'org.apache.derby:derbyshared:10.15.1.3'
         runtimeOnly 'org.apache.derby:derbytools:10.15.1.3'
+        runtimeOnly 'org.fusesource.jansi:jansi:1.18'
         runtimeOnly 'org.postgresql:postgresql:42.2.6'
       }
 

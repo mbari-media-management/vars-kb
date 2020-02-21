@@ -33,6 +33,7 @@ dependencies {
   runtimeOnly 'org.apache.derby:derbynet'
   runtimeOnly 'org.apache.derby:derbyshared'
   runtimeOnly 'org.apache.derby:derbytools'
+  runtimeOnly 'org.fusesource.jansi:jansi'
   runtimeOnly 'org.postgresql:postgresql'
 }
 
