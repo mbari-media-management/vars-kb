@@ -5,6 +5,7 @@ ALTER TABLE History DROP CONSTRAINT HstryCncptDlgtIDFK
 ALTER TABLE LinkRealization DROP CONSTRAINT LnkRlzCncptDlgtDFK
 ALTER TABLE LinkTemplate DROP CONSTRAINT LnkTmpCncptDlgtDFK
 ALTER TABLE Media DROP CONSTRAINT MdCncptDlegateIDFK
+ALTER TABLE Prefs DROP CONSTRAINT UNQ_Prefs_0
 DROP INDEX idx_Concept_FK1
 DROP INDEX idx_Concept_LUT
 DROP TABLE Concept
@@ -29,11 +30,11 @@ DROP INDEX idx_Media_LUT
 DROP TABLE Media
 DROP TABLE UserAccount
 DROP TABLE Prefs
-DELETE FROM UniqueID WHERE TableName = 'UserName'
-DELETE FROM UniqueID WHERE TableName = 'LinkTemplate'
+DELETE FROM UniqueID WHERE TableName = 'ConceptDelegate'
 DELETE FROM UniqueID WHERE TableName = 'Concept'
 DELETE FROM UniqueID WHERE TableName = 'History'
-DELETE FROM UniqueID WHERE TableName = 'Media'
 DELETE FROM UniqueID WHERE TableName = 'LinkRealization'
-DELETE FROM UniqueID WHERE TableName = 'ConceptDelegate'
 DELETE FROM UniqueID WHERE TableName = 'ConceptName'
+DELETE FROM UniqueID WHERE TableName = 'LinkTemplate'
+DELETE FROM UniqueID WHERE TableName = 'UserName'
+DELETE FROM UniqueID WHERE TableName = 'Media'

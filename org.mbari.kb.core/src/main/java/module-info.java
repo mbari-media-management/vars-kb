@@ -8,4 +8,5 @@ module org.mbari.kb.core {
 
     exports org.mbari.kb.core;
     exports org.mbari.kb.core.knowledgebase;
+    exports org.mbari.kb.core.testing;
 }

@@ -18,6 +18,7 @@ dependencies {
   implementation 'foxtrot:foxtrot-core'
   implementation 'org.bushe:eventbus'
   implementation 'org.eclipse.persistence:org.eclipse.persistence.jpa'
+  implementation 'org.mbari.m3:org.mbari.vars.core'
   implementation 'org.mbari.m3:org.mbari.vars.services'
   implementation 'org.mbari:mbarix4j'
   implementation 'org.slf4j:slf4j-api'

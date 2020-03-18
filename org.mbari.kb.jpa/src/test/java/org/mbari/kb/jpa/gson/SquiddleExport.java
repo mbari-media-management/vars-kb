@@ -3,11 +3,11 @@ package org.mbari.kb.jpa.gson;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
-import org.mbari.net.URLUtilities;
+
 import org.mbari.kb.core.knowledgebase.Concept;
 
 import org.mbari.kb.jpa.knowledgebase.ConceptImpl;
-
+import mbarix4j.net.URLUtilities;
 import java.io.BufferedWriter;
 import java.io.File;
 
