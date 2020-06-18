@@ -30,11 +30,11 @@ DROP INDEX idx_Media_LUT
 DROP TABLE Media
 DROP TABLE UserAccount
 DROP TABLE Prefs
-DELETE FROM UniqueID WHERE TableName = 'ConceptDelegate'
-DELETE FROM UniqueID WHERE TableName = 'Concept'
 DELETE FROM UniqueID WHERE TableName = 'History'
+DELETE FROM UniqueID WHERE TableName = 'Concept'
 DELETE FROM UniqueID WHERE TableName = 'LinkRealization'
-DELETE FROM UniqueID WHERE TableName = 'ConceptName'
 DELETE FROM UniqueID WHERE TableName = 'LinkTemplate'
-DELETE FROM UniqueID WHERE TableName = 'UserName'
+DELETE FROM UniqueID WHERE TableName = 'ConceptName'
 DELETE FROM UniqueID WHERE TableName = 'Media'
+DELETE FROM UniqueID WHERE TableName = 'ConceptDelegate'
+DELETE FROM UniqueID WHERE TableName = 'UserName'

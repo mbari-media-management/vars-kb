@@ -108,6 +108,9 @@ jlink {
 
     // gradlew suggestMergedModuleInfo
     mergedModule {
+        requires 'com.fasterxml.jackson.core'
+        requires 'com.fasterxml.jackson.databind'
+        requires 'com.google.gson'
         requires 'java.logging'
         requires 'java.sql'
         requires 'java.prefs'
@@ -125,7 +128,7 @@ jlink {
         requires 'java.instrument'
         uses 'javax.persistence.spi.PersistenceProvider'
         uses 'java.nio.file.spi.FileSystemProvider'
-        provides 'com.fasterxml.jackson.core.JsonFactory' with 'com.fasterxml.jackson.core.JsonFactory'
+//        provides 'com.fasterxml.jackson.core.JsonFactory' with 'com.fasterxml.jackson.core.JsonFactory'
         provides 'org.jdesktop.swingx.plaf.LookAndFeelAddons' with 'org.jdesktop.swingx.plaf.linux.LinuxLookAndFeelAddons',
                 'org.jdesktop.swingx.plaf.macosx.MacOSXLookAndFeelAddons',
                 'org.jdesktop.swingx.plaf.metal.MetalLookAndFeelAddons',
@@ -134,7 +137,7 @@ jlink {
                 'org.jdesktop.swingx.plaf.windows.WindowsClassicLookAndFeelAddons',
                 'org.jdesktop.swingx.plaf.windows.WindowsLookAndFeelAddons'
         provides 'java.sql.Driver' with 'org.postgresql.Driver'
-        provides 'com.fasterxml.jackson.core.ObjectCodec' with 'com.fasterxml.jackson.databind.ObjectMapper'
+//        provides 'com.fasterxml.jackson.core.ObjectCodec' with 'com.fasterxml.jackson.databind.ObjectMapper'
         provides 'javax.persistence.spi.PersistenceProvider' with 'org.eclipse.persistence.jpa.PersistenceProvider'
     }
 
