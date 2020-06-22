@@ -25,6 +25,7 @@ dependencies {
   implementation 'org.swinglabs.swingx:swingx-all'
   implementation 'org.swinglabs:swing-layout'
   runtimeOnly 'com.microsoft.sqlserver:mssql-jdbc'
+  runtimeOnly 'com.oracle.database.jdbc:ojdbc10dms'
   runtimeOnly('ch.qos.logback:logback-classic') {
       exclude group: 'javax.activation'
   }
