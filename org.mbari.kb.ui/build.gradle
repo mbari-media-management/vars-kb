@@ -168,9 +168,28 @@ jlink {
                 "--mac-package-name", "VARS Knowledgebase",
                 "--mac-package-identifier", project.name
             ])
+            //imageOptions = ["--icon", "src/jpackage/macos/VARS Knowledgebase.icns"]
         }
         installerOptions = customInstallerOptions
 
     }
 
+}
+
+tasks.jpackageImage.doLast {
+    if (org.gradle.internal.os.OperatingSystem.current().isMacOsX()) {
+        def signer = System.getenv("MAC_CODE_SIGNER")
+        if (signer) {
+            exec {
+                println("MACOSX: Signing application")
+                workingDir "build/jpackage"
+
+                executable "codesign"
+
+                args "--entitlements", "${projectDir}/src/jpackage/macos/java.entitlements",
+                  "--options", "runtime", "--deep", "-vvv", "-f", "--sign", signer, 
+                  "VARS Knowledgebase.app"
+            }
+        }
+    }
 }
