@@ -25,8 +25,8 @@ dependencies {
   implementation 'org.swinglabs.swingx:swingx-all'
   implementation 'org.swinglabs:swing-layout'
   runtimeOnly 'com.microsoft.sqlserver:mssql-jdbc'
-  runtimeOnly 'com.oracle.database.jdbc:ojdbc10dms'
-  runtimeOnly 'com.oracle.ojdbc:dms'
+//   runtimeOnly 'com.oracle.database.jdbc:ojdbc10'
+//   runtimeOnly 'com.oracle.database.observability:dms'
   runtimeOnly('ch.qos.logback:logback-classic') {
       exclude group: 'javax.activation'
   }
@@ -111,6 +111,7 @@ jlink {
     // gradlew suggestMergedModuleInfo
     mergedModule {
         requires 'com.fasterxml.jackson.core'
+    // requires 'com.fasterxml.jackson.annotation';
         requires 'com.fasterxml.jackson.databind'
         requires 'com.google.gson'
         requires 'java.logging'
@@ -138,9 +139,12 @@ jlink {
                 'org.jdesktop.swingx.plaf.nimbus.NimbusLookAndFeelAddons',
                 'org.jdesktop.swingx.plaf.windows.WindowsClassicLookAndFeelAddons',
                 'org.jdesktop.swingx.plaf.windows.WindowsLookAndFeelAddons'
-        provides 'java.sql.Driver' with 'org.postgresql.Driver'
 //        provides 'com.fasterxml.jackson.core.ObjectCodec' with 'com.fasterxml.jackson.databind.ObjectMapper'
         provides 'javax.persistence.spi.PersistenceProvider' with 'org.eclipse.persistence.jpa.PersistenceProvider'
+        provides 'java.sql.Driver' with 'com.microsoft.sqlserver.jdbc.SQLServerDriver',
+                                'net.sourceforge.jtds.jdbc.Driver',
+                                'org.postgresql.Driver';
+                                'oracle.jdbc.OracleDriver';
     }
 
     launcher {
