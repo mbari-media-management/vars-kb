@@ -2,6 +2,8 @@ package org.mbari.kb.core.knowledgebase;
 
 import org.mbari.kb.core.DAO;
 
+import java.util.List;
+
 /**
  * Created by IntelliJ IDEA.
  * User: brian
@@ -10,5 +12,7 @@ import org.mbari.kb.core.DAO;
  * To change this template use File | Settings | File Templates.
  */
 public interface MediaDAO extends DAO {
+
+    List<NamedMedia> findRepresentativeMedia(String conceptName);
         
 }
