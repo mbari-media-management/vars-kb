@@ -223,7 +223,7 @@ public class AddConceptDialog extends javax.swing.JDialog {
         jScrollPane2.setViewportView(referenceText);
 
         rankNameComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] {
-            "", "kingdom", "phylum", "class", "order", "family", "genus", "species"
+            "", "kingdom", "domain", "phylum", "division", "class", "order", "family", "tribe", "genus", "species", "variety"
         }));
         rankNameComboBox.setToolTipText("(OPTIONAL) The taxonomic rank");
 
