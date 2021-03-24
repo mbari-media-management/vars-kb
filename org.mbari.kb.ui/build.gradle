@@ -49,7 +49,10 @@ javafx {
 }
 
 def runtimeJvmArgs = [
-        '-Xms1g'
+        '-Xms1g',
+        '--add-opens', 'java.base/java.lang.invoke=retrofit2',
+        '--add-opens', 'java.base/java.lang.invoke=vars.knowledgebase.merged.module',
+        '--add-reads', 'vars.annotation.merged.module=org.slf4j'
 ]
 
 def confEnvParams = [
@@ -84,7 +87,8 @@ tasks.withType(JavaExec) {
  Use the jlink plugin to build a dist with a JVM
  */
 application {
-    mainClassName = "org.mbari.kb.ui/org.mbari.kb.ui.App"
+    // mainClassName = "org.mbari.kb.ui/org.mbari.kb.ui.App"
+    mainClassName = "org.mbari.kb.ui.App"
     applicationDefaultJvmArgs = runtimeJvmArgs
 }
 
@@ -109,43 +113,43 @@ jlink {
     }
 
     // gradlew suggestMergedModuleInfo
-    mergedModule {
-        requires 'com.fasterxml.jackson.core'
-    // requires 'com.fasterxml.jackson.annotation';
-        requires 'com.fasterxml.jackson.databind'
-        requires 'com.google.gson'
-        requires 'java.logging'
-        requires 'java.sql'
-        requires 'java.prefs'
-        requires 'java.rmi'
-        requires 'java.xml'
-        requires 'java.desktop'
-        requires 'java.security.jgss'
-        requires 'jdk.unsupported'
-        requires 'java.management'
-        requires 'java.naming'
-        requires 'java.security.sasl'
-        requires 'java.datatransfer'
-        requires 'java.compiler'
-        requires 'java.transaction.xa'
-        requires 'java.instrument'
-        uses 'javax.persistence.spi.PersistenceProvider'
-        uses 'java.nio.file.spi.FileSystemProvider'
-//        provides 'com.fasterxml.jackson.core.JsonFactory' with 'com.fasterxml.jackson.core.JsonFactory'
-        provides 'org.jdesktop.swingx.plaf.LookAndFeelAddons' with 'org.jdesktop.swingx.plaf.linux.LinuxLookAndFeelAddons',
-                'org.jdesktop.swingx.plaf.macosx.MacOSXLookAndFeelAddons',
-                'org.jdesktop.swingx.plaf.metal.MetalLookAndFeelAddons',
-                'org.jdesktop.swingx.plaf.motif.MotifLookAndFeelAddons',
-                'org.jdesktop.swingx.plaf.nimbus.NimbusLookAndFeelAddons',
-                'org.jdesktop.swingx.plaf.windows.WindowsClassicLookAndFeelAddons',
-                'org.jdesktop.swingx.plaf.windows.WindowsLookAndFeelAddons'
-//        provides 'com.fasterxml.jackson.core.ObjectCodec' with 'com.fasterxml.jackson.databind.ObjectMapper'
-        provides 'javax.persistence.spi.PersistenceProvider' with 'org.eclipse.persistence.jpa.PersistenceProvider'
-        provides 'java.sql.Driver' with 'com.microsoft.sqlserver.jdbc.SQLServerDriver',
-                                'net.sourceforge.jtds.jdbc.Driver',
-                                'org.postgresql.Driver';
-                                'oracle.jdbc.OracleDriver';
-    }
+//     mergedModule {
+//         requires 'com.fasterxml.jackson.core'
+//     // requires 'com.fasterxml.jackson.annotation';
+//         requires 'com.fasterxml.jackson.databind'
+//         requires 'com.google.gson'
+//         requires 'java.logging'
+//         requires 'java.sql'
+//         requires 'java.prefs'
+//         requires 'java.rmi'
+//         requires 'java.xml'
+//         requires 'java.desktop'
+//         requires 'java.security.jgss'
+//         requires 'jdk.unsupported'
+//         requires 'java.management'
+//         requires 'java.naming'
+//         requires 'java.security.sasl'
+//         requires 'java.datatransfer'
+//         requires 'java.compiler'
+//         requires 'java.transaction.xa'
+//         requires 'java.instrument'
+//         uses 'javax.persistence.spi.PersistenceProvider'
+//         uses 'java.nio.file.spi.FileSystemProvider'
+// //        provides 'com.fasterxml.jackson.core.JsonFactory' with 'com.fasterxml.jackson.core.JsonFactory'
+//         provides 'org.jdesktop.swingx.plaf.LookAndFeelAddons' with 'org.jdesktop.swingx.plaf.linux.LinuxLookAndFeelAddons',
+//                 'org.jdesktop.swingx.plaf.macosx.MacOSXLookAndFeelAddons',
+//                 'org.jdesktop.swingx.plaf.metal.MetalLookAndFeelAddons',
+//                 'org.jdesktop.swingx.plaf.motif.MotifLookAndFeelAddons',
+//                 'org.jdesktop.swingx.plaf.nimbus.NimbusLookAndFeelAddons',
+//                 'org.jdesktop.swingx.plaf.windows.WindowsClassicLookAndFeelAddons',
+//                 'org.jdesktop.swingx.plaf.windows.WindowsLookAndFeelAddons'
+// //        provides 'com.fasterxml.jackson.core.ObjectCodec' with 'com.fasterxml.jackson.databind.ObjectMapper'
+//         provides 'javax.persistence.spi.PersistenceProvider' with 'org.eclipse.persistence.jpa.PersistenceProvider'
+//         provides 'java.sql.Driver' with 'com.microsoft.sqlserver.jdbc.SQLServerDriver',
+//                                 'net.sourceforge.jtds.jdbc.Driver',
+//                                 'org.postgresql.Driver';
+//                                 'oracle.jdbc.OracleDriver';
+//     }
 
     launcher {
         name = 'VARS Knowledgebase'
@@ -158,6 +162,7 @@ jlink {
         def customInstallerOptions = [
                 "--copyright", "Monterey Bay Aquarium Research Institute",
                 "--vendor", "org.mbari",
+                "--name", "VARS Knowledgebase",
                 "--app-version", project.version
         ]
 

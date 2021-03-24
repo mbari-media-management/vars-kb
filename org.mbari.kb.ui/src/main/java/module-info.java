@@ -1,8 +1,8 @@
 module org.mbari.kb.ui {
 
+    requires com.google.gson;
     requires com.rabbitmq.client;
     requires eventbus;
-    requires com.google.gson;
     requires java.desktop;
     requires javafx.base;
     requires mbarix4j;
