@@ -23,6 +23,10 @@ public class MediaDAOImpl extends DAO implements MediaDAO {
     @Override
     public List<NamedMedia> findRepresentativeMedia(String conceptName) {
 //        String sql = "SELE"
+        // Find concept
+        // If it has media, return those
+        // If it does not have media
+            // Ge descendant names
         return null;
     }
 }
