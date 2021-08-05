@@ -21,24 +21,24 @@ subprojects {
     sourceCompatibility = 11
     targetCompatibility = 11
 
-    version = '11.0.9.jre11'
+    version = '11.0.10'
 
     repositories {
-        jcenter()
+        // jcenter()
         mavenCentral()
-        mavenLocal()
+        // mavenLocal()
 
         maven {
             name = "MBARI"
             url = uri("https://maven.pkg.github.com/mbari-org/maven")
             credentials {
-                username = project.findProperty("gpr.user") ?: System.getenv("GITHUB_USER")
+                username = project.findProperty("gpr.user") ?: System.getenv("GITHUB_USERNAME")
                 password = project.findProperty("gpr.key") ?: System.getenv("GITHUB_TOKEN")
             }
         }
-        maven {
-            url 'http://dl.bintray.com/jerady/maven'
-        }
+        // maven {
+        //     url 'http://dl.bintray.com/jerady/maven'
+        // }
     }
 
     test {
@@ -52,28 +52,28 @@ subprojects {
     }
 
     ext {
-        javafxVersion = "15.0.1"
+        javafxVersion = "16"
     }
 
     dependencies {
       constraints {
         implementation 'com.fatboyindustrial.gson-javatime-serialisers:gson-javatime-serialisers:1.1.1'
-        implementation 'com.google.code.gson:gson:2.8.6'
+        implementation 'com.google.code.gson:gson:2.8.7'
         implementation 'com.google.guava:guava:30.1.1-jre'
         implementation 'com.google.inject:guice:5.0.1'
         implementation 'com.rabbitmq:amqp-client:5.11.0'
         implementation 'com.typesafe:config:1.4.1'
         implementation 'foxtrot:foxtrot-core:4.0'
-        implementation 'io.reactivex.rxjava2:rxjava:2.2.19'
+        implementation 'io.reactivex.rxjava2:rxjava:2.2.21'
         implementation 'net.sourceforge.jtds:jtds:1.3.1'
         implementation 'org.apache.commons:commons-email:1.5'
         implementation 'org.bushe:eventbus:1.4'
         implementation 'org.eclipse.persistence:org.eclipse.persistence.jpa:2.7.8'
         implementation 'org.jasypt:jasypt:1.9.3'
         implementation 'org.mbari:mbarix4j:2.0.5.jre11'
-        implementation 'org.mbari.vars:org.mbari.vars.core:1.0.1'
-        implementation 'org.mbari.vars:org.mbari.vars.services:1.0.1'
-        implementation 'org.mbari.vcr4j:vcr4j-core:4.4.0.jre11'
+        implementation 'org.mbari.vars:org.mbari.vars.core:1.0.2.jre11'
+        implementation 'org.mbari.vars:org.mbari.vars.services:1.0.2.jre11'
+        implementation 'org.mbari.vcr4j:vcr4j-core:4.4.1.jre11'
         implementation 'org.slf4j:slf4j-api:1.8.0-beta4'
         implementation 'org.swinglabs:swing-layout:1.0.3'
         implementation 'org.swinglabs.swingx:swingx-all:1.6.5-1'
@@ -89,7 +89,7 @@ subprojects {
         runtimeOnly 'org.apache.derby:derbyshared:10.15.2.0'
         runtimeOnly 'org.apache.derby:derbytools:10.15.2.0'
         runtimeOnly 'org.fusesource.jansi:jansi:1.18'
-        runtimeOnly 'org.postgresql:postgresql:42.2.19'
+        runtimeOnly 'org.postgresql:postgresql:42.2.23'
       }
 
       testCompileOnly 'junit:junit:4.13.2'
@@ -114,7 +114,7 @@ subprojects {
                name = "GitHubPackages"
                url = uri("https://maven.pkg.github.com/mbari-org/maven")
                credentials {
-                   username = project.findProperty("gpr.user") ?: System.getenv("GITHUB_USER")
+                   username = project.findProperty("gpr.user") ?: System.getenv("GITHUB_USERNAME")
                    password = project.findProperty("gpr.key") ?: System.getenv("GITHUB_TOKEN")
                }
            }

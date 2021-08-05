@@ -1,6 +1,6 @@
 dependencies {
 
-  compile project(':org.mbari.kb.core')
+  implementation project(':org.mbari.kb.core')
 
   implementation 'com.fatboyindustrial.gson-javatime-serialisers:gson-javatime-serialisers'
   implementation 'com.google.code.gson:gson'

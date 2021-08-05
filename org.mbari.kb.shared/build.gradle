@@ -3,8 +3,8 @@ plugins {
 }
 
 dependencies {
-  compile project(":org.mbari.kb.core")
-  compile project(":org.mbari.kb.jpa")
+  implementation project(":org.mbari.kb.core")
+  implementation project(":org.mbari.kb.jpa")
 
   implementation 'com.google.guava:guava'
   implementation 'com.google.inject:guice'

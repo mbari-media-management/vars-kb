@@ -6,9 +6,9 @@ plugins {
 
 dependencies {
 
-  compile project(':org.mbari.kb.core')
-  compile project(':org.mbari.kb.jpa')
-  compile project(':org.mbari.kb.shared')
+  implementation project(':org.mbari.kb.core')
+  implementation project(':org.mbari.kb.jpa')
+  implementation project(':org.mbari.kb.shared')
 
   implementation 'com.google.code.gson:gson'
   implementation 'com.google.guava:guava'
