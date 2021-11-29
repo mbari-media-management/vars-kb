@@ -1,6 +1,7 @@
 module org.mbari.kb.jpa {
-  requires gson.javatime.serialisers;
+  
   requires com.google.gson;
+  requires gson.javatime.serialisers;
   requires jasypt;
   requires java.desktop;
   requires java.instrument;
@@ -11,6 +12,7 @@ module org.mbari.kb.jpa {
   requires org.mbari.kb.core;
   requires org.slf4j;
   requires typesafe.config;
+  requires vcr4j.core;
 
   opens org.mbari.kb.jpa to org.eclipse.persistence.core;
   opens org.mbari.kb.jpa.knowledgebase to org.eclipse.persistence.core;
