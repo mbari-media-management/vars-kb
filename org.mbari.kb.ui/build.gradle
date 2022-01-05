@@ -16,6 +16,7 @@ dependencies {
   implementation 'com.rabbitmq:amqp-client'
   implementation 'com.typesafe:config'
   implementation 'foxtrot:foxtrot-core'
+  implementation 'jakarta.activation:jakarta.activation-api'
   implementation 'org.bushe:eventbus'
   implementation 'org.eclipse.persistence:org.eclipse.persistence.jpa'
   implementation 'org.mbari.vars:org.mbari.vars.core'
@@ -157,7 +158,7 @@ jlink {
     }
 
     jpackage {
-        jpackageHome = System.getenv("JPACKAGE_HOME")
+        // jpackageHome = System.getenv("JPACKAGE_HOME")
 
         def customInstallerOptions = [
                 "--copyright", "Monterey Bay Aquarium Research Institute",
@@ -190,16 +191,16 @@ tasks.jpackageImage.doLast {
     if (org.gradle.internal.os.OperatingSystem.current().isMacOsX()) {
         def signer = System.getenv("MAC_CODE_SIGNER")
         if (signer) {
-            exec {
-                println("MACOSX: Signing application")
-                workingDir "build/jpackage"
+            // exec {
+            //     println("MACOSX: Signing application")
+            //     workingDir "build/jpackage"
 
-                executable "codesign"
+            //     executable "codesign"
 
-                args "--entitlements", "${projectDir}/src/jpackage/macos/java.entitlements",
-                  "--options", "runtime", "--deep", "-vvv", "-f", "--sign", signer, 
-                  "VARS Knowledgebase.app"
-            }
+            //     args "--entitlements", "${projectDir}/src/jpackage/macos/java.entitlements",
+            //       "--options", "runtime", "--deep", "-vvv", "-f", "--sign", signer, 
+            //       "VARS Knowledgebase.app"
+            // }
         }
     }
 }
