@@ -6,39 +6,41 @@ plugins {
 
 dependencies {
 
-  implementation project(':org.mbari.kb.core')
-  implementation project(':org.mbari.kb.jpa')
-  implementation project(':org.mbari.kb.shared')
+    implementation project(':org.mbari.kb.core')
+    implementation project(':org.mbari.kb.jpa')
+    implementation project(':org.mbari.kb.shared')
 
-  implementation 'com.google.code.gson:gson'
-  implementation 'com.google.guava:guava'
-  implementation 'com.google.inject:guice'
-  implementation 'com.rabbitmq:amqp-client'
-  implementation 'com.typesafe:config'
-  implementation 'foxtrot:foxtrot-core'
-  implementation 'jakarta.activation:jakarta.activation-api'
-  implementation 'org.bushe:eventbus'
-  implementation 'org.eclipse.persistence:org.eclipse.persistence.jpa'
-  implementation 'org.mbari.vars:org.mbari.vars.core'
-  implementation 'org.mbari.vars:org.mbari.vars.services'
-  implementation 'org.mbari:mbarix4j'
-  implementation 'org.slf4j:slf4j-api'
-  implementation 'org.swinglabs.swingx:swingx-all'
-  implementation 'org.swinglabs:swing-layout'
-  runtimeOnly 'com.microsoft.sqlserver:mssql-jdbc'
+    implementation 'com.fasterxml.jackson.core:jackson-core'
+    implementation 'com.fasterxml.jackson.core:jackson-databind'
+    implementation 'com.google.code.gson:gson'
+    implementation 'com.google.guava:guava'
+    implementation 'com.google.inject:guice'
+    implementation 'com.rabbitmq:amqp-client'
+    implementation 'com.typesafe:config'
+    implementation 'foxtrot:foxtrot-core'
+    implementation 'jakarta.activation:jakarta.activation-api'
+    implementation 'org.bushe:eventbus'
+    implementation 'org.eclipse.persistence:org.eclipse.persistence.jpa'
+    implementation 'org.mbari.vars:org.mbari.vars.core'
+    implementation 'org.mbari.vars:org.mbari.vars.services'
+    implementation 'org.mbari:mbarix4j'
+    implementation 'org.slf4j:slf4j-api'
+    implementation 'org.swinglabs.swingx:swingx-all'
+    implementation 'org.swinglabs:swing-layout'
+    runtimeOnly 'com.microsoft.sqlserver:mssql-jdbc'
 //   runtimeOnly 'com.oracle.database.jdbc:ojdbc10'
 //   runtimeOnly 'com.oracle.database.observability:dms'
-  runtimeOnly('ch.qos.logback:logback-classic') {
-      exclude group: 'javax.activation'
-  }
-  runtimeOnly 'net.sourceforge.jtds:jtds'
-  runtimeOnly 'org.apache.derby:derby'
-  runtimeOnly 'org.apache.derby:derbyclient'
-  runtimeOnly 'org.apache.derby:derbynet'
-  runtimeOnly 'org.apache.derby:derbyshared'
-  runtimeOnly 'org.apache.derby:derbytools'
-  runtimeOnly 'org.fusesource.jansi:jansi'
-  runtimeOnly 'org.postgresql:postgresql'
+    runtimeOnly('ch.qos.logback:logback-classic') {
+        exclude group: 'javax.activation'
+    }
+//    runtimeOnly 'net.sourceforge.jtds:jtds'
+    runtimeOnly 'org.apache.derby:derby'
+    runtimeOnly 'org.apache.derby:derbyclient'
+    runtimeOnly 'org.apache.derby:derbynet'
+    runtimeOnly 'org.apache.derby:derbyshared'
+    runtimeOnly 'org.apache.derby:derbytools'
+    runtimeOnly 'org.fusesource.jansi:jansi'
+    runtimeOnly 'org.postgresql:postgresql'
 }
 
 javafx {
@@ -52,22 +54,23 @@ javafx {
 def runtimeJvmArgs = [
         '-Xms1g',
         '--add-opens', 'java.base/java.lang.invoke=retrofit2',
+        '--add-opens', 'org.mbari.vars.services/org.mbari.vars.services.model=com.google.gson',
         '--add-opens', 'java.base/java.lang.invoke=vars.knowledgebase.merged.module',
         '--add-reads', 'vars.annotation.merged.module=org.slf4j'
 ]
 
 def confEnvParams = [
-    "ANNOTATION_SERVICE_CLIENT_SECRET",
-    "ANNOTATION_SERVICE_TIMEOUT",
-    "ANNOTATION_SERVICE_URL",
-    "APP_ANNOTATION_SERVICE",
-    "DATABASE_ENVIRONMENT",
-    "DATABASE_LOGLEVEL",
-    "ORG_MBARI_VARS_KNOWLEDGEBASE_PRODUCTION_DRIVER",
-    "ORG_MBARI_VARS_KNOWLEDGEBASE_PRODUCTION_NAME",
-    "ORG_MBARI_VARS_KNOWLEDGEBASE_PRODUCTION_PASSWORD",
-    "ORG_MBARI_VARS_KNOWLEDGEBASE_PRODUCTION_URL",
-    "ORG_MBARI_VARS_KNOWLEDGEBASE_PRODUCTION_USER"
+        "ANNOTATION_SERVICE_CLIENT_SECRET",
+        "ANNOTATION_SERVICE_TIMEOUT",
+        "ANNOTATION_SERVICE_URL",
+        "APP_ANNOTATION_SERVICE",
+        "DATABASE_ENVIRONMENT",
+        "DATABASE_LOGLEVEL",
+        "ORG_MBARI_VARS_KNOWLEDGEBASE_PRODUCTION_DRIVER",
+        "ORG_MBARI_VARS_KNOWLEDGEBASE_PRODUCTION_NAME",
+        "ORG_MBARI_VARS_KNOWLEDGEBASE_PRODUCTION_PASSWORD",
+        "ORG_MBARI_VARS_KNOWLEDGEBASE_PRODUCTION_URL",
+        "ORG_MBARI_VARS_KNOWLEDGEBASE_PRODUCTION_USER"
 ]
 confEnvParams.each { k ->
     def v = System.getenv(k)
@@ -77,11 +80,11 @@ confEnvParams.each { k ->
 }
 
 tasks.withType(JavaExec) {
-  if (System.getProperty('DEBUG', 'false') == 'true') {
-    def debugJvmArgs = ['-Xdebug', '-Xrunjdwp:transport=dt_socket,server=y,suspend=y,address=*:5005']
-    debugJvmArgs.addAll(runtimeJvmArgs)
-    jvmArgs(debugJvmArgs)
-  }
+    if (System.getProperty('DEBUG', 'false') == 'true') {
+        def debugJvmArgs = ['-Xdebug', '-Xrunjdwp:transport=dt_socket,server=y,suspend=y,address=*:5005']
+        debugJvmArgs.addAll(runtimeJvmArgs)
+        jvmArgs(debugJvmArgs)
+    }
 }
 
 /* *****************************************************************************
@@ -104,7 +107,12 @@ jlink {
             '--no-man-pages',
     ]
 
-    if(System.getenv("CI")) {
+    addExtraDependencies(
+            'com.fasterxml.jackson.core:jackson-core',
+            'com.fasterxml.jackson.core:jackson-databind'
+    )
+
+    if (System.getenv("CI")) {
         ["win", "linux", "mac"].each { name ->
             targetPlatform(name) {
                 jdkHome = System.getenv("JDK_HOME_${name.toUpperCase()}")
@@ -157,6 +165,10 @@ jlink {
         jvmArgs = runtimeJvmArgs
     }
 
+    mergedModule {
+        additive = true
+    }
+
     jpackage {
         // jpackageHome = System.getenv("JPACKAGE_HOME")
 
@@ -167,17 +179,15 @@ jlink {
                 "--app-version", project.version
         ]
 
-        if  (org.gradle.internal.os.OperatingSystem.current().isLinux()) {
+        if (org.gradle.internal.os.OperatingSystem.current().isLinux()) {
             installerType = "deb"
-        }
-        else if (org.gradle.internal.os.OperatingSystem.current().isWindows()) {
+        } else if (org.gradle.internal.os.OperatingSystem.current().isWindows()) {
             installerType = "msi"
-        }
-        else {
+        } else {
             installerType = "dmg"
             customInstallerOptions.addAll([
-                "--mac-package-name", "VARS Knowledgebase",
-                "--mac-package-identifier", project.name
+                    "--mac-package-name", "VARS Knowledgebase",
+                    "--mac-package-identifier", project.name
             ])
             //imageOptions = ["--icon", "src/jpackage/macos/VARS Knowledgebase.icns"]
         }

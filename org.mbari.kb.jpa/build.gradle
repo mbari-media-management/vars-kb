@@ -36,3 +36,7 @@ task performJPAWeaving(type: JavaExec, dependsOn: "compileJava"){
 tasks.withType(Jar){
   dependsOn "performJPAWeaving"
 }
+
+compileTestJava {
+  dependsOn "performJPAWeaving"
+}

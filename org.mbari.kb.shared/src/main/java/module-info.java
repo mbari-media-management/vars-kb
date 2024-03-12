@@ -9,6 +9,7 @@ module org.mbari.kb.shared {
   requires javafx.controls;
   requires javafx.graphics;
   requires mbarix4j;
+//  requires org.apache.commons.mail;
   requires org.mbari.kb.core;
   requires org.mbari.kb.jpa;
   requires org.slf4j;
