@@ -65,13 +65,13 @@ def confEnvParams = [
         "ANNOTATION_SERVICE_TIMEOUT",
         "ANNOTATION_SERVICE_URL",
         "APP_ANNOTATION_SERVICE",
-        "DATABASE_ENVIRONMENT",
-        "DATABASE_LOGLEVEL",
-        "ORG_MBARI_VARS_KNOWLEDGEBASE_PRODUCTION_DRIVER",
-        "ORG_MBARI_VARS_KNOWLEDGEBASE_PRODUCTION_NAME",
-        "ORG_MBARI_VARS_KNOWLEDGEBASE_PRODUCTION_PASSWORD",
-        "ORG_MBARI_VARS_KNOWLEDGEBASE_PRODUCTION_URL",
-        "ORG_MBARI_VARS_KNOWLEDGEBASE_PRODUCTION_USER"
+        "DATABASE_ENVIRONMENT",                             // not needed
+        "DATABASE_LOGLEVEL",                                // DATABASE_LOG_LEVEL
+        "ORG_MBARI_VARS_KNOWLEDGEBASE_PRODUCTION_DRIVER",   // DATABASE_DRIVER
+        "ORG_MBARI_VARS_KNOWLEDGEBASE_PRODUCTION_NAME",     // not needed
+        "ORG_MBARI_VARS_KNOWLEDGEBASE_PRODUCTION_PASSWORD", // DATABASE_PASSWORD
+        "ORG_MBARI_VARS_KNOWLEDGEBASE_PRODUCTION_URL",      // DATABASE_URL
+        "ORG_MBARI_VARS_KNOWLEDGEBASE_PRODUCTION_USER"      // DATABASE_USER
 ]
 confEnvParams.each { k ->
     def v = System.getenv(k)
@@ -102,7 +102,7 @@ jlink {
     imageZip = file("$buildDir/image-zip/vars-knowledgebase.zip")
     options = [
             '--bind-services',
-            '--strip-debug',
+            // '--strip-debug',
             '--compress', '2',
             '--no-header-files',
             '--no-man-pages',
@@ -162,10 +162,6 @@ jlink {
         jvmArgs = runtimeJvmArgs
     }
 
-//    mergedModule {
-//        additive = true
-//        uses "org.jdesktop.swingx.plaf.LookAndFeelAddons"
-//    }
 
     jpackage {
         // jpackageHome = System.getenv("JPACKAGE_HOME")
@@ -185,7 +181,7 @@ jlink {
             installerType = "dmg"
             customInstallerOptions.addAll([
                     "--mac-package-name", "VARS Knowledgebase",
-                    "--mac-package-identifier", project.name
+                    "--mac-package-identifier", "org.mbari.kb.ui"
             ])
             //imageOptions = ["--icon", "src/jpackage/macos/VARS Knowledgebase.icns"]
         }
@@ -199,16 +195,42 @@ tasks.jpackageImage.doLast {
     if (org.gradle.internal.os.OperatingSystem.current().isMacOsX()) {
         def signer = System.getenv("MAC_CODE_SIGNER")
         if (signer) {
-            // exec {
-            //     println("MACOSX: Signing application")
-            //     workingDir "build/jpackage"
+            def dirsToBeSigned= [
+                    file("${projectDir}/build/jpackage/VARS Knowledgebase.app/Contents/runtime/Contents/Home/bin"),
+                    file("${projectDir}/build/jpackage/VARS Knowledgebase.app/Contents/runtime/Contents/Home/lib"),
+                    file("${projectDir}/build/jpackage/VARS Knowledgebase.app/Contents/runtime/Contents/Home/lib/server"),
+                    file("${projectDir}/build/jpackage/VARS Knowledgebase.app/Contents/runtime/Contents/MacOS")
+            ]
 
-            //     executable "codesign"
+            dirsToBeSigned.forEach { dir ->
+                println("Signing $dir")
+                FileCollection files = layout.files(dir.listFiles())
+                files
+                        .findAll {it.isFile() }
+                        .forEach {file ->
+                    exec {
+                        println("MACOSX: Signing ${file}")
+                        workingDir "build/jpackage"
 
-            //     args "--entitlements", "${projectDir}/src/jpackage/macos/java.entitlements",
-            //       "--options", "runtime", "--deep", "-vvv", "-f", "--sign", signer, 
-            //       "VARS Knowledgebase.app"
-            // }
+                        executable "codesign"
+
+                        args "--entitlements", "${projectDir}/src/jpackage/macos/java.entitlements",
+                                "--options", "runtime", "--timestamp", "-vvv", "-f", "--sign", signer,
+                                file.absolutePath
+                    }
+                }
+            }
+
+            exec {
+               println("MACOSX: Signing application")
+               workingDir "build/jpackage"
+
+               executable "codesign"
+
+               args "--entitlements", "${projectDir}/src/jpackage/macos/java.entitlements",
+                 "--options", "runtime", "--timestamp", "-vvv", "-f", "--sign", signer,
+                 "VARS Knowledgebase.app"
+            }
         }
     }
 }
