@@ -21,7 +21,7 @@ subprojects {
     sourceCompatibility = 21
     targetCompatibility = 21
 
-    version = '11.0.12'
+    version = '11.1.0'
 
     repositories {
         // jcenter()
