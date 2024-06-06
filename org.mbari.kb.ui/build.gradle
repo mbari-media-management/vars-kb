@@ -76,7 +76,8 @@ def confEnvParams = [
 confEnvParams.each { k ->
     def v = System.getenv(k)
     if (v) {
-        runtimeJvmArgs.add("-D${k}=${v}")
+        def arg = "-D${k}=${v}".toString()
+        runtimeJvmArgs.add(arg)
     }
 }
 

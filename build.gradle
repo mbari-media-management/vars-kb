@@ -75,7 +75,7 @@ subprojects {
             implementation 'net.sourceforge.jtds:jtds:1.3.1'
             implementation 'org.apache.commons:commons-email:1.5'
             implementation 'org.bushe:eventbus:1.4'
-            implementation 'org.eclipse.persistence:org.eclipse.persistence.jpa:2.7.13'
+            implementation 'org.eclipse.persistence:org.eclipse.persistence.jpa:2.7.15'
             implementation 'org.jasypt:jasypt:1.9.3'
             implementation 'org.mbari:mbarix4j:2.0.5.jre11'
             implementation 'org.mbari.vars:org.mbari.vars.core:2.0.5'

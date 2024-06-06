@@ -146,13 +146,14 @@ public class ApproveHistoryTask extends AbstractHistoryTask {
         try {
             dao.startTransaction();
             // Bring History into transaction
-            try {
-            	history = dao.merge(history);
-            }
-            catch (Exception e) {
-                log.warn("Failed to merge " + history + ". Fetching from datastore", e);
-            	history = dao.find(history);
-            }
+            history = dao.find(history);
+//            try {
+//            	history = dao.merge(history);
+//            }
+//            catch (Exception e) {
+//                log.warn("Failed to merge " + history + ". Fetching from datastore", e);
+//            	history = dao.find(history);
+//            }
             approve(userAccount, history, dao);
         }
         catch (Exception e) {
@@ -599,7 +600,8 @@ public class ApproveHistoryTask extends AbstractHistoryTask {
         public void approve(UserAccount userAccount, History history, DAO dao) {
 
             if (canDo(userAccount, history)) {
-                var h = dao.isPersistent(history) ? history : dao.merge(history);
+//                var h = dao.isPersistent(history) ? history : dao.merge(history);
+                var h = history;
                 h.setProcessedDate(new Date());
                 h.setProcessorName(userAccount.getUserName());
                 h.setApproved(Boolean.TRUE);

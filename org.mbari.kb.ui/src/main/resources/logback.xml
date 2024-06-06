@@ -4,6 +4,8 @@
 
     <statusListener class="ch.qos.logback.core.status.NopStatusListener" />
 
+    <variable name="LOGBACK_LEVEL" value="${LOGBACK_LEVEL:-INFO}" />
+
     <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
         <withJansi>true</withJansi>
         <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
@@ -28,9 +30,14 @@
         </encoder>
     </appender>
 
+    <logger name="java" level="WARN" />
+    <logger name="javax" level="WARN" />
+    <logger name="jdk" level="WARN" />
+    <logger name="mbarix4j" level="WARN" />
     <logger name="org.mbari.kb.jpa.TransactionLogger" level="INFO" />
+    <logger name="sun" level="WARN" />
 
-    <root level="INFO">
+    <root level="${LOGBACK_LEVEL}">
         <appender-ref ref="FILE" />
         <appender-ref ref="CONSOLE" />
     </root>
