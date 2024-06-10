@@ -20,7 +20,7 @@
 
 package org.mbari.kb.core;
 
-import mbarix4j.text.IgnoreCaseToStringComparator;
+
 
 import java.util.Comparator;
 

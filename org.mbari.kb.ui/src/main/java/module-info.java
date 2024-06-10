@@ -5,7 +5,7 @@ module org.mbari.kb.ui {
     requires eventbus;
     requires java.desktop;
     requires javafx.base;
-    requires mbarix4j;
+    // requires mbarix4j;
     requires org.mbari.kb.core;
     requires org.mbari.kb.jpa;
     requires org.mbari.kb.shared;

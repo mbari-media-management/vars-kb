@@ -12,7 +12,7 @@
 
 package org.mbari.kb.core;
 
-import mbarix4j.text.IgnoreCaseToStringComparator;
+
 
 import java.util.Comparator;
 
@@ -23,7 +23,7 @@ import java.util.Comparator;
  */
 public class LinkComparator implements Comparator<ILink> {
     
-    private final Comparator comparator = new IgnoreCaseToStringComparator();
+    private final Comparator<String> comparator = new IgnoreCaseToStringComparator<String>();
 
     public int compare(ILink o1, ILink o2) {
     	

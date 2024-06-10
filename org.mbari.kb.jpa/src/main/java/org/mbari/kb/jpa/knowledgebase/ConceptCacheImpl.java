@@ -1,11 +1,6 @@
 package org.mbari.kb.jpa.knowledgebase;
 
-import mbarix4j.text.IgnoreCaseToStringComparator;
-import org.mbari.kb.core.CacheClearedEvent;
-import org.mbari.kb.core.CacheClearedListener;
-import org.mbari.kb.core.ILink;
-import org.mbari.kb.core.LinkBean;
-import org.mbari.kb.core.PersistenceCache;
+import org.mbari.kb.core.*;
 import org.mbari.kb.core.knowledgebase.Concept;
 import org.mbari.kb.core.knowledgebase.ConceptCache;
 import org.mbari.kb.core.knowledgebase.ConceptDAO;
@@ -32,7 +27,7 @@ public class ConceptCacheImpl implements ConceptCache {
     private final Map<Concept, List<ILink>> linkTemplates = new ConcurrentHashMap<>();
     private volatile List<String> allNames;
     private final Map<Concept, List<String>> descendantNames = new ConcurrentHashMap<>();
-    private final Comparator<Object> comparator = new IgnoreCaseToStringComparator();
+    private final Comparator<Object> comparator = new IgnoreCaseToStringComparator<>();
     private volatile Concept root;
     private final Object lock = new Object();
 

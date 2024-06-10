@@ -5,9 +5,10 @@
 
 package org.mbari.kb.core.knowledgebase;
 
-import mbarix4j.text.IgnoreCaseToStringComparator;
 
 import java.util.Comparator;
+
+import org.mbari.kb.core.IgnoreCaseToStringComparator;
 
 /**
  *

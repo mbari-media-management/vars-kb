@@ -8,7 +8,7 @@ module org.mbari.kb.jpa {
   requires java.persistence;
   requires java.prefs;
   requires java.sql;
-  requires mbarix4j;
+  // requires mbarix4j;
   requires org.mbari.kb.core;
   requires org.slf4j;
   requires typesafe.config;
