@@ -3,7 +3,7 @@
 # [MBARI's](http://www.mbari.org/) Video Annotation and Reference System (VARS)
 
 > [!IMPORTANT]
-> __This project is deprecated. Use <https://github.com/mbari-org/kb> instead.
+> __This project is deprecated.__ Use <https://github.com/mbari-org/kb> instead.
 
 ---
 
